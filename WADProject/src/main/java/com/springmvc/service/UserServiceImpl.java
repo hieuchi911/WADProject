@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.springmvc.dao.UserDao;
 import com.springmvc.model.Login;
+import com.springmvc.model.Patient;
 import com.springmvc.model.User;
 
 public class UserServiceImpl implements UserService {
@@ -17,6 +18,13 @@ public class UserServiceImpl implements UserService {
 
 	public User validateUser(Login login) {
 		return userDao.validateUser(login);
+	}
+
+	public Patient registerPatient(User user) {
+		return userDao.registerPatient(user);
+	}
+	public Patient profilePatient(User user) {
+		return userDao.profilePatient(user);
 	}
 
 }

@@ -8,8 +8,7 @@
 <title>Registration</title>
 </head>
 <body>
-	<form:form id="regForm" modelAttribute="user" action="registerProcess"
-		method="post">
+	<form:form id="regForm" modelAttribute="user" action="registerProcess" method="post">
 
 		<table align="center">
 			<tr>
@@ -18,9 +17,12 @@
 			</tr>
 			<tr>
 				<td><form:label path="password">Password</form:label></td>
-				<td><form:password path="password" name="password"
-						id="password" /></td>
+				<td><form:password path="password" name="password" id="password" /></td>
 			</tr>
+			<tr style="display:none;">
+				<td></td>
+            	<td><form:input path="usertype" name="usertype" id="usertype" value="patient" readonly="true"/></td>
+            </tr>
 			<tr>
 				<td></td>
 				<td><form:button id="register" name="register">Register</form:button></td>

@@ -9,8 +9,7 @@
 </head>
 <body>
 
-	<form:form id="loginForm" modelAttribute="login" action="loginProcess"
-		method="post">
+	<form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
 		<table align="center">
 			<tr>
 				<td><form:label path="username">Username: </form:label></td>
@@ -18,14 +17,12 @@
 			</tr>
 			<tr>
 				<td><form:label path="password">Password:</form:label></td>
-				<td><form:password path="password" name="password"
-						id="password" /></td>
+				<td><form:password path="password" name="password" id="password" /></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td align="left"><form:button id="login" name="login">Login</form:button></td>
 			</tr>
-
 			<tr></tr>
 			<tr>
 				<td></td>
