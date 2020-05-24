@@ -1,6 +1,9 @@
 package com.springmvc.model;
 
-public class Doctor {
+/**
+ * POJO class for handling the Doctor data
+ */
+public class Doctor extends User {
 	private String username;
 	private String name;
 	private String gender;

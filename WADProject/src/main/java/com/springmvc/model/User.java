@@ -8,6 +8,8 @@ public class User {
 	private String password;
 	private String usertype;
 	
+	public User() {}
+	
 	/* Username tasks */
 	public String getUsername() {
 		return username;

@@ -3,8 +3,7 @@ package com.springmvc.model;
 /**
  * POJO class for handling the Patient data
  */
-public class Patient {
-	
+public class Patient extends User {
 	private String username;
 	private String name;
 	private String gender;
