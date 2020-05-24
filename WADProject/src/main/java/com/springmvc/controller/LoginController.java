@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
@@ -55,10 +56,10 @@ public class LoginController {
 				Patient patient = userService.profilePatient(user);	// Get the patient's information
 				mav.addObject("user", patient);
 			} else if (user.getUsertype().equals("doctor")) {
-//				mav = new ModelAndView("doctorprofile");
-//				
-//				Doctor patient = userService.profileDoctor(user);
-//				mav.addObject("user", patient);
+				mav = new ModelAndView("doctorprofile");
+				
+				Doctor patient = userService.profileDoctor(user);
+				mav.addObject("user", patient);
 			} else {
 //				
 			}
