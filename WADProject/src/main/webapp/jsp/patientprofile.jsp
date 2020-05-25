@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +9,34 @@
 <body>
 	<table>
 		<tr>
-			<td>Welcome! ${user.name}</td>
+			<td>Welcome! ${user}</td>
 		</tr>
+		
 		<tr>
+			<td>Name</td>
+			<td>${name}</td>
 		</tr>
+		
 		<tr>
+			<td>Gender</td>
+			<td>${sex}</td>
 		</tr>
+		
+		<tr>
+			<td>Phone</td>
+			<td>${phone}</td>
+		</tr>
+		
+		<tr>
+			<td>Address</td>
+			<td>${address}</td>
+		</tr>
+		
+		<tr>
+			<td>Description</td>
+			<td>${description}</td>
+		</tr>
+		
 		<tr>
 			<td><a href="home.jsp">Home</a></td>
 		</tr>

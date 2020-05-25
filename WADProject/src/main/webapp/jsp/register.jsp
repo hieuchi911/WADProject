@@ -1,5 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html>
@@ -20,9 +19,9 @@
 				<td><form:password path="password" name="password" id="password" /></td>
 			</tr>
 			<tr style="display:none;">
-				<td></td>
-            	<td><form:input path="usertype" name="usertype" id="usertype" value="patient" readonly="true"/></td>
-            </tr>
+				<td><form:radiobutton path="usertype" name="usertype" id="usertype" value="patient" />Patient</td>
+			</tr>
+			
 			<tr>
 				<td></td>
 				<td><form:button id="register" name="register">Register</form:button></td>

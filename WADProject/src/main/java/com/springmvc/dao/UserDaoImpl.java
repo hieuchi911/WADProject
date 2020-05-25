@@ -34,12 +34,13 @@ public class UserDaoImpl implements UserDao {
 		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 
-	public Patient registerPatient(User user) {
+	public Patient registerPatient(Patient patient) {
 		String sql = "INSERT INTO patients VALUES(?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, new Object[] { user.getUsername(), "", "", "", "", "" });
+		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
+				patient.getPhone(), patient.getAddress(), patient.getDescription()});
 											// username, name, sex, phone, address, medical description
-		Patient patient = new Patient();
-		patient.setUsername(user.getUsername());
+//		Patient patient = new Patient();
+//		patient.setUsername(user.getUsername());
 		return patient;
 	}
 	

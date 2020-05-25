@@ -14,7 +14,7 @@ import com.springmvc.model.User;
 public interface UserService {
 
 	int register(User user);
-	Patient registerPatient(User user);
+	Patient registerPatient(Patient patient);
 
 	User validateUser(Login login);
 	Patient profilePatient(User user);

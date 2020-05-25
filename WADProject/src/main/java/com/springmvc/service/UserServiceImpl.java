@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.validateUser(login);
 	}
 
-	public Patient registerPatient(User user) {
-		return userDao.registerPatient(user);
+	public Patient registerPatient(Patient patient) {
+		return userDao.registerPatient(patient);
 	}
 	public Patient profilePatient(User user) {
 		return userDao.profilePatient(user);
