@@ -24,7 +24,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<mvc:resources mapping = "/images/**" location = "classpath:com/resources/images/" />
+	<mvc:resources mapping = "/images/**" location = "images/" />
 	<mvc:annotation-driven/>
 	
 </beans>
