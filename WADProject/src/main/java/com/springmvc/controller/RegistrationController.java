@@ -54,13 +54,6 @@ public class RegistrationController {
 		mv.addObject("patient", patient);
 
 		return mv;
-	
-		
-//		Doctor doctor = userService.registerDoctor(user);
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("doctorInfo");
-//		mv.addObject("user", doctor.getUsername());
-//		return mv;
 	}
 	
 	/* ---------------------------- addUser --------------------------------------
@@ -72,12 +65,7 @@ public class RegistrationController {
 		Patient p = userService.registerPatient(patient);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("patientprofile");
-		mv.addObject("username", p.getUsername());
-		mv.addObject("name", p.getName());
-		mv.addObject("sex", p.getGender());
-		mv.addObject("phone", p.getPhone());
-		mv.addObject("address", p.getAddress());
-		mv.addObject("description", p.getDescription());
+		mv.addObject("patient", p);
 		return mv;
 	}
 }

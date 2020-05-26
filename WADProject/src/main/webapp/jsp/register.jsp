@@ -19,7 +19,7 @@
 				<td><form:password path="password" name="password" id="password" /></td>
 			</tr>
 			<tr style="display:none;">
-				<td><form:radiobutton path="usertype" name="usertype" id="usertype" value="patient" />Patient</td>
+				<td><form:input path="usertype" name="usertype" id="usertype" value="patient" />Patient</td>
 			</tr>
 			
 			<tr>

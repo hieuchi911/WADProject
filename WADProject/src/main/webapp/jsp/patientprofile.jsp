@@ -9,32 +9,32 @@
 <body>
 	<table>
 		<tr>
-			<td>Welcome! ${user}</td>
+			<td>Welcome! ${patient.username}</td>
 		</tr>
 		
 		<tr>
 			<td>Name</td>
-			<td>${name}</td>
+			<td>${patient.name}</td>
 		</tr>
 		
 		<tr>
 			<td>Gender</td>
-			<td>${sex}</td>
+			<td>${patient.gender}</td>
 		</tr>
 		
 		<tr>
 			<td>Phone</td>
-			<td>${phone}</td>
+			<td>${patient.phone}</td>
 		</tr>
 		
 		<tr>
 			<td>Address</td>
-			<td>${address}</td>
+			<td>${patient.address}</td>
 		</tr>
 		
 		<tr>
 			<td>Description</td>
-			<td>${description}</td>
+			<td>${patient.description}</td>
 		</tr>
 		
 		<tr>
