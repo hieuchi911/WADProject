@@ -11,7 +11,7 @@
    http://www.springframework.org/schema/context 
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<import resource="classpath:com/config/user-beans.xml" />
+	<import resource="classpath:com/config/beans.xml" />
 
 	<context:component-scan
 		base-package="com.springmvc" />
@@ -24,7 +24,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<mvc:resources mapping = "/images/**" location = "/resources/images/" />
+	<mvc:resources mapping = "/images/**" location = "classpath:com/resources/images/" />
 	<mvc:annotation-driven/>
 	
 </beans>

@@ -16,7 +16,9 @@ import com.springmvc.service.UserService;
 
 /** 
  * The LoginController class handles login activities of the user,
- * with urls "/login" and "/loginProcess".
+ * with urls:
+ * | "/login"			This url shows the login screen.		 
+ * | "/loginProcess"	This url processes user login.	
  * 
  */
 @Controller
@@ -51,11 +53,13 @@ public class LoginController {
 			if (user.getUsertype().equals("patient")) {
 				mav = new ModelAndView("patientprofile");
 				
-				User patient = userService.profilePatient(user);	// Get the patient's information
+				// Get the patient's information
+				User patient = userService.profilePatient(user);	
 				mav.addObject("user", patient);
 			} else if (user.getUsertype().equals("doctor")) {
 				mav = new ModelAndView("doctorprofile");
 				
+				// Get the doctor's information
 				User doctor = userService.profileDoctor(user);
 				mav.addObject("user", doctor);
 			} else {

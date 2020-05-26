@@ -11,19 +11,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.Patient;
-import com.springmvc.model.Doctor;
 import com.springmvc.model.User;
 import com.springmvc.service.UserService;
 
 /** 
  * The RegistrationController class handles login activities of the user,
- * with urls "/register" and "/registerProcess".
+ * with urls: 
+ * | "/register"			This url shows the patient registration screen.
+ * | "/registerProcess" 	This url handles user's registration form.
  * 
  * For the time being, this controller class only allows patient registration
  * 
  */
 @Controller
 public class RegistrationController {
+	
 	@Autowired
 	public UserService userService;
 	
@@ -56,7 +58,7 @@ public class RegistrationController {
 		return mv;
 	}
 	
-	/* ---------------------------- addUser --------------------------------------
+	/* ---------------------------- continueRegistration --------------------------------------
 	 * This method adds a new user with the registration url "/registerProcess".
 	 */
 	@RequestMapping(value = "/registerPatient", method = RequestMethod.POST)
