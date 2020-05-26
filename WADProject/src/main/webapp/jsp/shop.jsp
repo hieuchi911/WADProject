@@ -23,7 +23,8 @@
 	</style>
 </head>
 <body>
-	<a href="home.jsp">Home</a>
+	Welcome! ${user.username}
+
 	<c:forEach items="${objects.objects}" var="object" varStatus="tagStatus">
 		<div class="card">
 			<a href="">
@@ -33,5 +34,8 @@
 			<p>Made by ${object.manufacturer} </p>
 		</div>
 	</c:forEach>
+	
+	<a href="home.jsp">Home</a>
+	
 </body>
 </html>

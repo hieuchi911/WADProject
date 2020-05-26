@@ -7,6 +7,8 @@
 <title>Welcome</title>
 </head>
 <body>
+	<a href="shop">Shop</a>
+
 	<table>
 		<tr>
 			<td>Welcome ${user.rank} ${user.name}!</td>
@@ -19,5 +21,6 @@
 			<td><a href="home.jsp">Home</a></td>
 		</tr>
 	</table>
+	
 </body>
 </html>

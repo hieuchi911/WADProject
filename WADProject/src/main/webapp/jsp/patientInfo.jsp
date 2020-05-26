@@ -11,7 +11,7 @@
 
 		<table align="center">
 			<tr>
-				<td>Welcome! ${user.username}</td>
+				<td>Welcome! ${patient.name}</td>
 			</tr>
 			<tr>
 				<td><form:label path="name">Full Name</form:label></td>

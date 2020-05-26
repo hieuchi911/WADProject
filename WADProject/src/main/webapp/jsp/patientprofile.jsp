@@ -7,34 +7,36 @@
 <title>Welcome</title>
 </head>
 <body>
+	<a href="shop">Shop</a>
+
 	<table>
 		<tr>
-			<td>Welcome! ${patient.username}</td>
+			<td>Welcome! ${user.username}</td>
 		</tr>
 		
 		<tr>
 			<td>Name</td>
-			<td>${patient.name}</td>
+			<td>${user.name}</td>
 		</tr>
 		
 		<tr>
 			<td>Gender</td>
-			<td>${patient.gender}</td>
+			<td>${user.gender}</td>
 		</tr>
 		
 		<tr>
 			<td>Phone</td>
-			<td>${patient.phone}</td>
+			<td>${user.phone}</td>
 		</tr>
 		
 		<tr>
 			<td>Address</td>
-			<td>${patient.address}</td>
+			<td>${user.address}</td>
 		</tr>
 		
 		<tr>
 			<td>Description</td>
-			<td>${patient.description}</td>
+			<td>${user.description}</td>
 		</tr>
 		
 		<tr>
