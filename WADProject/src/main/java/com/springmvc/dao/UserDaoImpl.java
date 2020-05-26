@@ -10,9 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
+import com.springmvc.model.Patient;
+import com.springmvc.model.ShopObject;
 import com.springmvc.model.User;
 
+/**
+ * This class provides an implementation of the Data Access Object
+ * It gets user data from the database
+ */
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
@@ -22,11 +29,21 @@ public class UserDaoImpl implements UserDao {
 	JdbcTemplate jdbcTemplate;
 
 	public int register(User user) {
-		String sql = "INSERT INTO users VALUES(?,?)";
+		String sql = "INSERT INTO users VALUES(?,?,?)";
 
-		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword() });
+		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 
+	public Patient registerPatient(Patient patient) {
+		String sql = "INSERT INTO patients VALUES(?,?,?,?,?,?)";
+		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
+				patient.getPhone(), patient.getAddress(), patient.getDescription()});
+											// username, name, sex, phone, address, medical description
+//		Patient patient = new Patient();
+//		patient.setUsername(user.getUsername());
+		return patient;
+	}
+	
 	public User validateUser(Login login) {
 		String sql = "SELECT * FROM users WHERE username ='" + login.getUsername() + "' AND password='"
 				+ login.getPassword() + "'";
@@ -35,16 +52,80 @@ public class UserDaoImpl implements UserDao {
 		return users.size() > 0 ? users.get(0) : null;
 	}
 
+	public Patient profilePatient(User user) {
+		String sql = "SELECT * FROM patients WHERE username ='" + user.getUsername() + "'";
+		List<Patient> patients = jdbcTemplate.query(sql, new PatientMapper());
+
+		return patients.size() > 0 ? patients.get(0) : null;
+	}
+	
+	public Doctor profileDoctor(User user) {
+		String sql = "SELECT * FROM doctors WHERE username ='" + user.getUsername() + "'";
+		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
+
+		return doctors.size() > 0 ? doctors.get(0) : null;	
+	}
+
+	public List <ShopObject> getAllShopObjects() {
+		String sql = "SELECT * FROM shop_objects;";
+		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
+		
+		return objects;
+	}
+
 }
 
 class UserMapper implements RowMapper<User> {
-
 	public User mapRow(ResultSet rs, int arg1) throws SQLException {
 		User user = new User();
 
 		user.setUsername(rs.getString("username"));
 		user.setPassword(rs.getString("password"));
-
+		user.setUsertype(rs.getString("usertype"));
 		return user;
+	}
+}
+
+class PatientMapper implements RowMapper<Patient> {
+	public Patient mapRow(ResultSet rs, int arg1) throws SQLException {
+		Patient patient = new Patient();
+
+		patient.setUsername(rs.getString("username"));
+		patient.setName(rs.getString("name"));
+		patient.setGender(rs.getString("gender"));
+		patient.setPhone(rs.getString("phone"));
+		patient.setAddress(rs.getString("address"));
+		patient.setDescription(rs.getString("description"));
+
+		return patient;
+	}
+}
+
+class DoctorMapper implements RowMapper<Doctor> {
+	public Doctor mapRow(ResultSet rs, int arg1) throws SQLException {
+		Doctor doctor = new Doctor();
+
+		doctor.setUsername(rs.getString("username"));
+		doctor.setName(rs.getString("name"));
+		doctor.setGender(rs.getString("gender"));
+		doctor.setRank(rs.getString("rank"));
+		doctor.setField(rs.getString("field"));
+		doctor.setDescription(rs.getString("description"));
+
+		return doctor;
+	}
+}
+
+class ShopObjectMapper implements RowMapper<ShopObject> {
+	public ShopObject mapRow(ResultSet rs, int arg1) throws SQLException {
+		ShopObject shopobject = new ShopObject();
+
+		shopobject.setUrl(rs.getString("url"));
+		shopobject.setName(rs.getString("name"));
+		shopobject.setManufacturer(rs.getString("manufacturer"));
+		shopobject.setDescription(rs.getString("description"));
+		shopobject.setPrice(Double.parseDouble(rs.getString("price")));
+
+		return shopobject;
 	}
 }

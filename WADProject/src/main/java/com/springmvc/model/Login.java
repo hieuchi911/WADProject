@@ -1,10 +1,14 @@
 package com.springmvc.model;
 
+/**
+ * POJO class for handling the Login data
+ */
 public class Login {
-
 	private String username;
 	private String password;
 
+	public Login() {}
+	
 	public String getUsername() {
 		return username;
 	}
