@@ -46,12 +46,14 @@ public class RegistrationController {
 	 */
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("patient") Patient patient) {
+			@ModelAttribute("user") User user) {
 
-		userService.register(patient);
+		userService.register(user);
 		
+		Patient patient = new Patient();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("patientInfo");
+		mv.addObject("user", user);
 		mv.addObject("patient", patient);
 		
 		return mv;
