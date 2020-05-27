@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.RowMapper;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
-import com.springmvc.model.ShopObject;
 import com.springmvc.model.User;
 
 /**
@@ -21,10 +20,9 @@ import com.springmvc.model.User;
  * It gets user data from the database
  */
 public class UserDaoImpl implements UserDao {
-
+	// The followings are necessary to establish database connection
 	@Autowired
 	DataSource datasource;
-
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -39,8 +37,7 @@ public class UserDaoImpl implements UserDao {
 		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
 				patient.getPhone(), patient.getAddress(), patient.getDescription()});
 											// username, name, sex, phone, address, medical description
-//		Patient patient = new Patient();
-//		patient.setUsername(user.getUsername());
+
 		return patient;
 	}
 	
@@ -64,13 +61,6 @@ public class UserDaoImpl implements UserDao {
 		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
 
 		return doctors.size() > 0 ? doctors.get(0) : null;	
-	}
-
-	public List <ShopObject> getAllShopObjects() {
-		String sql = "SELECT * FROM shop_objects;";
-		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
-		
-		return objects;
 	}
 
 }
@@ -113,19 +103,5 @@ class DoctorMapper implements RowMapper<Doctor> {
 		doctor.setDescription(rs.getString("description"));
 
 		return doctor;
-	}
-}
-
-class ShopObjectMapper implements RowMapper<ShopObject> {
-	public ShopObject mapRow(ResultSet rs, int arg1) throws SQLException {
-		ShopObject shopobject = new ShopObject();
-
-		shopobject.setUrl(rs.getString("url"));
-		shopobject.setName(rs.getString("name"));
-		shopobject.setManufacturer(rs.getString("manufacturer"));
-		shopobject.setDescription(rs.getString("description"));
-		shopobject.setPrice(Double.parseDouble(rs.getString("price")));
-
-		return shopobject;
 	}
 }

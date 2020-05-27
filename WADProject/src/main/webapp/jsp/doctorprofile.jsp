@@ -7,17 +7,42 @@
 <title>Welcome</title>
 </head>
 <body>
+	<a href="shop">Shop</a>
+
 	<table>
 		<tr>
 			<td>Welcome ${user.rank} ${user.name}!</td>
 		</tr>
+
 		<tr>
+			<td>Name</td>
+			<td>${user.name}</td>
 		</tr>
+		
 		<tr>
+			<td>Gender</td>
+			<td>${user.gender}</td>
 		</tr>
+		
+		<tr>
+			<td>Rank</td>
+			<td>${user.rank}</td>
+		</tr>
+		
+		<tr>
+			<td>Field</td>
+			<td>${user.field}</td>
+		</tr>
+		
+		<tr>
+			<td>Description</td>
+			<td>${user.description}</td>
+		</tr>
+		
 		<tr>
 			<td><a href="home.jsp">Home</a></td>
 		</tr>
 	</table>
+	
 </body>
 </html>

@@ -13,7 +13,9 @@
 
 	<bean id="userService" class="com.springmvc.service.UserServiceImpl" />
 	<bean id="userDao" class="com.springmvc.dao.UserDaoImpl" />
-
+	<bean id="shopService" class="com.springmvc.service.ShoppingServiceImpl" />
+	<bean id="shopDao" class="com.springmvc.dao.ShoppingDaoImpl" />
+	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="datasource" />
 	</bean>
@@ -27,5 +29,4 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-
 </beans>
