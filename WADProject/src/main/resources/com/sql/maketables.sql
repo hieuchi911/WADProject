@@ -34,23 +34,28 @@ CREATE TABLE IF NOT EXISTS Patient (
 	FOREIGN KEY (patient_id) REFERENCES User(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS Review (
+CREATE TABLE IF NOT EXISTS DoctorReview (
 	review_id int(10) NOT NULL AUTO_INCREMENT,
-	user_id int(10) NOT NULL,
+	doctor_id int(10) NOT NULL,
+	patient_id int(10) NOT NULL,
 	description varchar(255) NOT NULL,
 	stars int(2) NOT NULL,
 
 	PRIMARY KEY (review_id),
-	FOREIGN KEY (user_id) REFERENCES Doctor(doctor_id)
+	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
+	FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)
 );
 
-CREATE TABLE IF NOT EXISTS SymptomReport (
-	report_id int(10) NOT NULL AUTO_INCREMENT,
-	user_id int(10) NOT NULL,
-	description varchar(255) NOT NULL,    # originally illness_description
+CREATE TABLE IF NOT EXISTS Appointment (
+	appointment_id int(10) NOT NULL AUTO_INCREMENT,
+	doctor_id int(10) NOT NULL,
+	patient_id int(10) NOT NULL,
+	illness_description varchar(255) NOT NULL,
+	from_to varchar(255) NOT NULL,
 
-	PRIMARY KEY (report_id),
-	FOREIGN KEY (user_id) REFERENCES Patient(patient_id)
+	PRIMARY KEY (appointment_id),
+	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
+	FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)
 );
 
 /*------------ Shop object tables ------------*/
@@ -63,16 +68,6 @@ CREATE TABLE IF NOT EXISTS ShopObject (
 	price int(10) NOT NULL,
 
 	PRIMARY KEY (object_id)
-);
-
-CREATE TABLE IF NOT EXISTS Review (
-	review_id int(10) NOT NULL AUTO_INCREMENT,
-	object_id int(10) NOT NULL,
-	description varchar(255) NOT NULL,
-	stars int(2) NOT NULL,
-
-	PRIMARY KEY (review_id),
-	FOREIGN KEY (object_id) REFERENCES ShopObject(object_id)
 );
 
 CREATE TABLE IF NOT EXISTS MedicalTool (
@@ -91,6 +86,18 @@ CREATE TABLE IF NOT EXISTS Medicine (
 
 	PRIMARY KEY (medicine_id),
 	FOREIGN KEY (medicine_id) REFERENCES ShopObject(object_id)
+);
+
+CREATE TABLE IF NOT EXISTS ObjectReview (
+	review_id int(10) NOT NULL AUTO_INCREMENT,
+	user_id int(10) NOT NULL,
+	object_id int(10) NOT NULL,
+	description varchar(255) NOT NULL,
+	stars int(2) NOT NULL,
+
+	PRIMARY KEY (review_id),
+	FOREIGN KEY (object_id) REFERENCES ShopObject(object_id)
+	FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 /*------------ Prescriptions ------------*/
