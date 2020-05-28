@@ -27,16 +27,20 @@ public class UserDaoImpl implements UserDao {
 	JdbcTemplate jdbcTemplate;
 
 	public int register(User user) {
-		String sql = "INSERT INTO users VALUES(?,?,?)";
+		String sql = "INSERT INTO users VALUES(?,?,?) ON DUPLICATE KEY UPDATE password = \"" + user.getPassword()
+		+ "\", usertype=" + "\"" + user.getUsertype() + "\"";
 
 		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 
 	public Patient registerPatient(Patient patient) {
-		String sql = "INSERT INTO patients VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO patients (username, name, gender, phone, address, description)"
+				+ "VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE    \r\n" + 
+				"name = \"" + patient.getName() + "\", gender =" + "\"" + patient.getGender()
+				+ "\", phone=" + "\"" + patient.getPhone() + "\", address=" + "\"" + patient.getAddress()
+				+ "\", description= \"" + patient.getDescription() + "\"";
 		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
 				patient.getPhone(), patient.getAddress(), patient.getDescription()});
-											// username, name, sex, phone, address, medical description
 
 		return patient;
 	}

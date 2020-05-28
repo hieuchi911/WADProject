@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.Login;
 import com.springmvc.model.User;
+import com.springmvc.model.Patient;
 import com.springmvc.service.UserService;
+
 
 /** 
  * The LoginController class handles login activities of the user,
@@ -57,7 +59,8 @@ public class LoginController {
 				mav = new ModelAndView("patientprofile");
 				
 				// Get the patient's information
-				user = userService.profilePatient(user);	
+				Patient patient = userService.profilePatient(user);
+				mav.addObject("patient", patient);
 				mav.addObject("user", user);
 			} else if (user.getUsertype().equals("doctor")) {
 				mav = new ModelAndView("doctorprofile");
