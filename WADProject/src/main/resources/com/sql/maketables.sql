@@ -1,167 +1,306 @@
-USE spring_mvc;
+-- -----------------------------------------------------
+-- Database spring_mvc
+-- -----------------------------------------------------
+CREATE DATABASE IF NOT EXISTS `spring_mvc`;
+USE `spring_mvc` ;
 
-/*
-	Random comment
-*/
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`user` ;
 
-/*------------ User tables ------------*/
-DROP TABLE IF EXISTS User;
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS User (
-	user_id int NOT NULL AUTO_INCREMENT,
-	username varchar(255) NOT NULL,
-	password varchar(255) NOT NULL,
-	PRIMARY KEY (user_id)
-);
 
-DROP TABLE IF EXISTS Doctor;
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`doctor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`doctor` ;
 
-CREATE TABLE IF NOT EXISTS Doctor (
-	doctor_id int NOT NULL,
-	name varchar(255) NOT NULL,
-	sex varchar(6) NOT NULL,
-	academic_rank varchar(255) NOT NULL,
-	specialized_field varchar(255) NOT NULL,
-	bio_description varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`doctor` (
+  `doctor_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `photo-url` VARCHAR(45) NOT NULL,
+  `sex` VARCHAR(6) NOT NULL,
+  `academic_rank` VARCHAR(255) NOT NULL,
+  `specialized_field` VARCHAR(255) NOT NULL,
+  `bio_description` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`doctor_id`),
+  CONSTRAINT `fk_doctor_user`
+    FOREIGN KEY (`doctor_id`)
+    REFERENCES `spring_mvc`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-	PRIMARY KEY (doctor_id),
-	FOREIGN KEY (doctor_id) REFERENCES User(user_id)
-);
 
-DROP TABLE IF EXISTS Patient;
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`patient`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`patient` ;
 
-CREATE TABLE IF NOT EXISTS Patient (
-	patient_id int NOT NULL,
-	name varchar(255) NOT NULL,
-	phone_number varchar(12) NOT NULL,
-	home_address varchar(255) NOT NULL,
-	medical_description varchar(255) NOT NULL,
-	
-	PRIMARY KEY (patient_id),
-	FOREIGN KEY (patient_id) REFERENCES User(user_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`patient` (
+  `patient_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `phone_number` VARCHAR(12) NOT NULL,
+  `home_address` VARCHAR(255) NOT NULL,
+  `medical_description` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`patient_id`),
+  CONSTRAINT `fk_patient_user`
+    FOREIGN KEY (`patient_id`)
+    REFERENCES `spring_mvc`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS DoctorReview;
 
-CREATE TABLE IF NOT EXISTS DoctorReview (
-	review_id int NOT NULL AUTO_INCREMENT,
-	doctor_id int NOT NULL,
-	patient_id int NOT NULL,
-	description varchar(255) NOT NULL,
-	stars int NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`appointment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`appointment` ;
 
-	PRIMARY KEY (review_id),
-	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
-	FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`appointment` (
+  `appointment_id` INT NOT NULL AUTO_INCREMENT,
+  `doctor_id` INT NOT NULL,
+  `patient_id` INT NOT NULL,
+  `illness_description` VARCHAR(255) NOT NULL,
+  `from_to` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`appointment_id`),
+  INDEX `fk_appointment_doctor_idx` (`doctor_id` ASC) VISIBLE,
+  INDEX `fk_appointment_patient_idx` (`patient_id` ASC) VISIBLE,
+  CONSTRAINT `fk_appointment_doctor`
+    FOREIGN KEY (`doctor_id`)
+    REFERENCES `spring_mvc`.`doctor` (`doctor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_appointment_patient`
+    FOREIGN KEY (`patient_id`)
+    REFERENCES `spring_mvc`.`patient` (`patient_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS Appointment;
 
-CREATE TABLE IF NOT EXISTS Appointment (
-	appointment_id int NOT NULL AUTO_INCREMENT,
-	doctor_id int NOT NULL,
-	patient_id int NOT NULL,
-	illness_description varchar(255) NOT NULL,
-	from_to varchar(255) NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`cart`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`cart` ;
 
-	PRIMARY KEY (appointment_id),
-	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
-	FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`cart` (
+  `cart_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `checkout_date` VARCHAR(20) NOT NULL,
+  INDEX `fk_cart_user_idx` (`user_id` ASC) VISIBLE,
+  PRIMARY KEY (`cart_id`),
+  CONSTRAINT `fk_cart_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `spring_mvc`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-/*------------ Shop object tables ------------*/
-DROP TABLE IF EXISTS ShopObject;
 
-CREATE TABLE IF NOT EXISTS ShopObject (
-	object_id int NOT NULL AUTO_INCREMENT,
-	name varchar(255) NOT NULL,
-	manufacturer varchar(255) NOT NULL,
-	description varchar(255) NOT NULL,
-	price int NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`shopobject`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`shopobject` ;
 
-	PRIMARY KEY (object_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`shopobject` (
+  `object_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `photo-url` VARCHAR(45) NOT NULL,
+  `manufacturer` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `price` INT NOT NULL,
+  PRIMARY KEY (`object_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS MedicalTool;
 
-CREATE TABLE IF NOT EXISTS MedicalTool (
-	tool_id int NOT NULL,
-	description varchar(255) NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`cartobject`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`cartobject` ;
 
-	PRIMARY KEY (tool_id),
-	FOREIGN KEY (tool_id) REFERENCES ShopObject(object_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`cartobject` (
+  `object_id` INT NOT NULL,
+  `cart_id` INT NOT NULL,
+  `amount` INT NOT NULL,
+  PRIMARY KEY (`object_id`, `cart_id`),
+  INDEX `object_id` (`object_id` ASC) VISIBLE,
+  INDEX `fk_cartobject_cart_idx` (`cart_id` ASC) VISIBLE,
+  CONSTRAINT `fk_cartobject_shopobject`
+    FOREIGN KEY (`object_id`)
+    REFERENCES `spring_mvc`.`shopobject` (`object_id`),
+  CONSTRAINT `fk_cartobject_cart`
+    FOREIGN KEY (`cart_id`)
+    REFERENCES `spring_mvc`.`cart` (`cart_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS Medicine;
 
-CREATE TABLE IF NOT EXISTS Medicine (
-	medicine_id int NOT NULL,
-	instruction varchar(255) NOT NULL,
-	ingredients varchar(255) NOT NULL,
-	side_effects varchar(255) NOT NULL,    # very truthful
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`doctorreview`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`doctorreview` ;
 
-	PRIMARY KEY (medicine_id),
-	FOREIGN KEY (medicine_id) REFERENCES ShopObject(object_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`doctorreview` (
+  `review_id` INT NOT NULL AUTO_INCREMENT,
+  `doctor_id` INT NOT NULL,
+  `patient_id` INT NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `stars` INT NOT NULL,
+  PRIMARY KEY (`review_id`),
+  INDEX `fk_doctorreview_doctor_idx` (`doctor_id` ASC) VISIBLE,
+  INDEX `fk_doctorreview_patient_idx` (`patient_id` ASC) VISIBLE,
+  CONSTRAINT `fk_doctorreview_doctor`
+    FOREIGN KEY (`doctor_id`)
+    REFERENCES `spring_mvc`.`doctor` (`doctor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_doctorreview_patient`
+    FOREIGN KEY (`patient_id`)
+    REFERENCES `spring_mvc`.`patient` (`patient_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS ObjectReview;
 
-CREATE TABLE IF NOT EXISTS ObjectReview (
-	review_id int NOT NULL AUTO_INCREMENT,
-	user_id int NOT NULL,
-	object_id int NOT NULL,
-	description varchar(255) NOT NULL,
-	stars int NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`medicaltool`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`medicaltool` ;
 
-	PRIMARY KEY (review_id),
-	FOREIGN KEY (object_id) REFERENCES ShopObject(object_id),
-	FOREIGN KEY (user_id) REFERENCES User(user_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`medicaltool` (
+  `tool_id` INT NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`tool_id`),
+  CONSTRAINT `fk_medicaltool_shopobject`
+    FOREIGN KEY (`tool_id`)
+    REFERENCES `spring_mvc`.`shopobject` (`object_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-/*------------ Prescriptions ------------*/
-DROP TABLE IF EXISTS Prescription;
 
-CREATE TABLE IF NOT EXISTS Prescription (
-	prescription_id int NOT NULL AUTO_INCREMENT,
-	doctor_id int NOT NULL,
-	patient_id int NOT NULL,
-	diagnosis varchar(255) NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`medicine`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`medicine` ;
 
-	PRIMARY KEY (prescription_id),
-	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id),
-	FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`medicine` (
+  `medicine_id` INT NOT NULL,
+  `instruction` VARCHAR(255) NOT NULL,
+  `ingredients` VARCHAR(255) NOT NULL,
+  `side_effects` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`medicine_id`),
+  CONSTRAINT `fk_medicine_shopobject`
+    FOREIGN KEY (`medicine_id`)
+    REFERENCES `spring_mvc`.`shopobject` (`object_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS PrescribedMedicine;
 
-CREATE TABLE IF NOT EXISTS PrescribedMedicine (
-	prescription_id int NOT NULL,
-	medicine_id int NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`objectreview`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`objectreview` ;
 
-	PRIMARY KEY (prescription_id, medicine_id),
-	FOREIGN KEY (prescription_id) REFERENCES Prescription(prescription_id),
-	FOREIGN KEY (medicine_id) REFERENCES Medicine(medicine_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`objectreview` (
+  `review_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `object_id` INT NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `stars` INT NOT NULL,
+  INDEX `fk_objectreview_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_objectreview_shopobject_idx` (`object_id` ASC) VISIBLE,
+  PRIMARY KEY (`review_id`),
+  CONSTRAINT `fk_objectreview_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `spring_mvc`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_objectreview_shopobject`
+    FOREIGN KEY (`object_id`)
+    REFERENCES `spring_mvc`.`shopobject` (`object_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-/*------------ Cart ------------*/
-DROP TABLE IF EXISTS Cart;
 
-CREATE TABLE IF NOT EXISTS Cart (
-	cart_id int NOT NULL AUTO_INCREMENT,
-	user_id int NOT NULL,
-	checkout_date varchar(20) NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`prescription`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`prescription` ;
 
-	PRIMARY KEY (cart_id),
-	FOREIGN KEY (user_id) REFERENCES User(user_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`prescription` (
+  `prescription_id` INT NOT NULL AUTO_INCREMENT,
+  `doctor_id` INT NOT NULL,
+  `patient_id` INT NOT NULL,
+  `diagnosis` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`prescription_id`),
+  INDEX `fk_prescription_doctor_idx` (`doctor_id` ASC) VISIBLE,
+  INDEX `fk_prescription_patient_idx` (`patient_id` ASC) VISIBLE,
+  CONSTRAINT `fk_prescription_doctor`
+    FOREIGN KEY (`doctor_id`)
+    REFERENCES `spring_mvc`.`doctor` (`doctor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_prescription_patient`
+    FOREIGN KEY (`patient_id`)
+    REFERENCES `spring_mvc`.`patient` (`patient_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS CartObject;
 
-CREATE TABLE IF NOT EXISTS CartObject (
-	cart_id int NOT NULL,
-	object_id int NOT NULL,
+-- -----------------------------------------------------
+-- Table `spring_mvc`.`prescribedmedicine`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `spring_mvc`.`prescribedmedicine` ;
 
-	PRIMARY KEY (cart_id, object_id),
-	FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
-	FOREIGN KEY (object_id) REFERENCES ShopObject(object_id)
-);
+CREATE TABLE IF NOT EXISTS `spring_mvc`.`prescribedmedicine` (
+  `prescription_id` INT NOT NULL,
+  `medicine_id` INT NOT NULL,
+  PRIMARY KEY (`prescription_id`, `medicine_id`),
+  INDEX `medicine_id` (`medicine_id` ASC) VISIBLE,
+  CONSTRAINT `fk_prescribedmedicine_prescriptionid`
+    FOREIGN KEY (`prescription_id`)
+    REFERENCES `spring_mvc`.`prescription` (`prescription_id`),
+  CONSTRAINT `fk_prescribedmedicine_medicineid`
+    FOREIGN KEY (`medicine_id`)
+    REFERENCES `spring_mvc`.`medicine` (`medicine_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
