@@ -30,7 +30,7 @@ public interface UserDao {
 	 * @param patient:	(Patient) A patient
 	 * @return 			(SymptomReport) A filled report by the patient
 	 */
-	void addSymptomReport(SymptomReport report);
+	void addSymptomReport(Patient patient);
 	
 	/*
 	 * This function validates a login via database

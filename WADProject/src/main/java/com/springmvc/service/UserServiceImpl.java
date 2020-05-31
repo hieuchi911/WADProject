@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.springmvc.dao.UserDao;
 import com.springmvc.model.Doctor;
-import com.springmvc.model.SymptomReport;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
@@ -30,8 +29,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.registerPatient(patient);
 	}
 	
-	public void addSymptomReport(SymptomReport report) {
-		userDao.addSymptomReport(report);
+	public void addSymptomReport(Patient patient) {
+		userDao.addSymptomReport(patient);
 	}
 	
 	public Patient profilePatient(User user) {

@@ -13,9 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
-import com.springmvc.model.ShopObject;
 import com.springmvc.model.User;
-import com.springmvc.model.SymptomReport;
 
 /**
  * This class provides an implementation of the Data Access Object
@@ -47,17 +45,13 @@ public class UserDaoImpl implements UserDao {
 		return patient;
 	}
 	
-	public void addSymptomReport(SymptomReport report) {
+	public void addSymptomReport(Patient patient) {
 		// Add query here, deployed once have database
-		System.out.println("HEREEEEEEEE");
-		System.out.println(report.getGender());
-//		String sql = "INSERT INTO patients (username, name, gender, phone, address, description)"
-//				+ "VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE    \r\n" + 
-//				"name = \"" + patient.getName() + "\", gender =" + "\"" + patient.getGender()
-//				+ "\", phone=" + "\"" + patient.getPhone() + "\", address=" + "\"" + patient.getAddress()
-//				+ "\", description= \"" + patient.getDescription() + "\"";
-//		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
-//				patient.getPhone(), patient.getAddress(), patient.getDescription()});
+		String description = patient.getDescription();
+		String sql = "UPDATE patients "
+				+ "SET description =" + "\"" + description + "\"\n"
+				+ "WHERE username =" + "\"" + patient.getUsername() + "\"";
+		jdbcTemplate.update(sql);
 
 	}
 	

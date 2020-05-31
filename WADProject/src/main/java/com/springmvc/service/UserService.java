@@ -3,7 +3,6 @@ package com.springmvc.service;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
-import com.springmvc.model.SymptomReport;
 import com.springmvc.model.User;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public interface UserService {
 	Patient profilePatient(User user);
 	
 	
-	void addSymptomReport(SymptomReport report);
+	void addSymptomReport(Patient patient);
 	
 	/*
 	 * This function provides the profile of a doctor user via Data Access Object

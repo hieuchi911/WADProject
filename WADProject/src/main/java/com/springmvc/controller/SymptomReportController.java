@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.User;
 import com.springmvc.model.Patient;
-import com.springmvc.model.SymptomReport;
 import com.springmvc.service.UserService;
 
 /** 
@@ -38,22 +37,21 @@ public class SymptomReportController {
 	public ModelAndView symptomRp(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
 		ModelAndView mav = new ModelAndView("symptomreport");
-		Patient patient = new Patient();
-		SymptomReport rp = patient.getSymptomReport();
-		mav.addObject("symptomReport", rp);
-		mav.addObject("user", user);
+		Patient patient = userService.profilePatient(user);
+		mav.addObject("patient", patient);
+		//mav.addObject("user", user);
 		return mav;
 	}
 
 	@RequestMapping(value = "/addSymptomRp", method = RequestMethod.POST)
 	public ModelAndView editProfile(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("symptomReport") SymptomReport report, @SessionAttribute User user) {
+			@ModelAttribute("patient") Patient patient, @SessionAttribute User user) {
 		ModelAndView mav = null;
 		System.out.println("symptomRp: user session is: " + user.getUsername());
 
 		if (user != null) {
-			System.out.println(user.getUsername());
-			userService.addSymptomReport(report);
+			patient.setUsername(user.getUsername());
+			userService.addSymptomReport(patient);
 			mav = new ModelAndView("patientprofile");
 			mav.addObject("user", user);
 			mav.addObject("message", "Added symptom report, please choose a doctor!");
