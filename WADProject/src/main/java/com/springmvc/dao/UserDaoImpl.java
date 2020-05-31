@@ -27,13 +27,14 @@ public class UserDaoImpl implements UserDao {
 	JdbcTemplate jdbcTemplate;
 
 	public int register(User user) {
-		String sql = "INSERT INTO users VALUES(?,?,?)";
+		String sql = "INSERT INTO user VALUES(?,?,?)";
 
 		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 
 	public Patient registerPatient(Patient patient) {
-		String sql = "INSERT INTO patients VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO patient VALUES(?,?,?,?,?,?)";
+		
 		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
 				patient.getPhone(), patient.getAddress(), patient.getDescription()});
 											// username, name, sex, phone, address, medical description
@@ -42,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	public User validateUser(Login login) {
-		String sql = "SELECT * FROM users WHERE username ='" + login.getUsername() + "' AND password='"
+		String sql = "SELECT * FROM user WHERE username ='" + login.getUsername() + "' AND password='"
 				+ login.getPassword() + "'";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
 
@@ -50,14 +51,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public Patient profilePatient(User user) {
-		String sql = "SELECT * FROM patients WHERE username ='" + user.getUsername() + "'";
+		String sql = "SELECT * FROM patient WHERE patient_username ='" + user.getUsername() + "'";
 		List<Patient> patients = jdbcTemplate.query(sql, new PatientMapper());
 
 		return patients.size() > 0 ? patients.get(0) : null;
 	}
 	
 	public Doctor profileDoctor(User user) {
-		String sql = "SELECT * FROM doctors WHERE username ='" + user.getUsername() + "'";
+		String sql = "SELECT * FROM doctor WHERE doctor_username ='" + user.getUsername() + "'";
 		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
 
 		return doctors.size() > 0 ? doctors.get(0) : null;	
@@ -71,7 +72,7 @@ class UserMapper implements RowMapper<User> {
 
 		user.setUsername(rs.getString("username"));
 		user.setPassword(rs.getString("password"));
-		user.setUsertype(rs.getString("usertype"));
+		user.setUsertype(rs.getString("user_type"));
 		return user;
 	}
 }
@@ -80,12 +81,12 @@ class PatientMapper implements RowMapper<Patient> {
 	public Patient mapRow(ResultSet rs, int arg1) throws SQLException {
 		Patient patient = new Patient();
 
-		patient.setUsername(rs.getString("username"));
+		patient.setUsername(rs.getString("patient_username"));
 		patient.setName(rs.getString("name"));
 		patient.setGender(rs.getString("gender"));
-		patient.setPhone(rs.getString("phone"));
-		patient.setAddress(rs.getString("address"));
-		patient.setDescription(rs.getString("description"));
+		patient.setPhone(rs.getString("phone_number"));
+		patient.setAddress(rs.getString("home_address"));
+		patient.setDescription(rs.getString("medical_description"));
 
 		return patient;
 	}
@@ -97,10 +98,11 @@ class DoctorMapper implements RowMapper<Doctor> {
 
 		doctor.setUsername(rs.getString("username"));
 		doctor.setName(rs.getString("name"));
+		doctor.setUrl(rs.getString("photo_url"));
 		doctor.setGender(rs.getString("gender"));
-		doctor.setRank(rs.getString("rank"));
-		doctor.setField(rs.getString("field"));
-		doctor.setDescription(rs.getString("description"));
+		doctor.setRank(rs.getString("academic_rank"));
+		doctor.setField(rs.getString("specialized_field"));
+		doctor.setDescription(rs.getString("bio_description"));
 
 		return doctor;
 	}

@@ -2,6 +2,8 @@ package com.springmvc.service;
 
 import java.util.List;
 
+import com.springmvc.model.CartObject;
+import com.springmvc.model.ExtendedCartObject;
 import com.springmvc.model.ShopObject;
 
 /**
@@ -13,4 +15,8 @@ public interface ShoppingService {
 	 * @return 			(List <ShopObject>) The list of shopping objects
 	 */
 	List <ShopObject> getAllShopObjects();
+
+	ShopObject getShopObject(String object_id);
+
+	List<ExtendedCartObject> extendCartObjects(List<CartObject> objects);
 }
