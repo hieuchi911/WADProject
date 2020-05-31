@@ -23,6 +23,7 @@
 	</style>
 </head>
 <body>
+	<a href="shop.jsp">Shop</a>
 	Welcome! ${user.username}
 
 	<c:forEach items="${objects.objects}" var="object" varStatus="tagStatus">

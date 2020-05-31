@@ -10,11 +10,13 @@ public class Patient extends User {
 	private String phone;
 	private String address;
 	private String description;
+	private SymptomReport rp;
 	
 	public Patient() {
 		name = ""; gender = "";
 		phone = ""; address = "";
 		description = "";
+		rp = new SymptomReport();
 	}
 
 	/* Username tasks */
@@ -65,4 +67,11 @@ public class Patient extends User {
 		this.description = description;
 	}
 
+	/* Report tasks */
+	public SymptomReport getSymptomReport() {
+		return rp;
+	}
+	public void setSymptomReport(SymptomReport rp) {
+		this.rp = rp;
+	}
 }

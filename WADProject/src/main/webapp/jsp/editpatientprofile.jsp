@@ -10,11 +10,11 @@
 </head>
 <body>
 	<a href="shop">Shop</a>
-	<c:if test = "${user.usertype==\"patient\"}">      
+	     
 	<form:form id="loginForm" modelAttribute="patient" action="editProfile" method="post">
 	<table align="center">
 		<tr>
-			<td><form:label path="name">Full Name: ${user.username}</form:label></td>
+			<td><form:label path="name">Full Name</form:label></td>
 			<td><form:input path="name" name="name" id="name" /></td>
 		</tr>
 		<tr>
@@ -35,7 +35,6 @@
 		</tr>
 		
 		<tr style="display:none;">
-			<td></td>
            	<td><form:input path="username" name="username" id="username" value="${user.username}" readonly="true"/></td>
            </tr>
            <tr>
@@ -46,6 +45,6 @@
 		</tr>
 	</table>
 	</form:form>
-	</c:if>
+	
 </body>
 </html>

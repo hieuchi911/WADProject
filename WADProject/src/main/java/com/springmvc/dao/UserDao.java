@@ -4,6 +4,8 @@ import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
+import com.springmvc.model.SymptomReport;
+import java.util.List;
 
 /**
  * Data Access Object of User instances
@@ -22,6 +24,13 @@ public interface UserDao {
 	 * @return 			(Patient) A registered patient
 	 */
 	Patient registerPatient(Patient patient);
+	
+	/*
+	 * This function adds a symptom report to database
+	 * @param patient:	(Patient) A patient
+	 * @return 			(SymptomReport) A filled report by the patient
+	 */
+	void addSymptomReport(SymptomReport report);
 	
 	/*
 	 * This function validates a login via database
@@ -43,4 +52,12 @@ public interface UserDao {
 	 * @return 			(Doctor) The doctor
 	 */
 	Doctor profileDoctor(User user);
+	
+	/*
+	 * This function returns all doctors
+	 * @return 			(List<Doctor>) The list of doctors
+	 */
+	List<Doctor> getAllDoctors();
+	
+	
 }

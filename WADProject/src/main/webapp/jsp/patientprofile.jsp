@@ -9,45 +9,56 @@
 </head>
 <body>
 	<a href="shop">Shop</a>
+	<!-- showDoctors and symptomRp left here temporarily-->
+	
+	<a href="showDoctors">Doctors</a>
+	<a href="symptomRp">Write a symptom report</a>
+	
+	<!-- showDoctors and symptomRp left here temporarily-->
+	
 	<form action="editUser">
 	<table>
 		<tr>
-			<td>Welcome! ${patient.username}</td>
+			<td>Welcome! ${user.username}</td>
 		</tr>
 		
 		<tr>
 			<td>Name</td>
-			<td>${patient.name}</td>
+			<td>${user.name}</td>
 		</tr>
 		
 		<tr>
 			<td>Gender</td>
-			<td>${patient.gender}</td>
+			<td>${user.gender}</td>
 		</tr>
 		
 		<tr>
 			<td>Phone</td>
-			<td>${patient.phone}</td>
+			<td>${user.phone}</td>
 		</tr>
 		
 		<tr>
 			<td>Address</td>
-			<td>${patient.address}</td>
+			<td>${user.address}</td>
 		</tr>
 		
 		<tr>
 			<td>Description</td>
-			<td>${patient.description}</td>
+			<td>${user.description}</td>
 		</tr>
 		<tr>
-		<td><input type="submit" name="edit-username" value="Edit Profile"/>Edit Profile</td>
+		<td><input type="submit" name="edit-profile" value="Edit Profile"/>Edit Profile</td>
 		<td><input type="submit" name="edit-password" value="Edit Password"/>Edit Password</td>
 		</tr>
-		
 		<tr>
 			<td><a href="home.jsp">Home</a></td>
 		</tr>
 	</table>
 	</form>
+	<table align="center">
+		<tr>
+			<td style="font-style: italic; color: red;">${message}</td>
+		</tr>
+	</table>
 </body>
 </html>

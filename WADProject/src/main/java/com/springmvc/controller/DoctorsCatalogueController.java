@@ -7,14 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import com.springmvc.model.ObjectListContainer;
-import com.springmvc.model.ShopObject;
-import com.springmvc.service.ShoppingService;
-import com.springmvc.model.User;
+import com.springmvc.model.DoctorListContainer;
+import com.springmvc.model.Doctor;
+import com.springmvc.service.UserService;
 
 /** 
  * The ShopController class handles shopping activities of the user,
@@ -23,22 +20,22 @@ import com.springmvc.model.User;
  * 
  */
 @Controller
-public class ShopController {	
+public class DoctorsCatalogueController {
 	@Autowired
-	ShoppingService shopService;
+	UserService userService;
 	
 	/* ---------------------------- showShop --------------------------------------
 	 * This method shows the shopping screen in url "/shop".
 	 */
-	@RequestMapping(value = "/shop", method = RequestMethod.GET)
-	public ModelAndView showShop(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
-		ModelAndView mav = new ModelAndView("shop");
+	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
+	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("doctors");
 		
-		System.out.println("User is TESTTT " + user.getUsername());
-		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
-		objects.setObjects(shopService.getAllShopObjects());
-		
-		mav.addObject("objects", objects);
+		DoctorListContainer<Doctor> doctors = new DoctorListContainer<Doctor>();
+		doctors.setDoctors(userService.getAllDoctors());
+		for(Doctor d: doctors.getDoctors())
+			System.out.println(d.getUsername());
+		mav.addObject("doctors", doctors);
 		return mav;
 	}
 }

@@ -13,7 +13,9 @@ import org.springframework.jdbc.core.RowMapper;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
+import com.springmvc.model.ShopObject;
 import com.springmvc.model.User;
+import com.springmvc.model.SymptomReport;
 
 /**
  * This class provides an implementation of the Data Access Object
@@ -45,6 +47,20 @@ public class UserDaoImpl implements UserDao {
 		return patient;
 	}
 	
+	public void addSymptomReport(SymptomReport report) {
+		// Add query here, deployed once have database
+		System.out.println("HEREEEEEEEE");
+		System.out.println(report.getGender());
+//		String sql = "INSERT INTO patients (username, name, gender, phone, address, description)"
+//				+ "VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE    \r\n" + 
+//				"name = \"" + patient.getName() + "\", gender =" + "\"" + patient.getGender()
+//				+ "\", phone=" + "\"" + patient.getPhone() + "\", address=" + "\"" + patient.getAddress()
+//				+ "\", description= \"" + patient.getDescription() + "\"";
+//		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
+//				patient.getPhone(), patient.getAddress(), patient.getDescription()});
+
+	}
+	
 	public User validateUser(Login login) {
 		String sql = "SELECT * FROM users WHERE username ='" + login.getUsername() + "' AND password='"
 				+ login.getPassword() + "'";
@@ -66,6 +82,15 @@ public class UserDaoImpl implements UserDao {
 
 		return doctors.size() > 0 ? doctors.get(0) : null;	
 	}
+	
+	public List<Doctor> getAllDoctors() {
+		String sql = "SELECT * FROM doctors;";
+		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
+		
+		return doctors;
+	}
+	
+	
 
 }
 

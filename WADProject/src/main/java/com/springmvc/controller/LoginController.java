@@ -59,8 +59,7 @@ public class LoginController {
 				mav = new ModelAndView("patientprofile");
 				
 				// Get the patient's information
-				Patient patient = userService.profilePatient(user);
-				mav.addObject("patient", patient);
+				user = userService.profilePatient(user);
 				mav.addObject("user", user);
 			} else if (user.getUsertype().equals("doctor")) {
 				mav = new ModelAndView("doctorprofile");

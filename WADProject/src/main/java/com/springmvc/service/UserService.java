@@ -3,7 +3,9 @@ package com.springmvc.service;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
+import com.springmvc.model.SymptomReport;
 import com.springmvc.model.User;
+import java.util.List;
 
 /**
  * General services related to User instances
@@ -37,10 +39,15 @@ public interface UserService {
 	 */
 	Patient profilePatient(User user);
 	
+	
+	void addSymptomReport(SymptomReport report);
+	
 	/*
 	 * This function provides the profile of a doctor user via Data Access Object
 	 * @param user:		(User) A valid user
 	 * @return 			(Doctor) The doctor
 	 */
 	Doctor profileDoctor(User user);
+	
+	List<Doctor> getAllDoctors();
 }
