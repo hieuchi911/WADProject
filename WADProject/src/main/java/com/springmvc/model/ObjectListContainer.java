@@ -1,5 +1,6 @@
 package com.springmvc.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,9 @@ import java.util.List;
 public class ObjectListContainer <T> {
     private List <T> objects;
 
-	public ObjectListContainer() {}
+	public ObjectListContainer() {
+		objects = new ArrayList<T>();
+	}
 
 	/* Object list tasks */
     public List <T> getObjects() {

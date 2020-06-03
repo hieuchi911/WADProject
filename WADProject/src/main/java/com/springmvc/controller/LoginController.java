@@ -52,7 +52,6 @@ public class LoginController {
 		user = userService.validateUser(login);
 
 		if (user != null) {
-			System.out.println(user.getUsertype());
 			if (user.getUsertype().equals("patient")) {
 				mav = new ModelAndView("patientprofile");
 				
@@ -76,7 +75,16 @@ public class LoginController {
 		return mav;
 	}
 
-	@ModelAttribute
+	/* ---------------------------- logoutProcess --------------------------------------
+	 * This method shows the login screen in url "/logout".
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutProcess(Model model) {
+		model.addAttribute("user", new User());
+		return "redirect:/";
+	}
+	
+	@ModelAttribute("user")
 	public void addUser(Model model) {
 		model.addAttribute(new User());
 	}

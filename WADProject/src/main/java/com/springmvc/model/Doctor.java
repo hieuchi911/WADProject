@@ -10,6 +10,7 @@ public class Doctor extends User {
 	private String rank;
 	private String field;
 	private String description;
+	private String url;
 	
 	public Doctor() {
 		name = ""; gender = ""; 
@@ -63,6 +64,14 @@ public class Doctor extends User {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/* Url tasks */
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }

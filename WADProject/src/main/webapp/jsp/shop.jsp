@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,19 +24,19 @@
 	</style>
 </head>
 <body>
-	Welcome! ${user.username}
+	Welcome! ${user.name}
 
 	<c:forEach items="${objects.objects}" var="object" varStatus="tagStatus">
 		<div class="card">
-			<a href="">
+			<a href="shop/${object.id}">
 			   <img src="${object.url}" alt="${object.name}" style="width:100%">
 			</a>
 			<h1>${object.name}</h1>
 			<p>Made by ${object.manufacturer} </p>
 		</div>
 	</c:forEach>
-	
-	<a href="home.jsp">Home</a>
+	<a href="shopCheckout">Checkout</a>
+	<a href="logout">Home</a>
 	
 </body>
 </html>

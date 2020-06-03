@@ -1,19 +1,26 @@
 package com.springmvc.model;
 
 /**
- * POJO class for handling the Shop-object data
+ * POJO class for extending cart-item data with shop-object data
  */
-public class ShopObject {
-	private String object_id;
+public class ExtendedCartObject {
+	private String objectid;
 	private String url;
 	private String name;
-	private String category;
 	private String manufacturer;
-	private String description;
 	private double price;
+	private int amount;
 	
-	public ShopObject() {}
-
+	public ExtendedCartObject() {}
+	
+	/* Object ID tasks */
+	public String getObjectid() {
+		return objectid;
+	}
+	public void setObjectid(String objectid) {
+		this.objectid = objectid;
+	}
+	
 	/* URL tasks */
 	public String getUrl() {
 		return url;
@@ -38,14 +45,6 @@ public class ShopObject {
 		this.manufacturer = manufacturer;
 	}
 
-	/* Description tasks */
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	/* Price tasks */
 	public double getPrice() {
 		return price;
@@ -54,19 +53,11 @@ public class ShopObject {
 		this.price = price;
 	}
 	
-	/* Category tasks */
-	public String getCategory() {
-		return category;
+	/* Amount tasks */
+	public int getAmount() {
+		return amount;
 	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	
-	/* ID tasks */
-	public String getId() {
-		return object_id;
-	}
-	public void setId(String object_id) {
-		this.object_id = object_id;		
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 }
