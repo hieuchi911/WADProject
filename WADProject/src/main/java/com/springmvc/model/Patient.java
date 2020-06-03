@@ -9,12 +9,16 @@ public class Patient extends User {
 	private String gender;
 	private String phone;
 	private String address;
-	private String description;
+	private PatientDescription description;
 	
 	public Patient() {
 		name = ""; gender = "";
 		phone = ""; address = "";
-		description = "";
+		
+		description = new PatientDescription();
+		description.setAllergy("");
+		description.setBackground("");
+		description.setCurrent("");
 	}
 
 	/* Username tasks */
@@ -58,11 +62,15 @@ public class Patient extends User {
 	}
 
 	/* Description tasks */
-	public String getDescription() {
+	public PatientDescription getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		if (description.length() == 0) 
+			description = ".||.||.";
+		String[] att = description.split("\\|\\|");
+		this.description.setAllergy(att[0]);
+		this.description.setBackground(att[1]);
+		this.description.setCurrent(att[2]);
 	}
-
 }

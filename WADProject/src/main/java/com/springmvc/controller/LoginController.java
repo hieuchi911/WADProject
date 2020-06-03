@@ -9,10 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
+import com.springmvc.model.Patient;
 import com.springmvc.model.User;
 import com.springmvc.service.UserService;
 
@@ -45,28 +48,15 @@ public class LoginController {
 	 * This method shows handles login activities (i.e. verification, redirection) with url "/loginProcess".
 	 */
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("login") Login login, @ModelAttribute("user") User user) {
+	public ModelAndView loginProcess(Model model, HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("login") Login login, @ModelAttribute User user) {
 		ModelAndView mav = null;
 
 		user = userService.validateUser(login);
-
+		
 		if (user != null) {
-			if (user.getUsertype().equals("patient")) {
-				mav = new ModelAndView("patientprofile");
-				
-				// Get the patient's information
-				user = userService.profilePatient(user);	
-				mav.addObject("user", user);
-			} else if (user.getUsertype().equals("doctor")) {
-				mav = new ModelAndView("doctorprofile");
-				
-				// Get the doctor's information
-				user = userService.profileDoctor(user);
-				mav.addObject("user", user);
-			} else {
-//				
-			}
+			mav = new ModelAndView("redirect:/profile");
+			model.addAttribute("user", user);
 		} else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");
@@ -75,6 +65,30 @@ public class LoginController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView profile(Model model, @SessionAttribute User user) {
+		ModelAndView mav = null;
+		
+		System.out.println(user instanceof Patient);
+		
+		if (user.getUsertype().contentEquals("patient")) {
+			mav = new ModelAndView("patientprofile");
+			
+			// Get the patient's information
+			user = userService.profilePatient(user);	
+			
+			model.addAttribute("user", user);
+			mav.addObject("editUser", new Patient());
+		} else if (user.getUsertype().contentEquals("doctor")) {
+			mav = new ModelAndView("doctorprofile");
+			
+			// Get the doctor's information
+			user = userService.profileDoctor(user);
+			mav.addObject("editUser", new Doctor());
+		}
+		return mav;
+	}
+	
 	/* ---------------------------- logoutProcess --------------------------------------
 	 * This method shows the login screen in url "/logout".
 	 */
