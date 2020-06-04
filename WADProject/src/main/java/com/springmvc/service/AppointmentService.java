@@ -29,7 +29,7 @@ public interface AppointmentService {
 	 * @return 			(Patient) The patient
 	 */
 	
-	Appointment computeTime(String doctor, String patient);
+	Appointment computeTime(String doctor, Patient patient);
 
 
 	

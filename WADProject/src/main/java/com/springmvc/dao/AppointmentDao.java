@@ -17,7 +17,7 @@ public interface AppointmentDao {
 	void rejectAppointment(Appointment appointment);
 	
 	
-	Appointment computeTime(String doctor, String patient);
+	Appointment computeTime(String doctor, Patient patient);
 
 
 	

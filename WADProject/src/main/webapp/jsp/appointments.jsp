@@ -29,8 +29,8 @@
 		</tr>
 		
 		<tr>
-			<td><a href="rejectRequest${appointment.patient}">Reject request</a></td>
-			<td><a href="acceptRequest${appointment.patient}">Accept request</a></td>
+			<td><a href="${appointment.patient}-rejectRequest">Reject request</a></td>
+			<td><a href="${appointment.patient}-acceptRequest">Accept request</a></td>
 		</tr>
 		
 		<tr>

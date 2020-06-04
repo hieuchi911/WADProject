@@ -68,14 +68,18 @@ public class DoctorController {
 	 * This method update the pre-made appointment in the database (done by 
 	 * makeAppointment/{username} controller) with the computed from_to
 	 */
-	@RequestMapping(value = "/acceptRequest/{patient}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{patient}-acceptRequest", method = RequestMethod.GET)
 	public ModelAndView acceptRequest(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user, @PathVariable String patient) {
 		ModelAndView mav = null;
 
 		if(user instanceof Doctor) {
+			User tempUser = new User();
+			tempUser.setUsername(patient);
+			Patient p = userService.profilePatient(tempUser);
+			
 			Appointment appointment = new Appointment();
-			appointment = appointmentService.computeTime(user.getUsername(), patient);
+			appointment = appointmentService.computeTime(user.getUsername(), p);
 			mav = new ModelAndView("appointments");
 			mav.addObject("message_accept", "Patient accepted");
 			mav.addObject("appointment", appointment);
@@ -84,7 +88,7 @@ public class DoctorController {
 	}
 	
 	
-	@RequestMapping(value = "/rejectRequest/{patient}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{patient}-rejectRequest", method = RequestMethod.GET)
 	public ModelAndView rejectRequest(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user, @PathVariable String patient) {
 		ModelAndView mav = null;
@@ -97,6 +101,7 @@ public class DoctorController {
 			appointmentService.rejectAppointment(appointment);
 		}
 		mav = new ModelAndView("appointments");
+		mav.addObject(attributeValue);
 		mav.addObject("message_reject", "Patient rejected");
 		
 		

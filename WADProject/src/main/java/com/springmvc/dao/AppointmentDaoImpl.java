@@ -1,8 +1,10 @@
 package com.springmvc.dao;
 
+import java.time.LocalDateTime;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,8 +24,8 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
 	@Override
 	public Appointment makeAppointment(Appointment appointment) { // Need symptom report here, not yet handled
-		String sql = "INSERT INTO appointment (doctor_username, patient_username, illness_description)"
-				+ "VALUES (?, ?, ?);";
+		String sql = "INSERT INTO appointment (from_to, doctor_username, patient_username, illness_description)"
+				+ "VALUES (1, ?, ?, ?);";
 		jdbcTemplate.update(sql, new Object[] { appointment.getDoctor(), appointment.getPatient(), appointment.getIllness_description()});
 		
 		
@@ -32,14 +34,14 @@ public class AppointmentDaoImpl implements AppointmentDao{
 
 	@Override
 	public void rejectAppointment(Appointment appointment) {
-		String sql = "DELETE FROM appointment"
-				+ "WHERE doctor_username = '" + appointment.getDoctor()+ "'"
+		String sql = "DELETE FROM appointment "
+				+ "WHERE doctor_username = '" + appointment.getDoctor()+ "' "
 				+ "AND patient_username = '" + appointment.getPatient() + "';";
 		jdbcTemplate.update(sql);
 	}
 
 	@Override
-	public Appointment computeTime(String doctor, String patient) {
+	public Appointment computeTime(String doctor, Patient patient) {
 		
 		String sql = "SELECT from_to FROM appointment WHERE doctor_username = '" + doctor + "';";
 		List<String> from_to = jdbcTemplate.query(sql, new FromToMapper());
@@ -47,27 +49,66 @@ public class AppointmentDaoImpl implements AppointmentDao{
 		//.... handle String split here
 		int[][] shifts = new int[20][2];
 		int i = 0;
+		int[] hour_list = new int[20];
+		int[] shift_list = new int[20];
 		for(String f_t: from_to) {
 			String[] splitstring = f_t.split("_");	// 2020_12_1_16_1
-			shifts[i][0] = Integer.parseInt(splitstring[3]);
-			shifts[i][1] = Integer.parseInt(splitstring[4]);
+			//shifts[i][0] = Integer.parseInt(splitstring[3]);
+			hour_list[i] = Integer.parseInt(splitstring[3]);
+			//shifts[i][1] = Integer.parseInt(splitstring[4]);
+			shift_list[i] = Integer.parseInt(splitstring[4]);
+			
 			i++;
 		}
-		int m = 0;
-		for(int[] shift: shifts) {
-			if(m == 0)
-				continue;
-			//if(shift[m] )
+
+		int appointment_hour = 0;
+		int appointment_shift = 0;
+		int hour = LocalDateTime.now().getHour();
+		int minute = LocalDateTime.now().getMinute();
+		if(minute > 40) {
+			appointment_hour = hour + 1;
+			appointment_shift = 1;
+		} else {
+			if(minute < 20) {
+				appointment_hour = hour;
+				appointment_shift = 2;
+			} else {
+				appointment_hour = hour;
+				appointment_shift = 3;
+			}
 		}
+		
+//		if(! IntStream.of(hour_list).anyMatch(x -> x == hour)) {
+//			if(!IntStream.of(shift_list).anyMatch(x -> x == appointment_shift)) {
+//				
+//			}
+//		}
+		
+		for(int[] shift: shifts) {
+			if(minute > 40) {
+				appointment_hour = hour + 1;
+				appointment_shift = 1;
+			} else {
+				if(minute < 20) {
+					appointment_hour = hour;
+					appointment_shift = 2;
+				} else {
+					appointment_hour = hour;
+					appointment_shift = 3;
+				}
+			}
+		}
+		String f_t = appointment_hour + "_" + appointment_shift;
+		
 		
 		sql = "UPDATE appointment "
 				+ "SET from_to = '" + from_to + "' "	// (doctor username, patient username, symptom report??, from_to)
 				+ "WHERE doctor_username = '" + doctor + "' AND patient_username = '" + patient + "';";
 		Appointment appointment = new Appointment();
 		appointment.setDoctor(doctor);
-		appointment.setPatient(patient);
-		appointment.setFrom_to(from_to); // this needs handling
-		appointment.setIllness_description(symptomReport); // can retrieve by modifying String sql above to select from_to and illness_descr
+		appointment.setPatient(patient.getUsername());
+		appointment.setFrom_to(f_t); // this needs handling
+		appointment.setIllness_description(patient.getDescription()); // can retrieve by modifying String sql above to select from_to and illness_descr
 		return appointment;
 	}
 

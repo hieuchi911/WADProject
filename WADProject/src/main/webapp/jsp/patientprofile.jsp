@@ -53,6 +53,7 @@
 		<tr>
 			<td><a href="home.jsp">Home</a></td>
 		</tr>
+		
 	</table>
 	</form>
 	<table align="center">

@@ -10,10 +10,6 @@
 </head>
 <body>
 	Welcome! ${user.username}
-	
-
-
-
 
 	<c:forEach items="${doctors.doctors}" var="doctor" varStatus="tagStatus">
 		<div class="card">
@@ -44,8 +40,13 @@
 		</tr>
 		
 		<tr>
-			<td><a href="makeAppointment/${doctor.username}">Make an appointment with Dr. ${doctor.name}</a></td>
+			<td><a href="${doctor.username}-appointment">Make an appointment with Dr. ${doctor.name}</a></td>
 		</tr>
+		
+		<tr>
+			<td style="font-style: italic; color: red;">${message_request}</td>
+		</tr>
+		
 		</table>
 		</div>
 	</c:forEach>

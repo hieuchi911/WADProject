@@ -30,7 +30,7 @@ public class DoctorsCatalogueController {
 	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
 	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("doctors");
-		
+
 		DoctorListContainer<Doctor> doctors = new DoctorListContainer<Doctor>();
 		doctors.setDoctors(userService.getAllDoctors());
 		for(Doctor d: doctors.getDoctors())

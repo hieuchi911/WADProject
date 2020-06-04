@@ -149,7 +149,7 @@ public class PatientEditController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/makeAppointment/{username}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{username}-appointment", method = RequestMethod.GET)
 	public ModelAndView makeAppointment(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user, @PathVariable String username) {
 		ModelAndView mav = null;
@@ -159,19 +159,20 @@ public class PatientEditController {
 				// create a temporary doctor user whose name is path variable name above to put in profileDoctor method
 				User doctor = new User();
 				doctor.setUsername(username);
+				String description = ((Patient) user).getDescription();
 				
 				doctor = userService.profileDoctor(doctor);
 				
 				Appointment appointment = new Appointment();
 				appointment.setDoctor(doctor.getUsername());
 				appointment.setPatient(user.getUsername());
-				appointment.setIllness_description(symptomReport); // Need to add symptom report here
+				appointment.setIllness_description(description); // Need to add symptom report here
 				
 				appointmentService.makeAppointment(appointment);
 				
-				mav = new ModelAndView("doctors");
+				mav = new ModelAndView("patientprofile");
 				
-				mav.addObject("message_request", "Request submitted, please wait for approve from the doctor");
+				mav.addObject("message_request", "Request submitted, please wait for approvement from the doctor");
 			}
 		}
 

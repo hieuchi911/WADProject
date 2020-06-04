@@ -28,7 +28,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 
 	@Override
-	public Appointment computeTime(String doctor, String patient) {
+	public Appointment computeTime(String doctor, Patient patient) {
 		appointmentDao.computeTime(doctor, patient);
 		return null;
 	}
