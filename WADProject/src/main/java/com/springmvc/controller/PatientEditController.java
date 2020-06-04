@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.SessionAttributes;
@@ -15,7 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.User;
 import com.springmvc.model.Patient;
+import com.springmvc.model.Appointment;
+import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
+import com.springmvc.service.AppointmentService;
 import com.springmvc.service.UserService;
 
 /** 
@@ -33,6 +37,8 @@ import com.springmvc.service.UserService;
 public class PatientEditController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	AppointmentService appointmentService;
 	
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
 	public ModelAndView editUser(HttpServletRequest request, HttpServletResponse response,
@@ -41,7 +47,7 @@ public class PatientEditController {
 			System.out.println("user session is: " + user.getUsername());
 			ModelAndView mav = new ModelAndView("editpatientprofile");
 			Patient patient = new Patient();
-			mav.addObject("patient", patient);
+			mav.addObject("patient", patient);	// this is for the form in the view that uses modelAttribute = "patient"
 			return mav;
 		}
 		if(request.getParameter("edit-password") != null) {
@@ -67,6 +73,7 @@ public class PatientEditController {
 		if (user != null) {
 			System.out.println("User name is: " + user.getUsername());
 			if (user instanceof Patient) {
+				System.out.println("editProfile: user class is: " + user.getClass());
 				user = userService.registerPatient(patient);
 				
 				mav = new ModelAndView("patientprofile");
@@ -78,8 +85,10 @@ public class PatientEditController {
 	}
 	
 	@RequestMapping(value = "/editPassword", method = RequestMethod.POST)
-	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
+	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user) {
 		ModelAndView mav = null;
+		
 		if (user != null) {
 			System.out.println("Old pw entered: " + request.getParameter("oldpw"));
 			System.out.println("New pw entered: " + request.getParameter("newpw"));
@@ -99,12 +108,73 @@ public class PatientEditController {
 					
 					mav = new ModelAndView("patientprofile");
 				}
-				else {
-					mav = new ModelAndView("editpassword");
-					mav.addObject("message", "Passwords conflicts!!");
 			}
+			else {
+				mav = new ModelAndView("editpassword");
+				mav.addObject("message", "Passwords conflicts!!");
+		}
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/symptomRp", method = RequestMethod.GET)
+	public ModelAndView symptomRp(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user) {
+		
+		ModelAndView mav = new ModelAndView("symptomreport");
+		Patient patient = userService.profilePatient(user);
+		mav.addObject("patient", patient);
+		return mav;
+	}
+
+	@RequestMapping(value = "/addSymptomRp", method = RequestMethod.POST)
+	public ModelAndView addSymptomReport(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("patient") Patient patient, @SessionAttribute User user) {
+		ModelAndView mav = null;
+		if (user != null) {
+			if(user instanceof Patient) {
+				// update medical description on database
+				patient.setUsername(user.getUsername());
+				userService.addSymptomReport(patient);
+				mav = new ModelAndView("patientprofile");
+				
+				/* set user (now of class Patient)'s description to the specified of
+				 * patient model attribute from the previous form */
+				((Patient) user).setDescription(patient.getDescription());
+				
+				mav.addObject("message", "Added symptom report, please choose a doctor!");
 			}
 		}
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/makeAppointment/{username}", method = RequestMethod.POST)
+	public ModelAndView makeAppointment(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user, @PathVariable String username) {
+		ModelAndView mav = null;
+		if (user != null) {
+			if(user instanceof Patient) {
+				
+				// create a temporary doctor user whose name is path variable name above to put in profileDoctor method
+				User doctor = new User();
+				doctor.setUsername(username);
+				
+				doctor = userService.profileDoctor(doctor);
+				
+				Appointment appointment = new Appointment();
+				appointment.setDoctor(doctor.getUsername());
+				appointment.setPatient(user.getUsername());
+				appointment.setIllness_description(symptomReport); // Need to add symptom report here
+				
+				appointmentService.makeAppointment(appointment);
+				
+				mav = new ModelAndView("doctors");
+				
+				mav.addObject("message_request", "Request submitted, please wait for approve from the doctor");
+			}
+		}
+
 		return mav;
 	}
 }

@@ -10,9 +10,14 @@
 </head>
 <body>
 	Welcome! ${user.username}
+	
+
+
+
+
 	<c:forEach items="${doctors.doctors}" var="doctor" varStatus="tagStatus">
 		<div class="card">
-			<table>
+		<table>
 		<tr>
 			<td>Name</td>
 			<td>${doctor.name}</td>
@@ -39,7 +44,7 @@
 		</tr>
 		
 		<tr>
-			<td><a href="makeAppointment">Make an appointment with Dr. ${doctor.name}</a></td>
+			<td><a href="makeAppointment/${doctor.username}">Make an appointment with Dr. ${doctor.name}</a></td>
 		</tr>
 		</table>
 		</div>

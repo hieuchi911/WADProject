@@ -7,7 +7,8 @@
 <title>Welcome</title>
 </head>
 <body>
-	<a href="shop">Shop</a>
+	<a href="patientRecords">Patients</a>
+	<a href="appointments">Appointment requests</a>
 
 	<table>
 		<tr>

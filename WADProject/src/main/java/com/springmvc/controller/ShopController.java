@@ -34,7 +34,6 @@ public class ShopController {
 	public ModelAndView showShop(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
 		ModelAndView mav = new ModelAndView("shop");
 		
-		System.out.println("User is TESTTT " + user.getUsername());
 		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
 		objects.setObjects(shopService.getAllShopObjects());
 		
