@@ -87,8 +87,7 @@ public class ShopController {
 	 * This method handles the adding of an item to the user cart
 	 */
 	@RequestMapping(value = "addItem2Cart", method = RequestMethod.POST)
-	public String addItem2Cart(@ModelAttribute Cart cart, @ModelAttribute CartObject cartobject, 
-							@RequestParam String amount) {
+	public String addItem2Cart(@ModelAttribute Cart cart, @ModelAttribute CartObject cartobject) {
 		ObjectListContainer<CartObject> cart_objects = cart.getItems();
 		if (cart_objects == null) {
 			cart_objects = new ObjectListContainer<CartObject>();
@@ -99,11 +98,44 @@ public class ShopController {
 			objects = new ArrayList<CartObject>();
 		}
 		
-		objects.add(cartobject);
+		boolean isPresent = false;
+		for (int i = 0; i < objects.size(); i++) {
+			String id = objects.get(i).getObjectid();
+			if (cartobject.getObjectid().equals(id)) {
+				objects.get(i).setAmount(objects.get(i).getAmount() + cartobject.getAmount());
+				isPresent = true;
+				break;
+			}
+		}
+		
+		if (!isPresent) objects.add(cartobject);
 		cart_objects.setObjects(objects);
 		cart.setItems(cart_objects);	
 
 		return "redirect:/shop";
+	}
+	
+	/* ---------------------------- removeItemFromCart --------------------------------------
+	 * This method shows the shopping screen in url "/shop".
+	 */
+	@RequestMapping(value = "/remove-item", method = RequestMethod.GET)
+	public ModelAndView removeItemFromCart(HttpServletRequest request, HttpServletResponse response,
+											@ModelAttribute Cart cart) {
+		ModelAndView mav = new ModelAndView("redirect:/shopCheckout");
+		
+		String object_id = request.getParameter("remove");
+		ObjectListContainer<CartObject> cart_objects = cart.getItems();
+		List<CartObject> objects = cart_objects.getObjects();
+		
+		for (int i = 0; i < objects.size(); i++) {
+			String id = objects.get(i).getObjectid();
+			if (id.equals(object_id)) {
+				objects.remove(i);
+				break;
+			}
+		}
+		
+		return mav;
 	}
 	
 	/* ---------------------------- checkOut --------------------------------------

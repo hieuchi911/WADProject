@@ -27,6 +27,7 @@
 	   		</td>
 			<td>${object.amount}</td>
 			<td>${object.price * object.amount}</td>
+			<td><form action="remove-item"><button name="remove" value="${object.objectid}">Remove</button></form></td>
 			<c:set var="total" value="${total + object.price * object.amount}" />
 		</tr>
 		</c:forEach>
