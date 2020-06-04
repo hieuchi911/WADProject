@@ -12,7 +12,7 @@
 	<a href="../shop">Shop</a>
 	Welcome! ${user.gender}
 	
-	<form:form modelAttribute="cartobject" action="addItem2Cart" method="post">
+	<form:form modelAttribute="cartobject" action="../addItem2Cart" method="post">
 		<table>
 			<tr> 
 				<td colspan="2">

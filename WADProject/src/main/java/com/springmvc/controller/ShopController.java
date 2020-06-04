@@ -54,10 +54,24 @@ public class ShopController {
 		return mav;
 	}
 
-	/* ---------------------------- showItem --------------------------------------
-	 * This method shows the item screen in url "/shop/{item}".
+	/* ---------------------------- showShopByCategory --------------------------------------
+	 * This method shows the shopping screen in url "/shop".
 	 */
-	@RequestMapping(value = "/shop/{object_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{category}-shop", method = RequestMethod.GET)
+	public ModelAndView showShopByCategory(@PathVariable String category) {
+		ModelAndView mav = new ModelAndView("shop");
+		
+		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
+		objects.setObjects(shopService.getShopObjectsByCategory(category));
+		
+		mav.addObject("objects", objects);
+		return mav;
+	}
+	
+	/* ---------------------------- showItem --------------------------------------
+	 * This method shows the item screen in url "/shopitem/{item}".
+	 */
+	@RequestMapping(value = "/shopitem/{object_id}", method = RequestMethod.GET)
 	public ModelAndView showItem(@PathVariable String object_id) {
 		ModelAndView mav = new ModelAndView("shopitem");
 		
@@ -72,7 +86,7 @@ public class ShopController {
 	/* ---------------------------- addItem2Cart --------------------------------------
 	 * This method handles the adding of an item to the user cart
 	 */
-	@RequestMapping(value = "/shop/addItem2Cart", method = RequestMethod.POST)
+	@RequestMapping(value = "addItem2Cart", method = RequestMethod.POST)
 	public String addItem2Cart(@ModelAttribute Cart cart, @ModelAttribute CartObject cartobject, 
 							@RequestParam String amount) {
 		ObjectListContainer<CartObject> cart_objects = cart.getItems();
