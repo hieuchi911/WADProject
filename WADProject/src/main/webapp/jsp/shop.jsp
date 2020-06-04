@@ -24,19 +24,22 @@
 	</style>
 </head>
 <body>
+	<a href="shop">Shop</a>
+	<a href="tool-shop">Tools</a>
+	<a href="medicine-shop">Medicine</a>
+	
 	Welcome! ${user.name}
-
 	<c:forEach items="${objects.objects}" var="object" varStatus="tagStatus">
 		<div class="card">
-			<a href="shop/${object.id}">
+			<a href="shopitem/${object.id}">
 			   <img src="${object.url}" alt="${object.name}" style="width:100%">
 			</a>
 			<h1>${object.name}</h1>
 			<p>Made by ${object.manufacturer} </p>
 		</div>
 	</c:forEach>
-	<a href="shopCheckout">Checkout</a>
-	<a href="logout">Home</a>
 	
+	<a href="shopCheckout">Checkout</a>
+	<a href="logout">Logout</a>
 </body>
 </html>

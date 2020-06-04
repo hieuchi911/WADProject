@@ -15,8 +15,10 @@ public interface ShoppingService {
 	 * @return 			(List <ShopObject>) The list of shopping objects
 	 */
 	List <ShopObject> getAllShopObjects();
-
+	List <ShopObject> getShopObjectsByCategory(String category);
+	
 	ShopObject getShopObject(String object_id);
 
 	List<ExtendedCartObject> extendCartObjects(List<CartObject> objects);
+
 }

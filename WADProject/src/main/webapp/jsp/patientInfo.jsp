@@ -29,10 +29,6 @@
 				<td><form:label path="address">Address</form:label></td>
 				<td><form:input path="address" name="address" id="address" /></td>
 			</tr>
-			<tr>
-				<td><form:label path="description">Medical Description</form:label></td>
-				<td><form:input path="description" name="description" id="description" /></td>
-			</tr>
 			
 			<tr style="display:none;">
 				<td></td>

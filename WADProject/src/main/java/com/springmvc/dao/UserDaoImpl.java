@@ -27,41 +27,74 @@ public class UserDaoImpl implements UserDao {
 	JdbcTemplate jdbcTemplate;
 
 	public int register(User user) {
-		String sql = "INSERT INTO user VALUES(?,?,?)";
+		String sql = "INSERT INTO user VALUES(?,?,?);";
 
 		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 
 	public Patient registerPatient(Patient patient) {
-		String sql = "INSERT INTO patient VALUES(?,?,?,?,?,?)";
-		
+		String sql = "INSERT INTO patient VALUES(?,?,?,?,?,?);";
+	
 		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
 				patient.getPhone(), patient.getAddress(), patient.getDescription()});
-											// username, name, sex, phone, address, medical description
 
 		return patient;
+	}	
+	
+	public void updateMedicalData(String username, String description) {
+		String sql = "UPDATE patient SET medical_description='" + description + "' "
+				+ 	"WHERE patient_username='" + username + "';";
+		jdbcTemplate.update(sql);	
 	}
+
 	
 	public User validateUser(Login login) {
 		String sql = "SELECT * FROM user WHERE username ='" + login.getUsername() + "' AND password='"
-				+ login.getPassword() + "'";
+				+ login.getPassword() + "';";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
 
 		return users.size() > 0 ? users.get(0) : null;
 	}
 
 	public Patient profilePatient(User user) {
-		String sql = "SELECT * FROM patient WHERE patient_username ='" + user.getUsername() + "'";
+		String sql = "SELECT * FROM patient WHERE patient_username ='" + user.getUsername() + "';";
 		List<Patient> patients = jdbcTemplate.query(sql, new PatientMapper());
-
-		return patients.size() > 0 ? patients.get(0) : null;
+		
+		Patient patient = null;
+		if (patients.size() > 0) {
+			patient = patients.get(0);
+			patient.setUsertype("patient");
+		}
+		return patient;
 	}
 	
 	public Doctor profileDoctor(User user) {
-		String sql = "SELECT * FROM doctor WHERE doctor_username ='" + user.getUsername() + "'";
+		String sql = "SELECT * FROM doctor WHERE doctor_username ='" + user.getUsername() + "';";
 		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
 
-		return doctors.size() > 0 ? doctors.get(0) : null;	
+		Doctor doctor = null;
+		if (doctors.size() > 0) {
+			doctor = doctors.get(0);
+			doctor.setUsertype("doctor");
+		}
+		return doctor;	
+	}
+	
+	public List<Doctor> getAllDoctors() {
+		String sql = "SELECT * FROM doctor;";
+		List<Doctor> doctors = jdbcTemplate.query(sql, new DoctorMapper());
+		
+		return doctors;
+	}
+	
+	
+	public void updatePatient(Patient editUser) {
+		String sql = "UPDATE patient SET name='" + editUser.getName() + "',"
+				+ 						"gender='" + editUser.getGender() + "',"
+				+ 						"phone_number='" + editUser.getPhone() + "',"
+				+						"home_address='" + editUser.getAddress() + "' "
+				+ 	"WHERE patient_username='" + editUser.getUsername() + "';";
+		jdbcTemplate.update(sql);
 	}
 
 }
@@ -73,6 +106,7 @@ class UserMapper implements RowMapper<User> {
 		user.setUsername(rs.getString("username"));
 		user.setPassword(rs.getString("password"));
 		user.setUsertype(rs.getString("user_type"));
+		
 		return user;
 	}
 }
@@ -96,7 +130,7 @@ class DoctorMapper implements RowMapper<Doctor> {
 	public Doctor mapRow(ResultSet rs, int arg1) throws SQLException {
 		Doctor doctor = new Doctor();
 
-		doctor.setUsername(rs.getString("username"));
+		doctor.setUsername(rs.getString("doctor_username"));
 		doctor.setName(rs.getString("name"));
 		doctor.setUrl(rs.getString("photo_url"));
 		doctor.setGender(rs.getString("gender"));

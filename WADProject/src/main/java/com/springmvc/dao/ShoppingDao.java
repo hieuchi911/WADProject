@@ -15,8 +15,11 @@ public interface ShoppingDao {
 	 * @return 			(List <ShopObject>) The list of shopping objects
 	 */
 	List <ShopObject> getAllShopObjects();
-
+	
+	List <ShopObject> getShopObjectByCategory(String category);
+	
 	ShopObject getShopObject(String object_id);
 
 	List<ExtendedCartObject> extendCartObjects(List<CartObject> objects);
+
 }

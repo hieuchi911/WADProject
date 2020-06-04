@@ -20,7 +20,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public List <ShopObject> getAllShopObjects() {
 		return shoppingDao.getAllShopObjects();
 	}
-
+	
+	public 	List <ShopObject> getShopObjectsByCategory(String category) {
+		return shoppingDao.getShopObjectByCategory(category);
+	}
+	
 	public ShopObject getShopObject(String object_id) {
 		return shoppingDao.getShopObject(object_id);
 	}
@@ -28,5 +32,4 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public List<ExtendedCartObject> extendCartObjects(List<CartObject> objects) {
 		return shoppingDao.extendCartObjects(objects);
 	}
-
 }
