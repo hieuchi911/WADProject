@@ -150,7 +150,7 @@ public class PatientController {
 				
 				appointmentService.makeAppointment(appointment);
 				
-				mav = new ModelAndView("patientprofile");
+				mav = new ModelAndView("redirect:/profile");
 				mav.addObject("appointment", appointment);
 				
 				mav.addObject("message_request", "Request submitted, please wait for approvement from the doctor");

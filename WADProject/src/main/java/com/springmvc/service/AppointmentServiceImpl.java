@@ -24,7 +24,6 @@ public class AppointmentServiceImpl implements AppointmentService{
 	@Override
 	public void rejectAppointment(Appointment appointment) {
 		appointmentDao.rejectAppointment(appointment);
-		
 	}
 
 	@Override

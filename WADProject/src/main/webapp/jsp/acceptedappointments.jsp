@@ -28,8 +28,14 @@
 				<td>${appointment.from_to}</td>
 			</tr>
 			
+			<tr>
+				<td><a href="meet-${appointment.patient}">Meet</a></td>
+				<td><a href="prescribe-${appointment.patient}">Prescribe</a></td>
+			</tr>
+
 			</table>
 			</div>
+			<hr>
 		</c:if>
 	</c:forEach>
 	<table>		

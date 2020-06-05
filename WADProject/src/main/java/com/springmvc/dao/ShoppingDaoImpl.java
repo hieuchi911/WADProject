@@ -37,7 +37,8 @@ public class ShoppingDaoImpl implements ShoppingDao {
 		String sql = "SELECT * FROM shopobject WHERE category='" + category + "';";
 		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
 		
-		return objects;	}
+		return objects;	
+	}
 	
 	public ShopObject getShopObject(String object_id) {
 		String sql = "SELECT * FROM shopobject WHERE object_id = '" + object_id + "';";

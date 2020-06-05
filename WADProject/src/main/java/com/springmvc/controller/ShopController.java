@@ -31,7 +31,7 @@ import com.springmvc.service.ShoppingService;
  * The ShopController class handles shopping activities of the user,
  * with urls:
  * | "/shop"				This page shows the shopping catalogues
- * | "/shop/{object_id}"	This page shows the shopping object corresponding to `object_id`
+ * | "/shopitem/{object_id}"	This page shows the shopping object corresponding to `object_id`
  */
 @Controller
 @SessionAttributes("cart")
