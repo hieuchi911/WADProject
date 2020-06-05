@@ -152,6 +152,7 @@ public class PatientController {
 				
 				mav = new ModelAndView("patientprofile");
 				mav.addObject("appointment", appointment);
+				mav.addObject("editUser", new Patient());
 				
 				mav.addObject("message_request", "Request submitted, please wait for approvement from the doctor");
 			}
