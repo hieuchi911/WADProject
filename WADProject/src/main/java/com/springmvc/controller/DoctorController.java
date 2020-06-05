@@ -18,6 +18,7 @@ import com.springmvc.model.Patient;
 import com.springmvc.model.Prescription;
 import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
+import com.springmvc.model.Medicine;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.service.AppointmentService;
 import com.springmvc.service.UserService;
@@ -72,6 +73,35 @@ public class DoctorController {
 		
 		return mav;
 	}
+	
+	/* ---------------------------- meetViaZoom --------------------------------------
+	 * This method handles the zoom meeting link
+	 */
+	@RequestMapping(value = "/meet-{username}", method = RequestMethod.GET)
+	public ModelAndView meetViaZoom(@PathVariable String username) {
+		ModelAndView mav = new ModelAndView("zoom");
+		return mav;
+	}
+	
+	
+	/* ---------------------------- createPrecription --------------------------------------
+	 * This method handles the zoom meeting link
+	 */
+	@RequestMapping(value = "/prescribe-{username}", method = RequestMethod.GET)
+	public ModelAndView createPrecription(@PathVariable String username, @SessionAttribute User user) {
+		ModelAndView mav = new ModelAndView("prescribe");
+		
+		Prescription pres = new Prescription();
+
+		pres.setDoctor(user.getUsername());
+		pres.setPatient(username);
+		pres.setPrescription(new ObjectListContainer <Medicine>());
+		
+		mav.addObject("prescription", new Prescription());
+		
+		return mav;
+	}
+	
 	
 	/* ---------------------------- acceptRequest/{patient} --------------------------------------
 	 * This method update the pre-made appointment in the database (done by 

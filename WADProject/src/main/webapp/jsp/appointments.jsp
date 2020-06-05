@@ -31,12 +31,13 @@
 			</tr>
 			
 			<tr>
-				<td><a href="${appointment.patient}-rejectRequest">Reject request</a></td>
 				<td><a href="${appointment.patient}-acceptRequest">Accept request</a></td>
+				<td><a href="${appointment.patient}-rejectRequest">Reject request</a></td>
 			</tr>
 			
 			</table>
 			</div>
+			<hr>
 		</c:if>
 	</c:forEach>
 	
