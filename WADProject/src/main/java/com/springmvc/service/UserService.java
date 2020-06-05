@@ -1,5 +1,8 @@
 package com.springmvc.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.springmvc.dao.UserDao;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
@@ -7,55 +10,43 @@ import com.springmvc.model.User;
 import java.util.List;
 
 /**
- * General services related to User instances
+ * This class provides implementations of User Services
  */
-public interface UserService {
-	/* 
-	 * This function adds the user via Data Access Object
-	 * @param user:	(User) A user for registration
-	 * @return 		(int) Positive for successful add
-	 */
-	int register(User user);
+public class UserService {
+
+	@Autowired
+	public UserDao userDao;
+
+	public int register(User user) {
+		return userDao.register(user);
+	}
+
+	public User validateUser(Login login) {
+		return userDao.validateUser(login);
+	}
+
+	public Patient registerPatient(Patient patient) {
+		return userDao.registerPatient(patient);
+	}
 	
-	/*
-	 * This function adds a specific patient via Data Access Object
-	 * @param patient:	(Patient) A patient for registration
-	 * @return 			(Patient) A registered patient
-	 */
-	Patient registerPatient(Patient patient);
+	public void updateMedicalData(String username, String description) {
+		userDao.updateMedicalData(username, description);
+	}
 
-	/*
-	 * This function validates a login via Data Access Object
-	 * @param login:	(Login) A login attempt
-	 * @return 			(User) A valid user / null
-	 */
-	User validateUser(Login login);
 	
-	/*
-	 * This function provides the profile of a patient user via Data Access Object
-	 * @param user:		(User) A valid user
-	 * @return 			(Patient) The patient
-	 */
-	Patient profilePatient(User user);
+	public Patient profilePatient(User user) {
+		return userDao.profilePatient(user);
+	}
+
+	public Doctor profileDoctor(User user) {
+		return userDao.profileDoctor(user);
+	}
 	
-		
-	/*
-	 * This function provides the profile of a doctor user via Data Access Object
-	 * @param user:		(User) A valid user
-	 * @return 			(Doctor) The doctor
-	 */
-	Doctor profileDoctor(User user);
-
-//	void addSymptomReport(Patient patient);
-
-	List<Doctor> getAllDoctors();
-
-	/*
-	 * This function updates the profile of a Patient user via Data Access Object
-	 * @param editUser:		(Patient) A patient with updated params
-	 * @return 			
-	 */
-	void updatePatient(Patient editUser);
-
-	void updateMedicalData(String username, String description);
+	public List<Doctor> getAllDoctors(){
+		return userDao.getAllDoctors();
+	}
+	
+	public void updatePatient(Patient editUser) {
+		userDao.updatePatient(editUser);
+	}
 }

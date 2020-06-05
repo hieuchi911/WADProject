@@ -11,12 +11,12 @@
 	<context:component-scan base-package="com.springmvc" />
 	<context:annotation-config />
 
-	<bean id="userService" class="com.springmvc.service.UserServiceImpl" />
-	<bean id="userDao" class="com.springmvc.dao.UserDaoImpl" />
-	<bean id="shopService" class="com.springmvc.service.ShoppingServiceImpl" />
-	<bean id="shopDao" class="com.springmvc.dao.ShoppingDaoImpl" />
-	<bean id="appointmentService" class="com.springmvc.service.AppointmentServiceImpl" />
-	<bean id="appointmentDao" class="com.springmvc.dao.AppointmentDaoImpl" />
+	<bean id="userService" class="com.springmvc.service.UserService" />
+	<bean id="userDao" class="com.springmvc.dao.UserDao" />
+	<bean id="shopService" class="com.springmvc.service.ShoppingService" />
+	<bean id="shopDao" class="com.springmvc.dao.ShoppingDao" />
+	<bean id="appointmentService" class="com.springmvc.service.AppointmentService" />
+	<bean id="appointmentDao" class="com.springmvc.dao.AppointmentDao" />
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="datasource" />

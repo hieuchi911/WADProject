@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,6 @@ import com.springmvc.service.ShoppingService;
  * | "/shopitem/{object_id}"	This page shows the shopping object corresponding to `object_id`
  */
 @Controller
-@SessionAttributes("cart")
 public class ShopController {
 	
 	@Autowired
@@ -46,6 +46,14 @@ public class ShopController {
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
 	public ModelAndView showShop(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("shop");
+		
+		HttpSession sess = request.getSession();
+		Cart cart = (Cart) sess.getAttribute("cart");
+		
+		if (cart == null)
+			sess.setAttribute("cart", new Cart());
+		else 
+			sess.setAttribute("cart", cart);
 		
 		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
 		objects.setObjects(shopService.getAllShopObjects());
@@ -87,7 +95,11 @@ public class ShopController {
 	 * This method handles the adding of an item to the user cart
 	 */
 	@RequestMapping(value = "addItem2Cart", method = RequestMethod.POST)
-	public String addItem2Cart(@ModelAttribute Cart cart, @ModelAttribute CartObject cartobject) {
+	public String addItem2Cart(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute CartObject cartobject) {
+		HttpSession sess = request.getSession();
+		Cart cart = (Cart) sess.getAttribute("cart");
+		
 		ObjectListContainer<CartObject> cart_objects = cart.getItems();
 		if (cart_objects == null) {
 			cart_objects = new ObjectListContainer<CartObject>();
@@ -111,7 +123,10 @@ public class ShopController {
 		if (!isPresent) objects.add(cartobject);
 		cart_objects.setObjects(objects);
 		cart.setItems(cart_objects);	
-
+		System.out.println(objects.size());
+		
+		sess.setAttribute("cart", cart);
+		
 		return "redirect:/shop";
 	}
 	
@@ -119,9 +134,11 @@ public class ShopController {
 	 * This method shows the shopping screen in url "/shop".
 	 */
 	@RequestMapping(value = "/remove-item", method = RequestMethod.GET)
-	public ModelAndView removeItemFromCart(HttpServletRequest request, HttpServletResponse response,
-											@ModelAttribute Cart cart) {
+	public ModelAndView removeItemFromCart(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("redirect:/shopCheckout");
+		
+		HttpSession sess = request.getSession();
+		Cart cart = (Cart) sess.getAttribute("cart");
 		
 		String object_id = request.getParameter("remove");
 		ObjectListContainer<CartObject> cart_objects = cart.getItems();
@@ -134,7 +151,8 @@ public class ShopController {
 				break;
 			}
 		}
-		
+		sess.setAttribute("cart", cart);
+
 		return mav;
 	}
 	
@@ -142,7 +160,11 @@ public class ShopController {
 	 * This method handles checking out
 	 */
 	@RequestMapping(value = "/shopCheckout", method = RequestMethod.GET)
-	public ModelAndView checkOut(@SessionAttribute User user, @ModelAttribute Cart cart) {
+	public ModelAndView checkOut(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user) {
+		HttpSession sess = request.getSession();
+		Cart cart = (Cart) sess.getAttribute("cart");
+		
 		ObjectListContainer<CartObject> cart_objects = cart.getItems();
 		if (cart_objects == null) {
 			ModelAndView mav = new ModelAndView("redirect:/shop");
@@ -165,13 +187,11 @@ public class ShopController {
 	 * This method confirms the transaction and renews the shopping cart.
 	 */
 	@RequestMapping(value="/confirmTransaction", method=RequestMethod.POST) 
-	public String confirmTransaction(@SessionAttribute User user, @ModelAttribute Cart cart, Model model) {
-		model.addAttribute("cart", new Cart());
+	public String confirmTransaction(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user) {
+		HttpSession sess = request.getSession();
+		sess.setAttribute("cart", null);
+		
 		return "redirect:/shop";
-	}
-	
-	@ModelAttribute("cart")
-	public void addCart(Model model) {
-		model.addAttribute(new Cart());
 	}
 }

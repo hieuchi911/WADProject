@@ -1,41 +1,48 @@
 package com.springmvc.service;
 
-import com.springmvc.model.Doctor;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.springmvc.dao.AppointmentDao;
 import com.springmvc.model.Appointment;
+import com.springmvc.model.Doctor;
+import com.springmvc.model.ObjectListContainer;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Prescription;
-import com.springmvc.model.User;
-import com.springmvc.model.ObjectListContainer;
-import java.util.List;
-public interface AppointmentService {
-	
-	/*
-	 * This function adds a specific patient via Data Access Object
-	 * @param patient:	(Patient) A patient for registration
-	 * @return 			(Patient) A registered patient
-	 */
-	Appointment makeAppointment(Appointment appointment);
 
-	/*
-	 * This function validates a login via Data Access Object
-	 * @param login:	(Login) A login attempt
-	 * @return 			(User) A valid user / null
-	 */
-	void rejectAppointment(Appointment appointment);
+public class AppointmentService {
 	
-	/*
-	 * This function provides the profile of a patient user via Data Access Object
-	 * @param user:		(User) A valid user
-	 * @return 			(Patient) The patient
-	 */
-	
-	Appointment computeTime(String doctor, Patient patient);
+	@Autowired
+	AppointmentDao appointmentDao;
 
+	public Appointment makeAppointment(Appointment appointment) {
+		appointmentDao.makeAppointment(appointment);
+		return null;
+	}
+
+	public void rejectAppointment(Appointment appointment) {
+		appointmentDao.rejectAppointment(appointment);
+	}
 
 	
-	List<Appointment> getAllAppointment(Doctor doctor);
+	public Appointment computeTime(String doctor, Patient patient) {
+		appointmentDao.computeTime(doctor, patient);
+		return null;
+	}
+
 	
-	List<Appointment> getAllAppointmentForPatient(Patient patient);
+	public List<Appointment> getAllAppointment(Doctor doctor) {
+		return appointmentDao.getAllAppointment(doctor);
+	}
 	
-	List<Prescription> getAllPrescription(Doctor doctor);
+	
+	public List<Appointment> getAllAppointmentForPatient(Patient patient) {
+		return appointmentDao.getAllAppointmentForPatient(patient);
+	}
+
+	
+	public List<Prescription> getAllPrescription(Doctor doctor){
+		return appointmentDao.getAllPrescription(doctor); 
+	}
 }
