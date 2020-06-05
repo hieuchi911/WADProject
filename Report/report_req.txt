@@ -1,0 +1,28 @@
+CHAPTER I : INTRODUCTION
+- Motivation
+- Problems Statement
+- Scope
+
+CHAPTER II: LITERATURE REVIEW
+- Similar Applications/Systems
+- Platform and Tools Review
+
+CHAPTER III: SYSTEM DESIGN
+- System Requirement Specification
+	+ Funtional Requirements
+	+ Requirements Analysis
+	+ Non-functional Requirements
+- System Design Specification
+	+ Use-cases Diagram (summary goal use case and at least 3 main use cases) 
+	+ Sequence Diagram (at least 3 main sequence)
+	+ Activity Diagram (at least 3 main activities) (optional)
+	+ Class Diagram
+
+CHAPTER IV: SYSTEM IMPLEMENTATION
+
+CHAPTER V: CONCLUSION AND DISCUSSION
+- List of accomplished Work
+- Strength and Weakness
+- Future Work
+
+References
