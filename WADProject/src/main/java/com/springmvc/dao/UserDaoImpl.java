@@ -36,7 +36,7 @@ public class UserDaoImpl implements UserDao {
 		String sql = "INSERT INTO patient VALUES(?,?,?,?,?,?);";
 	
 		jdbcTemplate.update(sql, new Object[] { patient.getUsername(), patient.getName(), patient.getGender(),
-				patient.getPhone(), patient.getAddress(), patient.getDescription()});
+				patient.getPhone(), patient.getAddress(), patient.getDescription().toString()});
 
 		return patient;
 	}	
