@@ -60,6 +60,15 @@ public class DoctorController {
 		mav = new ModelAndView("appointments");
 		mav.addObject("appointments", appointmentList);
 		
+		boolean flag = true;
+		for(Appointment a: appointmentList.getObjects()) {
+			if(a.getFrom_to() == null) {
+				flag = false;
+				break;
+			}
+		}
+		if(flag)
+			mav.addObject("message", "No requests");
 		
 		return mav;
 	}
@@ -80,9 +89,15 @@ public class DoctorController {
 			
 			Appointment appointment = new Appointment();
 			appointment = appointmentService.computeTime(user.getUsername(), p);
-			mav = new ModelAndView("appointments");
+			
+			// get all appointments, then display accepted ones in the returned view
+			ObjectListContainer<Appointment> appointmentList = new ObjectListContainer<Appointment>();
+			appointmentList.setObjects(appointmentService.getAllAppointment((Doctor) user));
+			
+			mav = new ModelAndView("acceptedappointments");
 			mav.addObject("message_accept", "Patient accepted");
-			mav.addObject("appointment", appointment);
+			mav.addObject("appointments", appointmentList);
+			
 		}
 		return mav;
 	}
@@ -100,9 +115,14 @@ public class DoctorController {
 			
 			appointmentService.rejectAppointment(appointment);
 		}
+		
+		// get all appointments pending left to display in the returned view
+		ObjectListContainer<Appointment> appointmentList = new ObjectListContainer<Appointment>();
+		appointmentList.setObjects(appointmentService.getAllAppointment((Doctor) user));
+		
 		mav = new ModelAndView("appointments");
-		mav.addObject(attributeValue);
-		mav.addObject("message_reject", "Patient rejected");
+		mav.addObject("appointments", appointmentList);
+		mav.addObject("message_reject", "Patient " + patient +" rejected");
 		
 		
 		return mav;

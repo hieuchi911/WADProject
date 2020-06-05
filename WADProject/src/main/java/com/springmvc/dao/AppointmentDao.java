@@ -23,6 +23,8 @@ public interface AppointmentDao {
 	
 	List<Appointment> getAllAppointment(Doctor doctor);
 	
+	List<Appointment> getAllAppointmentForPatient(Patient patient);
+	
 	List<Prescription> getAllPrescription(Doctor doctor);
 
 }

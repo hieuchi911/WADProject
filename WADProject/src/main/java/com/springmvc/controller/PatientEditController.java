@@ -18,7 +18,9 @@ import com.springmvc.model.User;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
+import com.springmvc.model.DoctorListContainer;
 import com.springmvc.model.Login;
+import com.springmvc.model.ObjectListContainer;
 import com.springmvc.service.AppointmentService;
 import com.springmvc.service.UserService;
 
@@ -171,11 +173,38 @@ public class PatientEditController {
 				appointmentService.makeAppointment(appointment);
 				
 				mav = new ModelAndView("patientprofile");
+				mav.addObject("appointment", appointment);
 				
 				mav.addObject("message_request", "Request submitted, please wait for approvement from the doctor");
 			}
 		}
 
+		return mav;
+	}
+	
+	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
+	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
+		ModelAndView mav = new ModelAndView("doctors");
+
+		ObjectListContainer<Doctor> doctors = new ObjectListContainer<Doctor>();
+		doctors.setObjects(userService.getAllDoctors());
+		for(Doctor d: doctors.getObjects())
+			System.out.println(d.getUsername());
+		
+		ObjectListContainer<Appointment> appointmentList = new ObjectListContainer<Appointment>();
+		appointmentList.setObjects(appointmentService.getAllAppointmentForPatient((Patient) user));
+
+		mav.addObject("appointments", appointmentList);
+		
+		for(Appointment a: appointmentList.getObjects()) {
+			mav.addObject("appointment-" + a.getDoctor(), a);	// this is to check if appointment is accepted yet
+			for(Doctor d: doctors.getObjects()){
+				if(a.getDoctor().equals(d.getUsername()))
+					mav.addObject("haveappointment-" + a.getDoctor(), 1); // this is to check if appointment is made with the doctor
+			}
+		}
+		
+		mav.addObject("doctors", doctors);
 		return mav;
 	}
 }

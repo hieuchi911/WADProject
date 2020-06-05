@@ -60,6 +60,10 @@
 		<tr>
 			<td style="font-style: italic; color: red;">${message}</td>
 		</tr>
+		
+		<tr>
+			<td style="font-style: italic; color: red;">${message_request}</td>
+		</tr>
 	</table>
 </body>
 </html>
