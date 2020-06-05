@@ -49,12 +49,11 @@
 </head>
 <body onLoad="toggleFormInputs(); toggleDescriptionInputs(); togglePasswordInputs()">
 	<a href="shop">Shop</a>
-	<!-- showDoctors and symptomRp left here temporarily-->
 	
 	<a href="showDoctors">Doctors</a>
-	<a href="symptomRp">Write a symptom report</a>
 	
-	<!-- showDoctors and symptomRp left here temporarily-->
+	<a href="showPrescription">Prescription</a>
+	
 	
 	<form:form id="patientForm" name="patientForm" modelAttribute="editUser" action="editPatient">
 	<table>

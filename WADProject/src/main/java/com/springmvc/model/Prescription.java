@@ -4,7 +4,7 @@ public class Prescription {
 	private String doctor;
 	private String patient;
 	private ObjectListContainer <Medicine> prescription;
-	private String diagnosis;	// change this to symptom report!!!!!!!
+	private String diagnosis;
 	private String from_to;
 	
 	public String getDoctor() {

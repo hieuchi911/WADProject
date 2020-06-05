@@ -17,9 +17,9 @@ public interface AppointmentDao {
 	void rejectAppointment(Appointment appointment);
 	
 	
-	Appointment computeTime(String doctor, Patient patient);
+	Appointment setAppointment(String doctor, Patient patient, int appointment_hour, int appointment_shift);
 
-
+	List<String> getFromTo(String doctor);
 	
 	List<Appointment> getAllAppointment(Doctor doctor);
 	
