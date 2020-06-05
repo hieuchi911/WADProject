@@ -84,6 +84,8 @@ public class LoginController {
 			
 			// Get the doctor's information
 			user = userService.profileDoctor(user);
+
+			model.addAttribute("user", user);
 			mav.addObject("editUser", new Doctor());
 		}
 		return mav;

@@ -7,7 +7,9 @@
 <title>Welcome</title>
 </head>
 <body>
-	<a href="shop">Shop</a>
+	<a href="patientRecords">Patients</a>
+	<a href="accepted-requests">Appointments</a>
+	<a href="appointments">Appointment requests</a>
 
 	<table>
 		<tr>
@@ -40,7 +42,7 @@
 		</tr>
 		
 		<tr>
-			<td><a href="logout">Home</a></td>
+			<td><a href="home.jsp">Home</a></td>
 		</tr>
 	</table>
 	
