@@ -39,7 +39,7 @@
 		</tr>
 		
 		<tr>
-			<td><a href="${doctor.username}-appointment">Make an appointment with Dr. ${doctor.name}</a></td>
+			<td><a href="makeAppointment">Make an appointment with Dr. ${doctor.name}</a></td>
 		</tr>
 		</table>
 		</div>
