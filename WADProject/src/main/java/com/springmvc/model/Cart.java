@@ -21,7 +21,7 @@ public class Cart {
 	public String getCheckout() {
 		return checkout_date;
 	}
-	public void setUsername(String checkout_date) {
+	public void setCheckout(String checkout_date) {
 		this.checkout_date = checkout_date;
 	}
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.springmvc.dao.ShoppingDao;
 import com.springmvc.model.CartObject;
-import com.springmvc.model.ExtendedCartObject;
 import com.springmvc.model.ShopObject;
 
 /**
@@ -28,8 +27,8 @@ public class ShoppingService {
 	public ShopObject getShopObject(String object_id) {
 		return shoppingDao.getShopObject(object_id);
 	}
-	
-	public List<ExtendedCartObject> extendCartObjects(List<CartObject> objects) {
-		return shoppingDao.extendCartObjects(objects);
+
+	public List<CartObject> populate(List<CartObject> objects) {
+		return shoppingDao.populate(objects);
 	}
 }

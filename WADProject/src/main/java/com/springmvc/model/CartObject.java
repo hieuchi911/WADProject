@@ -3,7 +3,7 @@ package com.springmvc.model;
 /**
  * POJO class for handling the cart-item data
  */
-public class CartObject {
+public class CartObject extends ShopObject {
 	private String cartid;
 	private String objectid;
 	private int amount;

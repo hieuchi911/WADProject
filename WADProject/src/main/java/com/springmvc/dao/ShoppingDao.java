@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.springmvc.model.CartObject;
-import com.springmvc.model.ExtendedCartObject;
 import com.springmvc.model.ShopObject;
 
 /**
@@ -47,13 +46,13 @@ public class ShoppingDao {
 		
 		return objects.size() > 0 ? objects.get(0) : null;	
 	}
-	
-	public List<ExtendedCartObject> extendCartObjects(List<CartObject> objects) {
-		List<ExtendedCartObject> result = new ArrayList<ExtendedCartObject>();
+
+	public List<CartObject> populate(List<CartObject> objects) {
+		List <CartObject> result = new ArrayList<CartObject>();
+		
 		for (int i = 0; i < objects.size(); i++) {
 			ShopObject tmp_object = getShopObject(objects.get(i).getObjectid());
-			ExtendedCartObject object = new ExtendedCartObject();
-			object.setObjectid(tmp_object.getId());
+			CartObject object = objects.get(i);
 			object.setName(tmp_object.getName());
 			object.setManufacturer(tmp_object.getManufacturer());
 			object.setUrl(tmp_object.getUrl());

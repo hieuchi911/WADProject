@@ -1,5 +1,6 @@
 package com.springmvc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,14 +78,30 @@ public class PrescriptionController {
 	/* ---------------------------- buyPrescription --------------------------------------
 	 * This method lets the patient user buy the prescription of their doctor
 	 */
-	@RequestMapping(value = "/buy-prescription-${doctor_username}", method = RequestMethod.GET)
-	public ModelAndView buyPrescription(HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "/buy-prescription-{doctor_username}", method = RequestMethod.GET)
+	public String buyPrescription(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String doctor_username, @SessionAttribute User user) {
-		ModelAndView mav;
-		
 		Prescription pres = prescriptionService.getPrescription(user.getUsername(), doctor_username);
+		List <PrescribedMedicine> meds = pres.getPrescription().getObjects();
 		
-		return mav;
+		ObjectListContainer<CartObject> container = new ObjectListContainer<CartObject>();
+		List <CartObject> items = new ArrayList<CartObject>();
+		for (int i = 0; i < meds.size(); i++) {
+			CartObject object = new CartObject();
+			object.setObjectid(meds.get(i).getId());
+			object.setAmount(meds.get(i).getAmount());
+			items.add(object);
+		}
+		container.setObjects(items);
+		
+		Cart cart = new Cart();
+		cart.setCheckout("non");
+		cart.setItems(container);
+		
+		HttpSession sess = request.getSession();
+		sess.setAttribute("cart", cart);
+		
+		return "redirect:/shopCheckout";
 	}
 	
 	

@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.Cart;
 import com.springmvc.model.CartObject;
-import com.springmvc.model.ExtendedCartObject;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Prescription;
@@ -172,13 +171,9 @@ public class ShopController {
 			return mav;
 		}
 		
-		if (user instanceof Patient) {
-			System.out.println(((Patient) user).getGender() + " " + ((Patient) user).getName());
-		} else {
-			System.out.println(user.getUsername());
-		}
+		List <CartObject> objects = cart_objects.getObjects();
+		objects = shopService.populate(objects);
 		
-		List<ExtendedCartObject> objects = shopService.extendCartObjects(cart_objects.getObjects());
 		ModelAndView mav = new ModelAndView("checkout");
 		mav.addObject("objects", objects);
 		return mav;
