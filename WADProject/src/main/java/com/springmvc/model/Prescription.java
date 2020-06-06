@@ -1,11 +1,19 @@
 package com.springmvc.model;
 
 public class Prescription {
+	private String id;
 	private String doctor;
 	private String patient;
-	private ObjectListContainer <Medicine> prescription;
 	private String diagnosis;	// change this to symptom report!!!!!!!
 	private String from_to;
+	private ObjectListContainer <PrescribedMedicine> prescription;
+	
+	public String getId() {
+		return this.id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	public String getDoctor() {
 		return this.doctor;
@@ -21,10 +29,10 @@ public class Prescription {
 		this.patient = patient;
 	}
 	
-	public ObjectListContainer <Medicine> getPrescription() {
+	public ObjectListContainer <PrescribedMedicine> getPrescription() {
 		return this.prescription;
 	}
-	public void setPrescription(ObjectListContainer <Medicine> prescription) {
+	public void setPrescription(ObjectListContainer <PrescribedMedicine> prescription) {
 		this.prescription = prescription;
 	}
 	

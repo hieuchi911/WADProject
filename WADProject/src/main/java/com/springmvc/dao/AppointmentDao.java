@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,7 +20,9 @@ import com.springmvc.model.Prescription;
 import com.springmvc.model.ShopObject;
 
 public class AppointmentDao {
-	
+	// The followings are necessary to establish database connection
+	@Autowired
+	DataSource datasource;
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -187,7 +191,7 @@ public class AppointmentDao {
 	
 	public List<Appointment> getAllAppointmentForPatient(Patient patient) {
 		String sql = "SELECT * FROM appointment \n"
-				+ "WHERE patient_username = '" + patient.getUsername() + "';";
+				+ 	"WHERE patient_username = '" + patient.getUsername() + "';";
 		List<Appointment> appointments = jdbcTemplate.query(sql, new AppointmentMapper());
 		
 		return appointments;
@@ -227,19 +231,4 @@ class AppointmentMapper implements RowMapper<Appointment> {
 		return appointment;
 	}
 }
-
-
-class PrescriptionMapper implements RowMapper<Prescription> {
-	public Prescription mapRow(ResultSet rs, int arg1) throws SQLException {
-		Prescription prescription = new Prescription();
-
-		prescription.setDoctor(rs.getString("doctor_username"));
-		prescription.setPatient(rs.getString("patient_username"));
-		prescription.setFrom_to(rs.getString("from_to"));
-		prescription.setDiagnosis(rs.getString("diagnosis"));
-
-		return prescription;
-	}
-}
-
 

@@ -19,6 +19,7 @@ import com.springmvc.model.User;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
+import com.springmvc.model.DoctorListContainer;
 import com.springmvc.model.Login;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.service.AppointmentService;
@@ -161,7 +162,8 @@ public class PatientController {
 	}
 	
 	@RequestMapping(value = "/doctors", method = RequestMethod.GET)
-	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
+	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
 		ModelAndView mav = new ModelAndView("doctors");
 
 		ObjectListContainer<Doctor> doctors = new ObjectListContainer<Doctor>();
@@ -183,6 +185,36 @@ public class PatientController {
 		}
 		
 		mav.addObject("doctors", doctors);
+		return mav;
+	}
+	
+	/* ---------------------------- showDoctors --------------------------------------
+	 * This method shows the shopping screen in url "/shop".
+	 */
+	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
+	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("doctors");
+		
+		DoctorListContainer<Doctor> doctors = new DoctorListContainer<Doctor>();
+		doctors.setDoctors(userService.getAllDoctors());
+		for(Doctor d: doctors.getDoctors())
+			System.out.println(d.getUsername());
+		mav.addObject("doctors", doctors);
+		return mav;
+	}
+	
+	
+	/* ---------------------------- showAppointments --------------------------------------
+	 * This method shows the user's appointments.
+	 */
+	@RequestMapping(value = "/patient-accepted-requests", method = RequestMethod.GET)
+	public ModelAndView showAppointments(HttpServletRequest request, HttpServletResponse response,
+			@SessionAttribute User user) {		
+		ModelAndView mav = new ModelAndView("accepteddoctorappointment");
+
+		ObjectListContainer<Appointment> apps = new ObjectListContainer<Appointment>();
+		apps.setObjects(appointmentService.getAllAppointmentForPatient((Patient) user));
+		mav.addObject("appointments", apps);
 		return mav;
 	}
 }

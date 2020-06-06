@@ -2,6 +2,7 @@ package com.springmvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,10 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
+		// Reset session
+		HttpSession sess = request.getSession();
+		sess.invalidate();
+		
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new Login());
 

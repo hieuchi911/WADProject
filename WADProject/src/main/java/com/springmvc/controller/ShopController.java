@@ -24,6 +24,7 @@ import com.springmvc.model.CartObject;
 import com.springmvc.model.ExtendedCartObject;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.model.Patient;
+import com.springmvc.model.Prescription;
 import com.springmvc.model.ShopObject;
 import com.springmvc.model.User;
 import com.springmvc.service.ShoppingService;

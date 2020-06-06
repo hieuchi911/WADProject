@@ -17,6 +17,8 @@
 	<bean id="shopDao" class="com.springmvc.dao.ShoppingDao" />
 	<bean id="appointmentService" class="com.springmvc.service.AppointmentService" />
 	<bean id="appointmentDao" class="com.springmvc.dao.AppointmentDao" />
+	<bean id="prescriptionDao" class="com.springmvc.dao.PrescriptionDao" />
+	<bean id="prescriptionService" class="com.springmvc.service.PrescriptionService" />
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="datasource" />

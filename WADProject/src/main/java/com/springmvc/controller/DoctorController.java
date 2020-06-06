@@ -84,25 +84,6 @@ public class DoctorController {
 	}
 	
 	
-	/* ---------------------------- createPrecription --------------------------------------
-	 * This method handles the zoom meeting link
-	 */
-	@RequestMapping(value = "/prescribe-{username}", method = RequestMethod.GET)
-	public ModelAndView createPrecription(@PathVariable String username, @SessionAttribute User user) {
-		ModelAndView mav = new ModelAndView("prescribe");
-		
-		Prescription pres = new Prescription();
-
-		pres.setDoctor(user.getUsername());
-		pres.setPatient(username);
-		pres.setPrescription(new ObjectListContainer <Medicine>());
-		
-		mav.addObject("prescription", new Prescription());
-		
-		return mav;
-	}
-	
-	
 	/* ---------------------------- acceptRequest/{patient} --------------------------------------
 	 * This method update the pre-made appointment in the database (done by 
 	 * makeAppointment/{username} controller) with the computed from_to
