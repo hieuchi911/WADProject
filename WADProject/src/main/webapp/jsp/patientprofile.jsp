@@ -148,7 +148,7 @@
 		</div>
 	</form>
 	
-	<a href="home.jsp">Home</a>
+	<a href="logout">Home</a>
 	
 	<table align="center">
 		<tr>

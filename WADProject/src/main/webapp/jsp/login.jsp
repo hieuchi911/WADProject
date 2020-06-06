@@ -20,7 +20,8 @@
 				<td><form:password path="password" name="password" id="password" /></td>
 			</tr>
 			<tr>
-				<td></td>
+				<td><input type="checkbox" name="remember" value="remember"/>
+					<label for="remember">Remember me</label></td>
 				<td align="left"><form:button id="login" name="login">Login</form:button></td>
 			</tr>
 			<tr></tr>

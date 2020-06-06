@@ -18,6 +18,7 @@ import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
+import com.springmvc.service.CookieService;
 import com.springmvc.service.UserService;
 
 /** 
@@ -39,12 +40,21 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav;
+		
 		// Reset session
 		HttpSession sess = request.getSession();
 		sess.invalidate();
+		sess = request.getSession();
 		
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("login", new Login());
+		Login login = CookieService.getCookie(request, "login");
+		if (login == null) {
+			mav = new ModelAndView("login");
+			mav.addObject("login", new Login());
+		} else {
+			mav = new ModelAndView("redirect:/loginProcess");
+			sess.setAttribute("login", login);
+		}
 
 		return mav;
 	}
@@ -52,21 +62,32 @@ public class LoginController {
 	/* ---------------------------- loginProcess --------------------------------------
 	 * This method shows handles login activities (i.e. verification, redirection) with url "/loginProcess".
 	 */
-	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginProcess", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView loginProcess(Model model, HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("login") Login login, @ModelAttribute User user) {
+			@ModelAttribute Login login, @ModelAttribute User user) {
+		HttpSession sess = request.getSession();
+		
+		if (sess.getAttribute("login") != null) {
+			login = (Login) sess.getAttribute("login");
+			sess.setAttribute("login", null);
+		}
+		
 		ModelAndView mav = null;
 
 		user = userService.validateUser(login);
+		System.out.println("login process:" + login.getUsername());
 		
 		if (user != null) {
+			if (request.getParameter("remember") != null)
+				CookieService.addCookie(response, login);
+			
 			mav = new ModelAndView("redirect:/profile");
 			model.addAttribute("user", user);
 		} else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");
 		}
-
+		
 		return mav;
 	}
 
@@ -93,6 +114,7 @@ public class LoginController {
 			model.addAttribute("user", user);
 			mav.addObject("editUser", new Doctor());
 		}
+		
 		return mav;
 	}
 	
@@ -100,7 +122,8 @@ public class LoginController {
 	 * This method shows the login screen in url "/logout".
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutProcess(Model model) {
+	public String logoutProcess(Model model, HttpServletRequest request, HttpServletResponse response) {
+		CookieService.removeCookie(response, "login");
 		model.addAttribute("user", new User());
 		return "redirect:/";
 	}

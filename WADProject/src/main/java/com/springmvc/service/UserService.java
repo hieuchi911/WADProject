@@ -9,6 +9,9 @@ import com.springmvc.model.Patient;
 import com.springmvc.model.User;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * This class provides implementations of User Services
  */

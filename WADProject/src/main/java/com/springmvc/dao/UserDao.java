@@ -15,6 +15,7 @@ import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
 
+import com.springmvc.service.Cryptography;
 /**
  * This class provides an implementation of the Data Access Object
  * It gets user data from the database
@@ -50,7 +51,7 @@ public class UserDao {
 	
 	public User validateUser(Login login) {
 		String sql = "SELECT * FROM user WHERE username ='" + login.getUsername() + "' AND password='"
-				+ login.getPassword() + "';";
+				+ 											  login.getPassword() + "';";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
 
 		return users.size() > 0 ? users.get(0) : null;
