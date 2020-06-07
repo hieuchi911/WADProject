@@ -8,5 +8,12 @@
 </head>
 <body>
 	<img src="https://assets.zoom.us/images/en-us/zoom-rooms/sample/Customized+background+for+calendar.png"/>
+	
+	<table>
+		<tr>
+			<td><a href="homepage">Homepage</a></td>
+			<td><a href="home.jsp">Home</a></td>
+		</tr>
+	</table>
 </body>
 </html>

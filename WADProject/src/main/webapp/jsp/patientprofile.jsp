@@ -148,11 +148,16 @@
 		</div>
 	</form>
 	
-	<a href="logout">Home</a>
+	
 	
 	<table align="center">
 		<tr>
 			<td style="font-style: italic; color: red;">${message}</td>
+		</tr>
+		
+		<tr>
+			<td><a href="homepage">Homepage</a></td>
+			<td><a href="home.jsp">Home</a></td>
 		</tr>
 	</table>
 	

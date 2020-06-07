@@ -58,7 +58,31 @@ public class LoginController {
 
 		return mav;
 	}
-
+	
+	/* ---------------------------- homepage --------------------------------------
+	 * This method brings user back to homepage by the url "/homepage".
+	 */
+	@RequestMapping(value = "/homepage", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView homepage(Model model, HttpServletRequest request, HttpServletResponse response,
+				@ModelAttribute User user) {
+		
+		ModelAndView mav = null;
+		
+		if(user instanceof Patient){
+			mav = new ModelAndView("homepage");
+			user = userService.profilePatient(user);
+			model.addAttribute("user", user);
+		} else {
+			if(user instanceof Doctor) {
+				mav = new ModelAndView("homepage");
+				user = userService.profileDoctor(user);
+				model.addAttribute("user", user);
+			}
+		}
+		
+		return mav;
+	}
+	
 	/* ---------------------------- loginProcess --------------------------------------
 	 * This method shows handles login activities (i.e. verification, redirection) with url "/loginProcess".
 	 */
@@ -80,9 +104,19 @@ public class LoginController {
 		if (user != null) {
 			if (request.getParameter("remember") != null)
 				CookieService.addCookie(response, login);
-			
-			mav = new ModelAndView("redirect:/profile");
-			model.addAttribute("user", user);
+			if(user.getUsertype().equals("patient")){
+				mav = new ModelAndView("homepage");
+				user = userService.profilePatient(user);
+				model.addAttribute("user", user);
+			} else {
+				if(user.getUsertype().equals("doctor")) {
+					mav = new ModelAndView("homepage");
+					user = userService.profileDoctor(user);
+					model.addAttribute("user", user);
+				}
+			}
+//			mav = new ModelAndView("redirect:/profile");
+//			model.addAttribute("user", user);
 		} else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");

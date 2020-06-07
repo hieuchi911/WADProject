@@ -63,5 +63,12 @@
 			</tr>
 		</table>
 	</form>
+	
+	<table>
+		<tr>
+			<td><a href="homepage">Homepage</a></td>
+			<td><a href="home.jsp">Log out</a></td>
+		</tr>
+	</table>
 </body>
 </html>

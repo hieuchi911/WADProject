@@ -32,7 +32,11 @@
 		</table>
 		</div>
 	</c:forEach>
-	
-	<a href="home.jsp">Home</a>
+	<table>
+		<tr>
+			<td><a href="homepage">Homepage</a></td>
+			<td><a href="home.jsp">Log out</a></td>
+		</tr>
+	</table>
 </body>
 </html>

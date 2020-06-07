@@ -35,13 +35,15 @@ public class DoctorController {
 	/* ---------------------------- showPatientRecords --------------------------------------
 	 * This method shows the patients that the doctor worked with in the past
 	 */
-	@RequestMapping(value = "/showPatientRecords", method = RequestMethod.GET)
+	@RequestMapping(value = "/patientRecords", method = RequestMethod.GET)
 	public ModelAndView showRecords(HttpServletRequest request, HttpServletResponse response, @SessionAttribute User user) {
 		ModelAndView mav = null;
 		
 		ObjectListContainer<Prescription> prescriptionList = new ObjectListContainer<Prescription>();
 		
 		prescriptionList.setObjects(appointmentService.getAllPrescription((Doctor) user));
+		
+		System.out.println("prescriptionList is: " + prescriptionList.getObjects());
 		
 		mav = new ModelAndView("patientrecords");
 		mav.addObject("patientsRecords", prescriptionList);

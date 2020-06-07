@@ -39,13 +39,17 @@
 			<hr>
 		</c:if>
 	</c:forEach>
-	<table>		
+	<table>	
 		<tr>
 			<td style="font-style: italic; color: red;">${message_accept}</td>
 		</tr>
+		
+		<tr>
+			<td><a href="homepage">Homepage</a></td>
+			<td><a href="home.jsp">Log out</a></td>
+		</tr>
 	</table>
 	
-	<a href="home.jsp">Home</a>
 
 </body>
 </html>
