@@ -45,6 +45,8 @@
 		</div>
 	</c:forEach>
 	
-	<a href="home.jsp">Home</a>
+	<a href="loginProcess">Homepage</a>
+	<a href="home.jsp">Log out</a>
+	
 </body>
 </html>

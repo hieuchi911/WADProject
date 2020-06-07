@@ -24,8 +24,8 @@ public class DoctorsCatalogueController {
 	@Autowired
 	UserService userService;
 	
-	/* ---------------------------- showShop --------------------------------------
-	 * This method shows the shopping screen in url "/shop".
+	/* ---------------------------- showDoctors --------------------------------------
+	 * This method shows the available doctors in the system
 	 */
 	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
 	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {

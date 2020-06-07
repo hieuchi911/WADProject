@@ -55,8 +55,17 @@ public class LoginController {
 		user = userService.validateUser(login);
 		
 		if (user != null) {
-			mav = new ModelAndView("redirect:/profile");
-			model.addAttribute("user", user);
+			if(user.getUsertype().equals("patient")){
+				mav = new ModelAndView("homepage");
+				user = userService.profilePatient(user);
+				model.addAttribute("user", user);
+			} else {
+				if(user.getUsertype().equals("doctor")) {
+					mav = new ModelAndView("homepage");
+					user = userService.profileDoctor(user);
+					model.addAttribute("user", user);
+				}
+			}
 		} else {
 			mav = new ModelAndView("login");
 			mav.addObject("message", "Username or Password is wrong!!");
@@ -75,7 +84,7 @@ public class LoginController {
 			mav = new ModelAndView("patientprofile");
 			
 			// Get the patient's information
-			user = userService.profilePatient(user);	
+			user = userService.profilePatient(user);
 			
 			model.addAttribute("user", user);
 			mav.addObject("editUser", new Patient());
