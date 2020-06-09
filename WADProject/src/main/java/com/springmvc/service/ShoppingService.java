@@ -28,6 +28,10 @@ public class ShoppingService {
 		return shoppingDao.getShopObject(object_id);
 	}
 
+	public List <ShopObject> search(String key) {
+		return shoppingDao.searchQuery(key);
+	}
+	
 	public List<CartObject> populate(List<CartObject> objects) {
 		return shoppingDao.populate(objects);
 	}

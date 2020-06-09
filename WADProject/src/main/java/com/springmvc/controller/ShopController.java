@@ -190,4 +190,19 @@ public class ShopController {
 		
 		return "redirect:/shop";
 	}
+	
+	/* ---------------------------- searchItem --------------------------------------
+	 * This method shows the search items.
+	 */
+	@RequestMapping(value="/searchitem", method = RequestMethod.GET)
+	public ModelAndView searchItem(HttpServletRequest request, HttpServletResponse response) {
+		String key = request.getParameter("query");
+		ModelAndView mav = new ModelAndView("searchItems");
+		
+		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
+		objects.setObjects(shopService.search(key));
+		
+		mav.addObject("objects", objects);
+		return mav;
+	}
 }

@@ -28,6 +28,20 @@
 	<a href="tool-shop">Tools</a>
 	<a href="medicine-shop">Medicine</a>
 	
+	<form method="get" action="searchitem">
+		<table>
+			<tr>
+				<td>Search for items here: </td>
+				<td><input type="text" name="query"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" name="submit" value="Search"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
 	Welcome! ${user.name}
 	<c:forEach items="${objects.objects}" var="object" varStatus="tagStatus">
 		<div class="card">
