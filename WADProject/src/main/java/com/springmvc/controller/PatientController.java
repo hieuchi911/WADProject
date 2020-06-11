@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +18,6 @@ import com.springmvc.model.User;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
-import com.springmvc.model.DoctorListContainer;
 import com.springmvc.model.Login;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.service.AppointmentService;
@@ -28,11 +26,8 @@ import com.springmvc.service.UserService;
 /** 
  * PatientEditController helps edit a patient's infor fields,
  * with urls:
- * | "/editUsername"	This url update the database with the specified username	 
- * | "/editFullName"	This url update the database with the specified name	 
- * | "/editGender"		This url update the database with the specified gender 	 
- * | "/editPhone"		This url update the database with the specified phone
- * | "/editDescription"	This url update the database with the specified description
+ * | "/editPatient", "/editDescription", "/editPassword", "/{username}-appointment",
+ * | "/showDoctors", "/patient-accepted-requests"
  * 
  */
 @Controller
@@ -43,6 +38,9 @@ public class PatientController {
 	@Autowired
 	AppointmentService appointmentService;
 	
+	/* ---------------------------- editPatient --------------------------------------
+	 * This method helps editing patients basic information
+	 */
 	@RequestMapping(value = "/editPatient", method = RequestMethod.POST)
 	public ModelAndView editPatient(Model model,
 			@SessionAttribute User user, @ModelAttribute Patient editUser) {
@@ -62,15 +60,17 @@ public class PatientController {
 		
 		return null;
 	}
-
+	
+	
+	/* ---------------------------- editDescription --------------------------------------
+	 * This method helps patients report their symptoms
+	 */
 	@RequestMapping(value = "/editDescription", method = RequestMethod.POST)
 	public ModelAndView editProfile(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
 		
 		ModelAndView mav = null;
 		if (user != null) {
-			System.out.println("User name is: " + user.getUsername());
-			
 			// Allergy data
 			String allergy = request.getParameter("allergy");
 			if (allergy == null || allergy.length() == 0) 
@@ -97,15 +97,15 @@ public class PatientController {
 		return mav;
 	}
 	
+	/* ---------------------------- editPassword --------------------------------------
+	 * This method helps updating patients' password
+	 */
 	@RequestMapping(value = "/editPassword", method = RequestMethod.POST)
 	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response, 
 			@SessionAttribute User user) {
 		
 		ModelAndView mav = null;
 		if (user != null) {
-			System.out.println("Old pw entered: " + request.getParameter("oldpw"));
-			System.out.println("New pw entered: " + request.getParameter("newpw"));
-			System.out.println("Confirm new pw entered: " + request.getParameter("newpwCf"));
 			
 			Login login = new Login();
 			login.setUsername(user.getUsername());
@@ -113,7 +113,6 @@ public class PatientController {
 			
 			if(userService.validateUser(login) != null) {
 				if (request.getParameter("newpw").equals(request.getParameter("newpwCf"))) {
-					System.out.println("Verified :DDDDDD");
 					user.setPassword(request.getParameter("newpw"));
 					user.setUsertype("patient");
 					
@@ -130,6 +129,11 @@ public class PatientController {
 		return mav;
 	}
 	
+	/* ---------------------------- {username}-appointment --------------------------------------
+	 * This method creates an appointment request with the patient's name
+	 * and the doctor in demand. It also updates appointment table in database
+	 * with "None"-from_to records
+	 */
 	@RequestMapping(value = "/{username}-appointment", method = RequestMethod.GET)
 	public ModelAndView makeAppointment(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user, @PathVariable String username) {
@@ -140,14 +144,16 @@ public class PatientController {
 				// create a temporary doctor user whose name is path variable name above to put in profileDoctor method
 				User doctor = new User();
 				doctor.setUsername(username);
-				String description = ((Patient) user).getDescription().toString(); ////////////////////////////////////////////////
+				String description = ((Patient) user).getDescription().getAllergy() + "||"
+							+ ((Patient) user).getDescription().getBackground() + "||"
+							+((Patient) user).getDescription().getCurrent();
 				
 				doctor = userService.profileDoctor(doctor);
 				
 				Appointment appointment = new Appointment();
 				appointment.setDoctor(doctor.getUsername());
 				appointment.setPatient(user.getUsername());
-				appointment.setIllness_description(description); // Need to add symptom report here
+				appointment.setIllness_description(description);
 				
 				appointmentService.makeAppointment(appointment);
 				
@@ -161,44 +167,16 @@ public class PatientController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/doctors", method = RequestMethod.GET)
-	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response, 
-			@SessionAttribute User user) {
-		ModelAndView mav = new ModelAndView("doctors");
-
-		ObjectListContainer<Doctor> doctors = new ObjectListContainer<Doctor>();
-		doctors.setObjects(userService.getAllDoctors());
-		for(Doctor d: doctors.getObjects())
-			System.out.println(d.getUsername());
-		
-		ObjectListContainer<Appointment> appointmentList = new ObjectListContainer<Appointment>();
-		appointmentList.setObjects(appointmentService.getAllAppointmentForPatient((Patient) user));
-
-		mav.addObject("appointments", appointmentList);
-		
-		for(Appointment a: appointmentList.getObjects()) {
-			mav.addObject("appointment-" + a.getDoctor(), a);	// this is to check if appointment is accepted yet
-			for(Doctor d: doctors.getObjects()){
-				if(a.getDoctor().equals(d.getUsername()))
-					mav.addObject("haveappointment-" + a.getDoctor(), 1); // this is to check if appointment is made with the doctor
-			}
-		}
-		
-		mav.addObject("doctors", doctors);
-		return mav;
-	}
-	
 	/* ---------------------------- showDoctors --------------------------------------
-	 * This method shows the shopping screen in url "/shop".
+	 * This method returns the doctor catalog
 	 */
 	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
 	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("doctors");
 		
-		DoctorListContainer<Doctor> doctors = new DoctorListContainer<Doctor>();
-		doctors.setDoctors(userService.getAllDoctors());
-		for(Doctor d: doctors.getDoctors())
-			System.out.println(d.getUsername());
+		ObjectListContainer<Doctor> doctors = new ObjectListContainer<Doctor>();
+		doctors.setObjects(userService.getAllDoctors());
+
 		mav.addObject("doctors", doctors);
 		return mav;
 	}

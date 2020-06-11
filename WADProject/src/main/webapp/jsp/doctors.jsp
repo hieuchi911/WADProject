@@ -10,7 +10,7 @@
 </head>
 <body>
 	Welcome! ${user.username}
-	<c:forEach items="${doctors.doctors}" var="doctor"
+	<c:forEach items="${doctors.objects}" var="doctor"
 		varStatus="tagStatus">
 		<div class="card">
 			<table>

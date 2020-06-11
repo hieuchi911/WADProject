@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
 import com.springmvc.model.User;
 import com.springmvc.service.UserService;

@@ -41,8 +41,6 @@ public class PrescriptionDao {
 	public void addPrescribedMedicine(PrescribedMedicine prescribedMedicine, int prescription_id) {
 		String sql = "INSERT INTO prescribedmedicine VALUES(?,?,?);";
 		
-		System.out.println(prescription_id);
-		System.out.println(prescribedMedicine.getId());
 		
 		jdbcTemplate.update(sql, new Object[] { prescription_id, prescribedMedicine.getId(), 
 												prescribedMedicine.getAmount()});
@@ -66,15 +64,12 @@ public class PrescriptionDao {
 				+ 							"ON prescribedmedicine.medicine_id = medicine.medicine_id "
 				+ 	 "WHERE prescribedmedicine.prescription_id='" + id + "';";
 		List<PrescribedMedicine> objects = jdbcTemplate.query(sql, new PrescribedMedicineMapper());
-		System.out.println("ID is " + id);
-		System.out.println(objects.size());
 		
 		return objects;
 	}
 
 	public int initializeID() {
 		String sql = "SELECT COUNT(*) FROM prescription;";
-		System.out.println(jdbcTemplate.queryForObject(sql, Integer.class) + 1);
 		
 		return jdbcTemplate.queryForObject(sql, Integer.class) + 1;
 	}
@@ -91,7 +86,6 @@ class PrescriptionMapper implements RowMapper<Prescription> {
 		prescription.setPatient(rs.getString("patient_username"));
 		prescription.setFrom_to(rs.getString("from_to"));
 		prescription.setDiagnosis(rs.getString("diagnosis"));
-		System.out.println(prescription.getDiagnosis());
 		
 		prescription.setPrescription(new ObjectListContainer<PrescribedMedicine>());
 		

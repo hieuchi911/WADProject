@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
 import com.springmvc.model.Login;
 import com.springmvc.model.Patient;
@@ -22,10 +23,13 @@ import com.springmvc.service.CookieService;
 import com.springmvc.service.UserService;
 
 /** 
- * The LoginController class handles login activities of the user,
+ * The LoginController class handles login activities of the user
  * with urls:
- * | "/login"			This url shows the login screen.		 
+ * | "/showLogin"		This url shows the login screen.		 
  * | "/loginProcess"	This url processes user login.	
+ * | "/homepage"		This url brings user to the homepage.
+ * | "/profile"			This url brings user to the profile view.
+ * | "/logout" 			This url enables the user to log out.
  * 
  */
 @Controller
@@ -36,7 +40,7 @@ public class LoginController {
 	UserService userService;
 
 	/* ---------------------------- showLogin --------------------------------------
-	 * This method shows the login screen in url "/login".
+	 * This method shows the login screen in url "/showLogin".
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -99,7 +103,6 @@ public class LoginController {
 		ModelAndView mav = null;
 
 		user = userService.validateUser(login);
-		System.out.println("login process:" + login.getUsername());
 		
 		if (user != null) {
 			if (request.getParameter("remember") != null)
@@ -129,7 +132,6 @@ public class LoginController {
 	public ModelAndView profile(Model model, @SessionAttribute User user) {
 		ModelAndView mav = null;
 		
-		System.out.println(user instanceof Patient);
 		
 		if (user.getUsertype().contentEquals("patient")) {
 			mav = new ModelAndView("patientprofile");
