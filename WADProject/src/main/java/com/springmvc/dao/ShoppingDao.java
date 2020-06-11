@@ -32,6 +32,13 @@ public class ShoppingDao {
 		return objects;
 	}
 	
+	public List <ShopObject> searchQuery(String key) {
+		String sql = String.format("SELECT * FROM shopobject WHERE name LIKE '%s%' OR category LIKE '%s%' OR manufacturer LIKE '%s%';", key, key, key);
+		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
+		
+		return objects;
+	}
+	
 	public List <ShopObject> getShopObjectByCategory(String category) {
 		String sql = "SELECT * FROM shopobject WHERE category='" + category + "';";
 		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
