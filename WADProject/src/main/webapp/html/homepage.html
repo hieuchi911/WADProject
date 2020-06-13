@@ -1,5 +1,4 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Required meta tags -->
@@ -16,7 +15,7 @@
 <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="vendors/animate-css/animate.css">
 <!-- main css -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
 <title>Welcome</title>
 </head>
@@ -49,7 +48,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img
+					<a class="navbar-brand logo_h" href="index"><img
 						src="img/logo.png" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
@@ -59,31 +58,16 @@
 							class="icon-bar"></span>
 					</button>
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<c:if test="${user.usertype == 'patient' }">
-						<div class="collapse navbar-collapse offset"
-							id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item"><a class="nav-link" href="homepage.html">Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="patientprofile.html">My profile</a></li>
-								<li class="nav-item"><a class="nav-link" href="shop.html">Shop now</a></li>
-								<li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
-								<li class="nav-item"><a class="nav-link" href="home.html">Log out</a></li>
-							</ul>
-						</div>
-					</c:if>
-					<c:if test="${user.usertype == 'doctor' }">
-						<div class="collapse navbar-collapse offset"
-							id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item"><a class="nav-link"
-									href="homepage.html">Home</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="patientprofile.html">My profile</a></li>
-								<li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
-								<li class="nav-item"><a class="nav-link" href="home.html">Log out</a></li>
-							</ul>
-						</div>
-					</c:if>
+					<div class="collapse navbar-collapse offset"
+						id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="profile">My profile</a></li>
+							<li class="nav-item"><a class="nav-link" href="shop">Shop now</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact">Contact us</a></li>
+							<li class="nav-item"><a class="nav-link" href="logout">Log out</a></li>
+						</ul>
+					</div>
 				</div>
 			</nav>
 		</div>
@@ -107,6 +91,7 @@
 		<div class="row">
 			<!--  First column as Left bar -->
 			<div class="col-3" style="padding: 25px;">
+				
 				<c:if test="${user.usertype == 'patient' }">
 					<table align="center">
 						<tr>
@@ -116,6 +101,7 @@
 						<tr>
 							<td><a href="patient-accepted-requests">Appointments</a></td>
 						</tr>
+
 					</table>
 				</c:if>
 				
@@ -130,7 +116,7 @@
 						</tr>
 	
 						<tr>
-							<td><a href="appointments">Appointment requests</a></td>
+							<td><a href="appointments">Requests</a></td>
 						</tr>
 					</table>
 				</c:if>
@@ -183,46 +169,10 @@
         
     	</section>
 		
-		<footer class="footer-area area-padding-top">
+	<footer class="footer-area area-padding-top">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Top Products</h4>
-					<ul>
-						<li><a href="#">Managed Website</a></li>
-						<li><a href="#">Manage Reputation</a></li>
-						<li><a href="#">Power Tools</a></li>
-						<li><a href="#">Marketing Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Quick Links</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Features</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="#">Guides</a></li>
-						<li><a href="#">Research</a></li>
-						<li><a href="#">Experts</a></li>
-						<li><a href="#">Agencies</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-4 col-md-6 single-footer-widget">
+				<div class="col-lg-12 col-md-12 single-footer-widget">
 					<h4>About this website</h4>
 					<p>This is a project for the course Web application development</p>
 				</div>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.springmvc.model.Medicine;
 import com.springmvc.model.ObjectListContainer;
 import com.springmvc.model.PrescribedMedicine;
 import com.springmvc.model.Prescription;
@@ -26,7 +27,7 @@ public class PrescriptionDao {
 		String sql = "SELECT * FROM medicine INNER JOIN shopobject "
 				+ 							"ON medicine.medicine_id = shopobject.object_id "
 				+ 	 "WHERE medicine.medicine_id='" + id + "';";
-		List<PrescribedMedicine> objects = jdbcTemplate.query(sql, new PrescribedMedicineMapper());
+		List<PrescribedMedicine> objects = jdbcTemplate.query(sql, new MedicineMapper());
 				
 		return objects.get(0);
 	}
@@ -93,6 +94,24 @@ class PrescriptionMapper implements RowMapper<Prescription> {
 	}
 }
 
+class MedicineMapper implements RowMapper<PrescribedMedicine> {
+	public PrescribedMedicine mapRow(ResultSet rs, int arg1) throws SQLException {
+		PrescribedMedicine med = new PrescribedMedicine();
+		
+		med.setId(rs.getString("object_id"));
+		med.setName(rs.getString("name"));
+		med.setCategory(rs.getString("category"));
+		med.setUrl(rs.getString("photo_url"));
+		med.setManufacturer(rs.getString("manufacturer"));
+		med.setDescription(rs.getString("description"));
+		med.setPrice(Double.parseDouble(rs.getString("price")));
+		med.setIngredients(rs.getString("instruction"));
+		med.setIngredients(rs.getString("ingredients"));
+		med.setIngredients(rs.getString("side_effects"));
+		
+		return med;
+	}
+}
 
 class PrescribedMedicineMapper implements RowMapper<PrescribedMedicine> {
 	public PrescribedMedicine mapRow(ResultSet rs, int arg1) throws SQLException {

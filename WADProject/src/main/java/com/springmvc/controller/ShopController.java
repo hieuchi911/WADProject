@@ -72,9 +72,9 @@ public class ShopController {
 	}
 	
 	/* ---------------------------- showItem --------------------------------------
-	 * This method shows the item screen in url "/shopitem/{item}".
+	 * This method shows the item screen in url "/shopitem-{item}".
 	 */
-	@RequestMapping(value = "/shopitem/{object_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/shopitem-{object_id}", method = RequestMethod.GET)
 	public ModelAndView showItem(@PathVariable String object_id) {
 		ModelAndView mav = new ModelAndView("shopitem");
 		
