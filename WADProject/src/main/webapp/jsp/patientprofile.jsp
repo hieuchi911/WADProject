@@ -20,62 +20,9 @@
 <link rel="stylesheet" href="css/responsive.css">
 
 <title>Patient</title>
-<!-- JavaScript -->
-<script>
-	function toggleFormInputs() {
-		if (document.patientForm.name.disabled == false) {
-			document.patientForm.name.disabled = true;
-			document.patientForm.gender.disabled = true;
-			document.patientForm.phone.disabled = true;
-			document.patientForm.address.disabled = true;
-			document.patientForm.submit.style.display = "none";
-		} else {
-			document.patientForm.name.disabled = false;
-			document.patientForm.gender.disabled = false;
-			document.patientForm.phone.disabled = false;
-			document.patientForm.address.disabled = false;
-			document.patientForm.submit.style.display = "block";
-		}
-	}
-
-	function toggleDescriptionInputs() {
-		if (document.patientMedicalForm.allergy.disabled == false) {
-			document.patientMedicalForm.allergy.disabled = true;
-			document.patientMedicalForm.background.disabled = true;
-			document.patientMedicalForm.current.disabled = true;
-			document.patientMedicalForm.submit.style.display = "none";
-		} else {
-			document.patientMedicalForm.allergy.disabled = false;
-			document.patientMedicalForm.background.disabled = false;
-			document.patientMedicalForm.current.disabled = false;
-			document.patientMedicalForm.submit.style.display = "block";
-		}
-	}
-
-	function togglePasswordInputs() {
-		let ps = document.getElementById("passwordSection")
-		if (ps.style.display != "none") {
-			ps.style.display = "none";
-		} else {
-			ps.style.display = "block";
-		}
-	}
-	
-	function repeatDiv(list){
-		for(let element in list) {
-			document.write(	"<div class=\"row\">\n" +
-							"<div class=\"col\"></div>\n" +
-							"<div class=\"col-3\">" + element + "</div>\n" +
-							"<div class=\"col-5\">" + "" + 
-							"</div>\n" +
-							"<div class=\"col\"></div>\n" +
-							"</div>\n"); 
-		}
-	}
-</script>
 
 </head>
-<body onLoad="toggleFormInputs(); toggleDescriptionInputs(); togglePasswordInputs()">
+<body>
 
 	<!--================Header Menu Area =================-->
 	<header class="header_area">
@@ -192,7 +139,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Name</div>
 								<div class="col-5">
-									<form:input class="form-control" path="name" name="name" value="${user.name}"></form:input>
+									<form:input class="form-control" path="name" name="name" value="${user.name}" disabled="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -201,7 +148,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Gender</div>
 								<div class="col-5">
-									<form:input class="form-control" path="gender" name="gender" value="${user.gender}"></form:input>
+									<form:input class="form-control" path="gender" name="gender" value="${user.gender}" disabled="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -210,7 +157,7 @@
 								<div class="col-1"></div>								
 								<div class="col-3" style="text-align: right">Phone</div>
 								<div class="col-5">
-									<form:input class="form-control" path="phone" name="phone" value="${user.phone}"></form:input>
+									<form:input class="form-control" path="phone" name="phone" value="${user.phone}" disabled="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -219,7 +166,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Address</div>
 								<div class="col-5">
-									<form:input class="form-control" path="address" name="address" value="${user.address}"></form:input>
+									<form:input class="form-control" path="address" name="address" value="${user.address}" disabled="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -227,12 +174,12 @@
 							<div class="row" style="height: 150px">
 								<div class="col-4"></div>
 								<div class="col-3">
-									<button class="form-control" type="button" onclick="toggleFormInputs()">Edit</button>
+									<button class="form-control" id="edit-basic" type="button">Edit</button>
 									<br>
-									<button class="form-control" type="button" onclick="togglePasswordInputs()">Change Password</button>
+									<button class="form-control" id="edit-password" type="button">Change Password</button>
 								</div>
 								<div class="col-2">
-									<button class="form-control" type="submit" name="submit" value="Confirm">Confirm</button>
+									<button class="form-control" id="edit-basic-confirm" type="submit" name="submit" value="Confirm">Confirm</button>
 								</div>
 							</div>
 						</form:form>
@@ -240,7 +187,7 @@
 					
 					<div class="w-100"></div>
 					
-					<div class="col card-team__body text-center" id="passwordSection">
+					<div class="col card-team__body text-center" id="passwordSection" style="display: none;">
 						<h3>
 							<a href="#">Edit password</a><hr width="200px">
 						</h3>
@@ -287,14 +234,14 @@
 						<h3>
 							<a href="#">Symptom report</a><hr width="200px">
 						</h3>
-						<form name="patientMedicalForm" action="editDescription" method="post">
+						<form id="report" name="patientMedicalForm" action="editDescription" method="post">
 							<div class="row" style="height: 270px">
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right;">
 									Allergy
 								</div>
 								<div class="col-5">
-									<textarea class="form-control" name="allergy" style="height: 250px">${user.description.allergy}</textarea>
+									<textarea class="form-control" name="allergy" style="height: 250px" disabled>${user.description.allergy}</textarea>
 								</div>
 							</div>
 							
@@ -304,7 +251,7 @@
 									Background disease
 								</div>
 								<div class="col-5">
-									<textarea class="form-control" name="background" style="height: 250px">${user.description.background}</textarea>
+									<textarea class="form-control" name="background" style="height: 250px" disabled>${user.description.background}</textarea>
 								</div>
 							</div>
 							<div class="row" style="height: 270px">
@@ -313,16 +260,16 @@
 									Current symptoms/well-being
 								</div>
 								<div class="col-5">
-									<textarea class="form-control" name="current" style="height: 250px">${user.description.current}</textarea>
+									<textarea class="form-control" name="current" style="height: 250px" disabled>${user.description.current}</textarea>
 								</div>
 							</div>
 							<div class="row" style="height: 75px">
 								<div class="col-4"></div>
 								<div class="col-3">
-									<button class="form-control" type="button" onclick="toggleDescriptionInputs()">Edit</button>
+									<button id="edit-report" class="form-control" type="button">Edit</button>
 								</div>
 								<div class="col-2">
-									<input class="form-control" type="submit" name="submit" value="Confirm" />
+									<input id="edit-report-confirm" class="form-control" type="submit" name="submit" value="Confirm" />
 								</div>
 								<div class="col"></div>
 							</div>

@@ -104,14 +104,15 @@
 	                            <div class="product__item">
 	                                <div class="product__item__pic set-bg" data-setbg="${object.url}">
 	                                	<div class="presmed-info-input">
-	                                		<form action="add-medicine-${object.id}" method="post">
-				                				<input type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
-				                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="s0">
-				                				<input type="submit" class="form-control" name="submit" value="Add"/>
-				                			</form>
+
 		                				</div>
 	                                </div>
 	                                <div class="product__item__text">
+	                               	    <form action="add-medicine-${object.id}" method="post">
+			                				<input type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
+			                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="40">
+			                				<input type="submit" class="form-control" name="submit" value="Add"/>
+			                			</form>
 	                                    <h6><a href="#">${object.name}</a></h6>
 	                                </div>
 	                            </div>

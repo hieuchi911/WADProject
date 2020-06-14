@@ -1,5 +1,5 @@
-(function ($) {
-
+$(document).ready(function(){
+	
     /*------------------
         Background Set
     --------------------*/
@@ -31,4 +31,37 @@
         $button.parent().find('input').val(newVal);
     });
 
+    /*-------------------
+    	Edit basic info
+	--------------------- */
+    var basic_tog = 0;
+    $("#edit-basic-confirm").hide();
+    $("#edit-basic").click(function() {
+    	$("#edit-basic-confirm").toggle();	basic_tog ^= 1;
+    	if (basic_tog == 1)
+    		$("#patientForm input").prop("disabled", false);
+    	else 
+    		$("#patientForm input").prop("disabled", true);
+    });
+    
+    /*-------------------
+		Edit password
+	--------------------- */
+	$("#passwordSection").hide();
+    $("#edit-password").click(function() {
+    	$("#passwordSection").toggle();
+    });
+    
+    /*-------------------
+		Edit patient report
+	--------------------- */
+    var report_tog = 0;
+    $("#edit-report-confirm").hide();
+    $("#edit-report").click(function() {
+    	$("#edit-report-confirm").toggle();	report_tog ^= 1;
+    	if (report_tog == 1)
+    		$("#report textarea").prop("disabled", false);
+    	else 
+    		$("#report textarea").prop("disabled", true);
+    });
 })(jQuery);

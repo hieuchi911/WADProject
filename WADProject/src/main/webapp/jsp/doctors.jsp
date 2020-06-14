@@ -107,7 +107,7 @@
 
 										<table>
 			                                <tr>
-			                                    <td style="width: 60%">Gender</td>
+			                                    <td style="width: 50%">Gender</td>
 			                                    <td>${doctor.gender}</td>
 			                                </tr>
 			                                <tr>

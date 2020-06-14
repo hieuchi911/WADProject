@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
 <link rel="stylesheet" href="css/style.css" type="text/css">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css" type="text/css">
 <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -132,7 +132,7 @@
 	                <div class="col">
 	                    <div class="about-content">
 	                        <h4>About this website</h4><hr align="left" width="200px">
-	                        <h6>An online platform that offers distant examinations</h6>
+	                        <h6>An online platform that offers distant examinations</h6><br>
 	                        <p>Using this platform, patients can do online shopping for medicines or medical tools.
 	                        It amalgamates online shopping fuction of Lazada with appointment scheduling function of Grab,
 	                        which brings new experience to patients and doctors. <a href="#">Learn more</a></p>
