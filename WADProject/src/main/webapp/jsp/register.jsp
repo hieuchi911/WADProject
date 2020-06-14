@@ -90,6 +90,9 @@
 						<td></td>
 						<td><form:button class="form-control" id="register" name="register">Register</form:button></td>
 					</tr>
+					<tr>
+						<td colspan="2" style="font-style: italic; color: red;">${message}</td>
+					</tr>
 				</table>
 			</fieldset>
 		</form:form>

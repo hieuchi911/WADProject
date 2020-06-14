@@ -9,7 +9,7 @@
 <body>
 
 <form method="post" action="manager-doctor">
-<table>
+<table align="center">
 	<tr>
 		<th colspan="2">Doctor</th>
 	</tr>
@@ -47,9 +47,10 @@
 	</tr>
 </table>
 </form>
+<hr>
 
 <form method="post" action="manager-medicine">
-<table>
+<table align="center">
 	<tr>
 		<th colspan="2">Medicine</th>
 	</tr>
@@ -59,7 +60,7 @@
 	</tr>
 	<tr>
 		<td>Photo</td>
-		<td><input type="text" name="medicine-url"></td>
+		<td><input type="text" name="medicine-photo"></td>
 	</tr>
 	<tr>
 		<td>Manufacturer</td>
@@ -91,9 +92,10 @@
 	</tr>
 </table>
 </form>
+<hr>
 
 <form method="post" action="manager-tool">
-<table>
+<table align="center">
 	<tr>
 		<th colspan="2">Tool</th>
 	</tr>

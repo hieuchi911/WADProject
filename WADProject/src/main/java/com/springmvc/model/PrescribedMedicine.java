@@ -4,6 +4,7 @@ public class PrescribedMedicine extends Medicine {
 	private String prescriptionid;
 	private String medicineid;
 	private int amount;
+	private String dosage;
 	
 	public String getPrescriptionid() {
 		return this.prescriptionid;
@@ -24,5 +25,12 @@ public class PrescribedMedicine extends Medicine {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	
+	public String getDosage() {
+		return this.dosage;
+	}
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
 	}
 }

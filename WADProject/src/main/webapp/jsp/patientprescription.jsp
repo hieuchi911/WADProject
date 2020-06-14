@@ -122,6 +122,7 @@
 	                                        <tr>
 	                                            <th class="prescription__product">Medicine</th>
 	                                            <th>Quantity</th>
+	                                            <th>Dosage</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
@@ -132,6 +133,9 @@
 		                                            </td>
 		                                            <td class="prescription__cart__quantity">
 		                                                ${object.amount}
+		                                            </td>
+		                                            <td class="prescription__cart__quantity">
+		                                                ${object.dosage}
 		                                            </td>
 	                                        	</tr>
 											</c:forEach>

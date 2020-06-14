@@ -46,16 +46,20 @@ public class RegistrationController {
 	@RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
 	public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("user") User user) {
-
-		userService.register(user);
+		ModelAndView mav = new ModelAndView();
+		if (userService.register(user) == 0) {
+			mav.setViewName("register");
+			mav.addObject("patient", new Patient());
+			mav.addObject("message", "existing username");
+		} else {
+			Patient patient = new Patient();
+			
+			mav.setViewName("patientInfo");
+			mav.addObject("user", user);
+			mav.addObject("patient", patient);
+		}
 		
-		Patient patient = new Patient();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("patientInfo");
-		mv.addObject("user", user);
-		mv.addObject("patient", patient);
-		
-		return mv;
+		return mav;
 	}
 	
 	/* ---------------------------- continueRegistration --------------------------------------

@@ -108,6 +108,7 @@
 	                                	<div class="presmed-info-input">
 	                                		<form action="add-medicine-${object.id}" method="post">
 				                				<input type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
+				                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="40">
 				                				<input type="submit" name="submit" value="Add"/>
 				                			</form>
 		                				</div>
@@ -170,6 +171,7 @@
 	                                        <tr>
 	                                            <th class="prescription__product">Medicine</th>
 	                                            <th>Quantity</th>
+	                                            <th>Dosage</th>
 	                                            <th></th>
 	                                        </tr>
 	                                    </thead>
@@ -181,6 +183,9 @@
 		                                            </td>
 		                                            <td class="prescription__cart__quantity">
 		                                                ${object.amount}
+		                                            </td>
+		                                            <td class="prescription__cart__quantity">
+		                                                ${object.dosage}
 		                                            </td>
 		                                            <td class="prescription__cart__item__close">
 		                                                <form action="removemed-${object.id}" method="get">

@@ -115,6 +115,7 @@ public class PrescriptionController {
 		HttpSession sess = request.getSession();
 		Prescription pres = (Prescription) sess.getAttribute("prescription");
 		String amount = request.getParameter("amount");
+		String dosage = request.getParameter("dosage");
 		
 		String link = "redirect:/prescribe-" + pres.getPatient();
 		ModelAndView mav = new ModelAndView(link);
@@ -127,12 +128,13 @@ public class PrescriptionController {
 			if (items.get(i).getId().equals(id)) {
 				isPresent = true;
 				items.get(i).setAmount(items.get(i).getAmount() + Integer.parseInt(amount));
+				items.get(i).setDosage(dosage);
 				break;
 			}
 		}
 		
 		if (!isPresent) {
-			items.add(prescriptionService.getPrescribedMedicine(id, amount));
+			items.add(prescriptionService.getPrescribedMedicine(id, amount, dosage));
 		}
 		
 		prescription.setObjects(items);

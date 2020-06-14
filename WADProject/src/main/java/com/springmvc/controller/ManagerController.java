@@ -29,8 +29,21 @@ public class ManagerController {
 	 */
 	@RequestMapping(value = "/manager-doctor", method = RequestMethod.POST)
 	public ModelAndView addDoctor(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav;
-		return null;
+		ModelAndView mav = new ModelAndView("manager");
+		
+		String[] att = new String[8];
+		
+		att[0] = request.getParameter("doctor-username");
+		att[1] = request.getParameter("doctor-password");
+		att[2] = "doctor";
+		att[3] = request.getParameter("doctor-name");
+		att[4] = request.getParameter("doctor-gender");
+		att[5] = request.getParameter("doctor-rank");
+		att[6] = request.getParameter("doctor-field");
+		att[7] = request.getParameter("doctor-description");
+		managerService.addDoctor(att);
+		
+		return mav;
 	}
 	
 	/* ---------------------------- addMedicine --------------------------------------
@@ -38,8 +51,21 @@ public class ManagerController {
 	 */
 	@RequestMapping(value = "/manager-medicine", method = RequestMethod.POST)
 	public ModelAndView addMedicine(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav;
-		return null;
+		ModelAndView mav = new ModelAndView("manager");
+		
+		String[] att = new String[8];
+		
+		att[0] = request.getParameter("medicine-name");
+		att[1] = request.getParameter("medicine-photo");
+		att[2] = request.getParameter("medicine-manufacturer");
+		att[3] = request.getParameter("medicine-description");
+		att[4] = request.getParameter("medicine-price");
+		att[5] = request.getParameter("medicine-instruction");
+		att[6] = request.getParameter("medicine-ingredients");
+		att[7] = request.getParameter("medicine-sideeffects");
+		managerService.addMedicine(att);
+		
+		return mav;
 	}
 	
 	/* ---------------------------- addTool --------------------------------------
@@ -47,7 +73,18 @@ public class ManagerController {
 	 */
 	@RequestMapping(value = "/manager-tool", method = RequestMethod.POST)
 	public ModelAndView addTool(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav;
-		return null;
+		ModelAndView mav = new ModelAndView("manager");
+		
+		String[] att = new String[6];
+		
+		att[0] = request.getParameter("tool-name");
+		att[1] = request.getParameter("tool-photo");
+		att[2] = request.getParameter("tool-manufacturer");
+		att[3] = request.getParameter("tool-description");
+		att[4] = request.getParameter("tool-price");
+		att[5] = request.getParameter("tool-usage");
+		managerService.addMedicine(att);
+		
+		return mav;
 	}
 }

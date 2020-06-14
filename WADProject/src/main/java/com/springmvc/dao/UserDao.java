@@ -28,8 +28,15 @@ public class UserDao {
 	JdbcTemplate jdbcTemplate;
 
 	public int register(User user) {
-		String sql = "INSERT INTO user VALUES(?,?,?);";
-
+		// Checking existence
+		String sql = "SELECT * FROM user WHERE username ='" + user.getUsername() + "';";
+		List<User> users = jdbcTemplate.query(sql, new UserMapper());
+		if (users.size() > 0) {
+			return 0;
+		}
+		
+		// Add new user
+		sql = "INSERT INTO user VALUES(?,?,?);";
 		return jdbcTemplate.update(sql, new Object[] { user.getUsername(), user.getPassword(), user.getUsertype() });
 	}
 

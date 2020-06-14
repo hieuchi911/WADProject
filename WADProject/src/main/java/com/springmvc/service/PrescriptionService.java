@@ -27,9 +27,10 @@ public class PrescriptionService {
 		return pres;
 	}
 	
-	public PrescribedMedicine getPrescribedMedicine(String id, String amount) {
+	public PrescribedMedicine getPrescribedMedicine(String id, String amount, String dosage) {
 		PrescribedMedicine med = prescriptionDao.getPrescribedMedicine(id);
 		med.setAmount(Integer.parseInt(amount));
+		med.setDosage(dosage);
 		return med;
 	}
 	
