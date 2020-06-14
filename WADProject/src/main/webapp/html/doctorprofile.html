@@ -21,8 +21,6 @@
 </head>
 <body>
 	<!--================Header Menu Area =================-->
-	<!-- if patients -->
-		
 	<header class="header_area">
 		<div class="top_menu row m0">
 			<div class="container">
@@ -43,7 +41,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light">
 				<div class="container">
@@ -61,91 +58,118 @@
 					<div class="collapse navbar-collapse offset"
 						id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="profile">My profile</a></li>
-							<li class="nav-item"><a class="nav-link" href="shop">Shop now</a></li>
-							<li class="nav-item"><a class="nav-link" href="contact">Contact us</a></li>
-							<li class="nav-item"><a class="nav-link" href="logout">Log out</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="homepage">Home</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="patientprofile">My profile</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact">Contact
+									us</a></li>
+							<li class="nav-item"><a class="nav-link" href="logout">Log
+									out</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 	</header>
+	<!--================Header Menu Area =================-->
 
-    <!-- Products body begins -->
-    <section class="appointment extrapad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-5">
-			        <div class="sidebar">
-			                <div class="searchbar">
-			                	<form method="get" action="searchitem">
-			                        <input type="text" placeholder="Search.." name="query" size="20">
-			                        <button type="submit">Submit</button>
-			                    </form>
-			                </div>
-			        </div>
-                </div>
-                <div class="col-lg-9 col-md-7">
-					<div class="row">
-						<c:forEach items="${appointments.objects}" var="appointment" varStatus="tagStatus">
-							<c:if test="${appointment.from_to == 'none'}">
-								<div class="appointment-card container">
-									<div class="row">
-										<div class="col-lg-2">
-											<img
-												src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGjTgg70t-gQ0i66piGNEeoHVYff0uopb-3cXeDUH6GoMgpq7x&usqp=CAU"
-												width="50%">
-										</div>
-										<div class="col-lg-10"><br>
-											<h3>Patient ${appointment.patient}</h3>
-											<div class="time-info">
-												<h5>${appointment.from_to}</h5>
-											</div>
-											<hr>
+	<!--================Home Banner Area =================-->
 
-											<table>
-												<tr>
-													<td style="width: 50%;">Allergy</td>
-													<td>${appointment.illness_description.allergy}</td>
-												</tr>
-												<tr>
-													<td>Illness history</td>
-													<td>${appointment.illness_description.background}</td>
-												</tr>
-												<tr>
-													<td>Well-being</td>
-													<td>${appointment.illness_description.current}</td>
-												</tr>
-											</table>
-											<br>
-											<table>
-												<tr>
-													<td>
-														<form action="${appointment.patient}-acceptRequest" method="get">
-															<button class="left-button">Accept</button>
-														</form>
-													</td>
-													<td>
-														<form action="${appointment.patient}-rejectRequest" method="get">
-															<button class="right-button"><span style="margin-left: 20px;">Reject</span></button>
-														</form>
-													</td>
-												</tr>
-											</table>
-										</div>
-									</div>
-								<hr>
-							</c:if>
-						</c:forEach>
+	<section class="banner-area d-flex align-items-center"
+		style="background-image: url(https://image.freepik.com/free-photo/blur-hospital_1203-7957.jpg);">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8"></div>
+			</div>
+		</div>
+	</section>
+
+	<!--================End Home Banner Area =================-->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3" style="padding: 25px;">
+				<table align="center">
+					<tr>
+						<td><a href="patientRecords">Patients</a></td>
+					</tr>
+
+					<tr>
+						<td><a href="accepted-requests">Appointments</a></td>
+					</tr>
+
+					<tr>
+						<td><a href="appointments">Appointment requests</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col">
+				<div class="row">
+					<div class="col card-team__body text-center">
+						<h3>
+							<a href="#">Personal information</a><hr width="200px">
+						</h3>
+						<form:form id="patientForm" name="patientForm"
+							modelAttribute="editUser" action="editPatient">
+							<form:input path="username" name="username"
+								value="${user.username}" disabled="true"></form:input>
+							<div class="row" style="height: 50px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Name</div>
+								<div class="col-5 form-control">
+									${user.name}
+								</div>
+								<div class="col"></div>
+							</div>
+							
+							<div class="row" style="height: 50px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Gender</div>
+								<div class="col-5 form-control">
+									${user.gender}
+								</div>
+								<div class="col"></div>
+							</div>
+							
+							<div class="row" style="height: 50px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Academic Rank</div>
+								<div class="col-5 form-control">
+									${user.rank}
+								</div>
+								<div class="col"></div>
+							</div>
+							
+							<div class="row" style="height: 50px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Specialized Field</div>
+								<div class="col-5 form-control">
+									${user.field}
+								</div>
+								<div class="col"></div>
+							</div>
+							
+							<div class="row" style="height: 280px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Doctor Description</div>
+								<div class="col-5 form-control" style="height: 250px">
+									${user.description}
+								</div>
+								<div class="col"></div>
+							</div>
+						</form:form>
 					</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Products body ends -->
-
+				</div>
+			</div>
+			<div class="col-1"></div>
+		</div>
+	</div>
+	<!--  End of row -->
+	<!--================ End of main page: edit profile, edit symptom report, edit password =================-->
+	
+	
+	
 	<footer class="footer-area area-padding-top">
 		<div class="container">
 			<div class="row">
@@ -167,7 +191,12 @@
 			</div>
 		</div>
 	</footer>
-	
+
+
+
+
+
+
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

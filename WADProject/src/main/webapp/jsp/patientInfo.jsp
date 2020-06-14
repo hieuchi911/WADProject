@@ -8,15 +8,13 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
 <!-- main css -->
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
@@ -35,6 +33,15 @@
 						<i class="ti-location-pin"></i>Find our Location
 					</span>
 				</div>
+				<div class="float-right">
+					<ul class="list header_social">
+						<li><a href="#"><i class="ti-facebook"></i></a></li>
+						<li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						<li><a href="#"><i class="ti-linkedin"></i></a></li>
+						<li><a href="#"><i class="ti-skype"></i></a></li>
+						<li><a href="#"><i class="ti-vimeo-alt"></i></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		
@@ -51,17 +58,6 @@
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
-							<li class="nav-item"><a class="nav-link" href="profile">My profile</a></li>
-							<li class="nav-item"><a class="nav-link" href="shop">Shop now</a></li>
-							<li class="nav-item"><a class="nav-link" href="contact">Contact us</a></li>
-							<li class="nav-item"><a class="nav-link" href="logout">Log out</a></li>
-						</ul>
-					</div>
 				</div>
 			</nav>
 		</div>
@@ -77,7 +73,7 @@
 					</tr>
 					<tr>
 						<td><form:label path="name">Full Name</form:label></td>
-						<td><form:input class="form-control" path="name" name="name" id="name" /></td>
+						<td style="width:70%"><form:input class="form-control" path="name" name="name" id="name" /></td>
 					</tr>
 					<tr>
 						<td><form:label path="gender">Gender</form:label></td>
@@ -97,7 +93,7 @@
 		            </tr>
 		            <tr>
 						<td></td>
-						<td><form:button id="register" name="register">Register</form:button></td>
+						<td><form:button class="form-control" id="register" name="register">Register</form:button></td>
 					</tr>
 				</table>
 			</fieldset>
@@ -128,20 +124,11 @@
 		</div>
 	</footer>
 	
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

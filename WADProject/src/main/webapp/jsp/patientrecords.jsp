@@ -9,20 +9,18 @@
 <meta charset="utf-8">
 <meta name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
 <!-- main css -->
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
 
-<link rel="stylesheet" href="css/style.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -99,34 +97,33 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="row">
                         <c:forEach items="${doctors.objects}" var="doctor" varStatus="tagStatus">
-                                <div class="auser-card container">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <img
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGjTgg70t-gQ0i66piGNEeoHVYff0uopb-3cXeDUH6GoMgpq7x&usqp=CAU"
-                                                width="50%">
-                                        </div>
-                                        <div class="col-lg-10"><br>
-                                            <h3>${prescription.patient}</h3>
-                                            <hr>
-
-                                            <table>
-                                                <tr>
-                                                    <td>Diagnosis</td>
-                                                    <td>${prescription.diagnosis}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Next appointment</td>
-                                                    <td>${prescription.from_to}</td>
-                                                </tr>
-                                            </table>
-                                            <br>
-                                            <!-- <form method="get" action="">  -->
-                                                <p><button>Prescription Details</button></p>
-                                            <!-- </form>  -->
-                                        </div>
-                                    </div>
-                                <hr>
+                             <div class="auser-card container">
+                                 <div class="row">
+                                     <div class="col-lg-2">
+                                         <img
+                                             src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGjTgg70t-gQ0i66piGNEeoHVYff0uopb-3cXeDUH6GoMgpq7x&usqp=CAU"
+                                             width="50%">
+                                     </div>
+                                     <div class="col-lg-10"><br>
+                                         <h3>${prescription.patient}</h3>
+                                         <hr>
+                                         <table>
+                                             <tr>
+                                                 <td>Diagnosis</td>
+                                                 <td>${prescription.diagnosis}</td>
+                                             </tr>
+                                             <tr>
+                                                 <td>Next appointment</td>
+                                                 <td>${prescription.from_to}</td>
+                                             </tr>
+                                         </table>
+                                         <br>
+                                         <form method="get" action="take-${prescription.doctor}">
+                                             <p><button>Prescription Details</button></p>
+                                         </form>
+                                     </div>
+                                 </div>
+                             </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -157,20 +154,11 @@
         </div>
     </footer>
     
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/popper.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/stellar.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

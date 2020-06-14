@@ -7,20 +7,20 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
-<title>Welcome</title>
 </head>
 <body>
 	<!--================Header Menu Area =================-->
@@ -71,6 +71,9 @@
 			<fieldset>
 				<table align="center">
 					<tr>
+						<td colspan="2" style="text-align: center; font-style: italic; color: red;">${message}<hr></td>
+					</tr>
+					<tr>
 						<td><form:label path="username">Username </form:label></td>
 						<td style="width:70%"><form:input class="form-control" path="username" name="username" id="username" /></td>
 					</tr>
@@ -84,11 +87,12 @@
 							<label for="remember" class="small-text">Remember me</label></td>
 					</tr>
 					<tr>
-						<td align="left"><form:button class="form-control" id="login" name="login">Login</form:button></td>
-						<td><a href="register">Register</a></td>
+						<td></td>
+						<td><form:button class="form-control" id="login" name="login">Login</form:button>
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" style="font-style: italic; color: red;">${message}</td>
+						<td colspan="2" style="text-align: center;"><br><br><hr>Have no account yet? <span><a href="register">Click here!</a></span></td>
 					</tr>
 				</table>
 			</fieldset>
@@ -119,20 +123,11 @@
 		</div>
 	</footer>
 	
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

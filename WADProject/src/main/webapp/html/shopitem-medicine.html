@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +103,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                     	<form:form modelAttribute="cartobject" action="addItem2Cart" method="post">
-                        	<h3>${object.name} <a style="color: red;" href="#" class="fa fa-heart fa-1x"><span class="icon_heart_alt"></span></a></h3>
+                            <h3>${object.name} <a style="color: red;" href="#" class="fa fa-heart fa-1x"><span class="icon_heart_alt"></span></a></h3>
                         	<form:hidden path="objectid" value="${object.id}"/>
 
 	                        <div class="product__details__price">${object.price}</div>
@@ -149,8 +145,16 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Usage</h6>
+                                    <h6>Product Indication</h6>
                                     <p>${object.usage}.</p>
+                                </div>
+                                <div class="product__details__tab__desc">
+                                    <h6>Product Ingredients</h6>
+                                    <p>${object.ingredients}.</p>
+                                </div>
+                                <div class="product__details__tab__desc">
+                                    <h6>Adverse effects</h6>
+                                    <p>${object.sideeffects}.</p>
                                 </div>
                             </div>
                         </div>

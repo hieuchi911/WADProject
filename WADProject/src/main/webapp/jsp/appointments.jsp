@@ -8,25 +8,20 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
-
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<title>Welcome</title>
 </head>
 <body>
 	<!--================Header Menu Area =================-->
@@ -107,7 +102,7 @@
 												src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGjTgg70t-gQ0i66piGNEeoHVYff0uopb-3cXeDUH6GoMgpq7x&usqp=CAU"
 												width="50%">
 										</div>
-										<div class="col-lg-8"><br>
+										<div class="col-lg-10"><br>
 											<h3>Patient ${appointment.patient}</h3>
 											<div class="time-info">
 												<h5>${appointment.from_to}</h5>
@@ -145,7 +140,7 @@
 											</table>
 										</div>
 									</div>
-								<hr>
+								</div>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -177,20 +172,11 @@
 		</div>
 	</footer>
 	
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

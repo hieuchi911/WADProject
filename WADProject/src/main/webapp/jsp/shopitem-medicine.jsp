@@ -3,34 +3,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport"
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Shopping</title>
 
-    <link rel="icon" href="img/favicon.png" type="image/png">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendors/animate-css/animate.css">
-    <!-- main css -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/responsive.css">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<title>Medcare Medical</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/themify-icons.css">
+<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <!--================Header Menu Area =================-->
@@ -116,7 +107,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
                     	<form:form modelAttribute="cartobject" action="addItem2Cart" method="post">
-                        	<h3>${object.name}</h3>
+                            <h3>${object.name} <a style="color: red;" href="#" class="fa fa-heart fa-1x"><span class="icon_heart_alt"></span></a></h3>
                         	<form:hidden path="objectid" value="${object.id}"/>
 
 	                        <div class="product__details__price">${object.price}</div>
@@ -143,7 +134,6 @@
 	                                    <a href="#"><i class="fa fa-pinterest"></i></a>
 	                                </div>
 	                            </li>
-	                            <li><a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a></li>
 	                        </ul>
                         </form:form>
                     </div>
@@ -202,24 +192,11 @@
         </div>
     </footer>
     
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/stellar.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/theme.js"></script>
-    <!-- Js Plugins -->
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,27 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link href="css/mainDeco.css" rel="stylesheet" />
-<title>Welcome</title>
 </head>
 <body>
 	<!--================Header Menu Area =================-->
@@ -138,7 +137,7 @@
 							
 							<div class="row" style="height: 50px">
 								<div class="col-1"></div>
-								<div class="col-3" style="text-align: right">Rank</div>
+								<div class="col-3" style="text-align: right">Academic Rank</div>
 								<div class="col-5 form-control">
 									${user.rank}
 								</div>
@@ -147,17 +146,17 @@
 							
 							<div class="row" style="height: 50px">
 								<div class="col-1"></div>
-								<div class="col-3" style="text-align: right">Field</div>
+								<div class="col-3" style="text-align: right">Specialized Field</div>
 								<div class="col-5 form-control">
 									${user.field}
 								</div>
 								<div class="col"></div>
 							</div>
 							
-							<div class="row" style="height: 50px">
+							<div class="row" style="height: 280px">
 								<div class="col-1"></div>
-								<div class="col-3" style="text-align: right">Description</div>
-								<div class="col-5 form-control">
+								<div class="col-3" style="text-align: right">Doctor Description</div>
+								<div class="col-5 form-control" style="height: 250px">
 									${user.description}
 								</div>
 								<div class="col"></div>
@@ -174,47 +173,10 @@
 	
 	
 	
-	<!-- start footer Area -->
 	<footer class="footer-area area-padding-top">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Top Products</h4>
-					<ul>
-						<li><a href="#">Managed Website</a></li>
-						<li><a href="#">Manage Reputation</a></li>
-						<li><a href="#">Power Tools</a></li>
-						<li><a href="#">Marketing Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Quick Links</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Features</h4>
-					<ul>
-						<li><a href="#">Jobs</a></li>
-						<li><a href="#">Brand Assets</a></li>
-						<li><a href="#">Investor Relations</a></li>
-						<li><a href="#">Terms of Service</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-2 col-sm-6 single-footer-widget">
-					<h4>Resources</h4>
-					<ul>
-						<li><a href="#">Guides</a></li>
-						<li><a href="#">Research</a></li>
-						<li><a href="#">Experts</a></li>
-						<li><a href="#">Agencies</a></li>
-					</ul>
-				</div>
-				<div class="col-lg-4 col-md-6 single-footer-widget">
+				<div class="col-lg-12 col-md-12 single-footer-widget">
 					<h4>About this website</h4>
 					<p>This is a project for the course Web application development</p>
 				</div>
@@ -232,27 +194,17 @@
 			</div>
 		</div>
 	</footer>
-	<!-- End footer Area -->
 
 
 
 
 
 
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

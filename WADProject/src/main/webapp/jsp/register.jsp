@@ -7,16 +7,14 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
 <!-- main css -->
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
@@ -71,6 +69,9 @@
 			<fieldset>
 				<table align="center">
 					<tr>
+						<td colspan="2" style="text-align: center; font-style: italic; color: red;">${message}<hr></td>
+					</tr>
+					<tr>
 						<td><form:label path="username">Username</form:label></td>
 						<td><form:input class="form-control" path="username" name="username" id="username" /></td>
 					</tr>
@@ -89,9 +90,6 @@
 					<tr>
 						<td></td>
 						<td><form:button class="form-control" id="register" name="register">Register</form:button></td>
-					</tr>
-					<tr>
-						<td colspan="2" style="font-style: italic; color: red;">${message}</td>
 					</tr>
 				</table>
 			</fieldset>
@@ -122,20 +120,11 @@
 		</div>
 	</footer>
 	
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>

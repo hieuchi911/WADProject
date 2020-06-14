@@ -47,6 +47,6 @@ public class Prescription {
 		return this.from_to;
 	}
 	public void setFrom_to(String duration) {
-		this.from_to = duration ;
+		this.from_to = duration;
 	}
 }

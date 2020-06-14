@@ -1,24 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="img/favicon.png" type="image/png">
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <title>Medcare Medical</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet" href="vendors/animate-css/animate.css">
 <!-- main css -->
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/responsive.css">
 <title>Welcome</title>
@@ -108,8 +106,8 @@
 	                                	<div class="presmed-info-input">
 	                                		<form action="add-medicine-${object.id}" method="post">
 				                				<input type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
-				                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="40">
-				                				<input type="submit" name="submit" value="Add"/>
+				                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="s0">
+				                				<input type="submit" class="form-control" name="submit" value="Add"/>
 				                			</form>
 		                				</div>
 	                                </div>
@@ -143,25 +141,36 @@
 	                <div class="prescription-cart">
 	                    <div class="row">
 	                        <div class="col-lg-4">
-	                            <div class="prescription-info-input">
-	                            <form action="confirm-prescription" method="get">
-	                                <table>
-	                                    <thead>
-	                                        <tr>
-	                                            <th>Dianosis</th>
-	                                        </tr>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                            <td><textarea class="form-control" id="diagnosis" name="diagnosis" rows="3" cols="48">It was a dark and stormy night...
-	                                            </textarea>
-	                                            </td>         
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
-	                                <h6>Until <input type="text" class="form-control" placeholder="date..." name="from-to" size="32"></h6>
-	                                <button class="form-control primary-btn cart-btn cart-btn-right">Confirm</button>
-	                            </form>
+	                            <div class="prescription__cart__table">
+		                            <form action="confirm-prescription" method="get">
+		                                <table>
+		                                    <thead>
+		                                        <tr>
+		                                            <th style="text-align: left;">Dianosis</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                        <tr>
+		                                            <td><textarea class="form-control" id="diagnosis" name="diagnosis" rows="3" cols="48">It was a dark and stormy night...
+		                                            </textarea>
+		                                            </td>         
+		                                        </tr>
+		                                    </tbody>
+		                                </table>
+		                                <br>
+		                                <table>
+		                                    <thead>
+		                                        <tr>
+		                                            <th style="text-align: left; width: 60%;">Until</th>
+		                                            <td><input type="text" class="form-control" placeholder="date..." name="from-to"></td>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                    </tbody>
+		                                </table>
+		                                <h6> </h6>
+		                                <button class="form-control">Confirm</button>
+		                            </form>
 	                            </div>
 	                        </div>
 	                        <div class="col-lg-8">
@@ -170,8 +179,8 @@
 	                                    <thead>
 	                                        <tr>
 	                                            <th class="prescription__product">Medicine</th>
-	                                            <th>Quantity</th>
-	                                            <th>Dosage</th>
+	                                            <th class="prescription__product">Quantity</th>
+	                                            <th class="prescription__product">Dosage</th>
 	                                            <th></th>
 	                                        </tr>
 	                                    </thead>
@@ -181,10 +190,10 @@
 		                                            <td class="prescription__cart__item">
 		                                                <h5>${object.name}</h5>
 		                                            </td>
-		                                            <td class="prescription__cart__quantity">
+		                                            <td class="prescription__cart__item">
 		                                                ${object.amount}
 		                                            </td>
-		                                            <td class="prescription__cart__quantity">
+		                                            <td class="prescription__cart__item">
 		                                                ${object.dosage}
 		                                            </td>
 		                                            <td class="prescription__cart__item__close">
@@ -228,20 +237,11 @@
 		</div>
 	</footer>
 	
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/popper.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/stellar.js"></script>
-	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/contact.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="js/jquery.validate.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="js/main.js"></script>
 </body>
 </html>
