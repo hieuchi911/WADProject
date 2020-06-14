@@ -117,15 +117,15 @@
 											<table>
 												<tr>
 													<td style="width: 50%;">Allergy</td>
-													<td>${appointment.illness_description}</td>
+													<td>${appointment.illness_description.allergy}</td>
 												</tr>
 												<tr>
 													<td>Illness history</td>
-													<td>${appointment.illness_description}</td>
+													<td>${appointment.illness_description.background}</td>
 												</tr>
 												<tr>
 													<td>Well-being</td>
-													<td>${appointment.illness_description}</td>
+													<td>${appointment.illness_description.current}</td>
 												</tr>
 											</table>
 											<br>

@@ -19,6 +19,8 @@
 	<bean id="appointmentDao" class="com.springmvc.dao.AppointmentDao" />
 	<bean id="prescriptionDao" class="com.springmvc.dao.PrescriptionDao" />
 	<bean id="prescriptionService" class="com.springmvc.service.PrescriptionService" />
+	<bean id="managerDao" class="com.springmvc.dao.ManagerDao" />
+	<bean id="managerService" class="com.springmvc.service.ManagerService" />
 	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="datasource" />

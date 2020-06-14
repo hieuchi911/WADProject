@@ -12,6 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.springmvc.model.CartObject;
+import com.springmvc.model.MedicalTool;
+import com.springmvc.model.Medicine;
 import com.springmvc.model.ShopObject;
 
 /**
@@ -33,7 +35,10 @@ public class ShoppingDao {
 	}
 	
 	public List <ShopObject> searchQuery(String key) {
-		String sql = String.format("SELECT * FROM shopobject WHERE name LIKE '%s%' OR category LIKE '%s%' OR manufacturer LIKE '%s%';", key, key, key);
+		String sql = "SELECT * FROM shopobject WHERE "
+                				+ "name LIKE \'%" + key + "%\' OR "
+                				+ "category LIKE \'%" + key + "%\' OR "
+                				+ "manufacturer LIKE \'%" + key + "%\';";
 		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
 		
 		return objects;
@@ -51,9 +56,38 @@ public class ShoppingDao {
 		
 		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
 		
-		return objects.size() > 0 ? objects.get(0) : null;	
+		ShopObject object = objects.get(0);
+		if (objects.size() == 0) return null;
+		
+		if (object.getCategory().equals("medicine")) {
+			object = getMedicine(object_id);
+		} else if (object.getCategory().equals("tool")) {
+			object = getTool(object_id);
+		}
+		
+		return object;
 	}
 
+	private Medicine getMedicine(String object_id) {
+		String sql = "SELECT * FROM medicine "
+					+ "INNER JOIN shopobject ON medicine.medicine_id = shopobject.object_id "
+					+ "WHERE object_id = '" + object_id + "';";
+		List<Medicine> objects = jdbcTemplate.query(sql, new MedicineObjectMapper());
+		if (objects.size() == 0) return null;
+		
+		return objects.get(0);
+	}
+
+	private ShopObject getTool(String object_id) {
+		String sql = "SELECT * FROM medicaltool "
+				+ "INNER JOIN shopobject ON medicaltool.tool_id = shopobject.object_id "
+				+ "WHERE object_id = '" + object_id + "';";
+		List<MedicalTool> objects = jdbcTemplate.query(sql, new ToolObjectMapper());
+		if (objects.size() == 0) return null;
+		
+		return objects.get(0);
+	}
+	
 	public List<CartObject> populate(List<CartObject> objects) {
 		List <CartObject> result = new ArrayList<CartObject>();
 		
@@ -83,6 +117,42 @@ class ShopObjectMapper implements RowMapper<ShopObject> {
 		shopobject.setManufacturer(rs.getString("manufacturer"));
 		shopobject.setDescription(rs.getString("description"));
 		shopobject.setPrice(Double.parseDouble(rs.getString("price")));
+
+		return shopobject;
+	}
+}
+
+class MedicineObjectMapper implements RowMapper<Medicine> {
+	public Medicine mapRow(ResultSet rs, int arg1) throws SQLException {
+		Medicine shopobject = new Medicine();
+		
+		shopobject.setId(rs.getString("object_id"));
+		shopobject.setName(rs.getString("name"));
+		shopobject.setCategory(rs.getString("category"));
+		shopobject.setUrl(rs.getString("photo_url"));
+		shopobject.setManufacturer(rs.getString("manufacturer"));
+		shopobject.setDescription(rs.getString("description"));
+		shopobject.setPrice(Double.parseDouble(rs.getString("price")));
+		shopobject.setUsage(rs.getString("description"));
+		shopobject.setIngredients(rs.getString("ingredients"));
+		shopobject.setSideeffects(rs.getString("side_effects"));
+
+		return shopobject;
+	}
+}
+
+class ToolObjectMapper implements RowMapper<MedicalTool> {
+	public MedicalTool mapRow(ResultSet rs, int arg1) throws SQLException {
+		MedicalTool shopobject = new MedicalTool();
+		
+		shopobject.setId(rs.getString("object_id"));
+		shopobject.setName(rs.getString("name"));
+		shopobject.setCategory(rs.getString("category"));
+		shopobject.setUrl(rs.getString("photo_url"));
+		shopobject.setManufacturer(rs.getString("manufacturer"));
+		shopobject.setDescription(rs.getString("description"));
+		shopobject.setPrice(Double.parseDouble(rs.getString("price")));
+		shopobject.setUsage(rs.getString("usage"));
 
 		return shopobject;
 	}

@@ -116,6 +116,8 @@ public class LoginController {
 					mav = new ModelAndView("homepage");
 					user = userService.profileDoctor(user);
 					model.addAttribute("user", user);
+				} else {
+					mav = new ModelAndView("manager");
 				}
 			}
 //			mav = new ModelAndView("redirect:/profile");

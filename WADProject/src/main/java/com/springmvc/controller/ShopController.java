@@ -76,12 +76,17 @@ public class ShopController {
 	 */
 	@RequestMapping(value = "/shopitem-{object_id}", method = RequestMethod.GET)
 	public ModelAndView showItem(@PathVariable String object_id) {
-		ModelAndView mav = new ModelAndView("shopitem");
-		
 		ShopObject object = shopService.getShopObject(object_id);
-		mav.addObject("object", object);
-		mav.addObject("cartobject", new CartObject());
 		
+		ModelAndView mav = null;
+		if (object.getCategory().equals("medicine")) {
+			mav = new ModelAndView("shopitem-medicine");	
+		} else if (object.getCategory().equals("tool")) {
+			mav = new ModelAndView("shopitem-tool");
+		}
+		
+		mav.addObject("object", object);		
+		mav.addObject("cartobject", new CartObject());
 		return mav;
 	}
 	
@@ -190,9 +195,9 @@ public class ShopController {
 	 */
 	@RequestMapping(value="/searchitem", method = RequestMethod.GET)
 	public ModelAndView searchItem(HttpServletRequest request, HttpServletResponse response) {
-		String key = request.getParameter("query");
-		ModelAndView mav = new ModelAndView("searchItems");
+		ModelAndView mav = new ModelAndView("shop");
 		
+		String key = request.getParameter("query");
 		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
 		objects.setObjects(shopService.search(key));
 		

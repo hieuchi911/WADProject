@@ -106,24 +106,24 @@ public class PatientController {
 		
 		ModelAndView mav = null;
 		if (user != null) {
-			
 			Login login = new Login();
 			login.setUsername(user.getUsername());
 			login.setPassword(request.getParameter("oldpw"));
 			
+			mav = new ModelAndView("redirect:/profile");
 			if(userService.validateUser(login) != null) {
 				if (request.getParameter("newpw").equals(request.getParameter("newpwCf"))) {
 					user.setPassword(request.getParameter("newpw"));
 					user.setUsertype("patient");
 					
-					userService.register(user);
-					
-					mav = new ModelAndView("patientprofile");
+					userService.changePassword(user);		
+					mav.addObject("message", "Success!!");
 				}
 				else {
-					mav = new ModelAndView("editpassword");
 					mav.addObject("message", "Passwords conflicts!!");
-			}
+				}
+			} else {
+				mav.addObject("message", "Wrong password!!");
 			}
 		}
 		return mav;

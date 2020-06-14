@@ -98,6 +98,12 @@ public class UserDao {
 		jdbcTemplate.update(sql);
 	}
 
+	public void changePassword(User user) {
+		String sql = "UPDATE user SET password='" + user.getPassword() + "' "
+					+ "WHERE username='" + user.getUsername() + "';";
+		jdbcTemplate.update(sql);		
+	}
+
 }
 
 class UserMapper implements RowMapper<User> {

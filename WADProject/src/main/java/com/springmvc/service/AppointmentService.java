@@ -29,12 +29,13 @@ public class AppointmentService {
 	
 	public Appointment computeTime(String doctor, Patient patient) {
 		List<String> from_to = appointmentDao.getFromTo(doctor);
+		
 		// Not consider existing appointments, this is just plain computation for a proper from_to
 		int appointment_hour = 0;
 		int appointment_shift = 0;
 		int hour = LocalDateTime.now().getHour();
 		int minute = LocalDateTime.now().getMinute();
-		if(hour < 7 || hour > 17) {		// if making appointment at non-working time, then set appointment time as the first shift in a day
+		if(hour < 7 || hour > 17 || (hour == 17 && minute > 40)) {		// if making appointment at non-working time, then set appointment time as the first shift in a day
 			appointment_hour = 7;
 			appointment_shift = 1;
 		} else {

@@ -52,4 +52,8 @@ public class UserService {
 	public void updatePatient(Patient editUser) {
 		userDao.updatePatient(editUser);
 	}
+
+	public void changePassword(User user) {
+		userDao.changePassword(user);
+	}
 }
