@@ -129,7 +129,8 @@ class PrescribedMedicineMapper implements RowMapper<PrescribedMedicine> {
 		med.setIngredients(rs.getString("side_effects"));
 		if (rs.getString("amount") != null && rs.getString("amount").length() > 0)
 			med.setAmount(Integer.parseInt(rs.getString("amount")));
-		
+		if (rs.getString("dosage") != null && rs.getString("dosage").length() > 0)
+			med.setDosage(rs.getString("dosage"));
 		return med;
 	}
 }
