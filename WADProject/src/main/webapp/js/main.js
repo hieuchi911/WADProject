@@ -51,7 +51,7 @@ $(document).ready(function(){
 	--------------------- */
 	$("#passwordSection").hide();
     $("#edit-password").click(function() {
-    	$("#passwordSection").toggle();
+    	$("#passwordSection").slideToggle("fast");
     });
     
     /*-------------------

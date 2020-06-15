@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css" type="text/css">
+<link rel="stylesheet" href="css/frame.css" type="text/css">
 <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -52,7 +52,7 @@
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<a class="navbar-brand logo_h" href="index"><img
-						src="img/logo.png" alt=""></a>
+						src="images/misc/logo.png" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"

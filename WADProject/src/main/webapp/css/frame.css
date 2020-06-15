@@ -315,7 +315,7 @@ ul {
   top: 80px; }
 
 .feature-section {
-  background: url("../img/banner/pattern_bg.jpg") no-repeat center;
+  background: url("../images/misc/banner/pattern_bg.jpg") no-repeat center;
   background-size: cover;
   padding: 60px 0; }
   @media (max-width: 767px) {
@@ -369,7 +369,7 @@ ul {
 /* 5. Banner */
 .banner-area {
   min-height: 800px;
-  background-image: url("../img/banner/home-banner-01.jpg");
+  background: url("../images/misc/banner/home-banner-01.jpg") no-repeat center;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -410,7 +410,7 @@ ul {
     overflow: hidden;
     width: 100%;
     min-height: 300px;
-    background: url("../img/banner/banner-2.jpg") no-repeat scroll center center;
+    background: url("../images/misc/banner/banner-2.jpg") no-repeat scroll center center;
     z-index: 1;
     background-size: cover; }
     .banner_area .banner_inner .banner_content h2 {
