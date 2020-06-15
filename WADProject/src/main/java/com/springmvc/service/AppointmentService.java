@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.springmvc.dao.AppointmentDao;
 import com.springmvc.model.Appointment;
 import com.springmvc.model.Doctor;
-import com.springmvc.model.ObjectListContainer;
 import com.springmvc.model.Patient;
 import com.springmvc.model.Prescription;
 
@@ -27,7 +26,7 @@ public class AppointmentService {
 	}
 
 	
-	public Appointment computeTime(String doctor, Patient patient) {
+	public String computeTime(String doctor, Patient patient) {
 		List<String> from_to = appointmentDao.getFromTo(doctor);
 		
 		// Not consider existing appointments, this is just plain computation for a proper from_to
@@ -35,20 +34,27 @@ public class AppointmentService {
 		int appointment_shift = 0;
 		int hour = LocalDateTime.now().getHour();
 		int minute = LocalDateTime.now().getMinute();
-		if(hour < 7 || hour > 17 || (hour == 17 && minute > 40)) {		// if making appointment at non-working time, then set appointment time as the first shift in a day
+		// if making appointment at non-working time, set appointment time as the first shift in the next day
+		if(hour < 7 ) {
 			appointment_hour = 7;
 			appointment_shift = 1;
 		} else {
-			if(minute > 40) {
-				appointment_hour = hour + 1;
-				appointment_shift = 1;
-			} else {
-				if(minute < 20) {
-					appointment_hour = hour;
-					appointment_shift = 2;
+			if(hour > 17 || (hour == 17 && minute > 40)) {
+				appointmentDao.setAppointment(doctor, patient, "Please come back tomorrow");
+				return null;
+			}
+			else {
+				if(minute > 40) {
+					appointment_hour = hour + 1;
+					appointment_shift = 1;
 				} else {
-					appointment_hour = hour;
-					appointment_shift = 3;
+					if(minute < 20) {
+						appointment_hour = hour;
+						appointment_shift = 2;
+					} else {
+						appointment_hour = hour;
+						appointment_shift = 3;
+					}
 				}
 			}
 		}
@@ -117,7 +123,8 @@ public class AppointmentService {
 				shift_index = 0;
 			}
 		}
-		appointmentDao.setAppointment(doctor, patient, appointment_hour, appointment_shift);
+		String result = appointment_hour +"_" + appointment_shift;
+		appointmentDao.setAppointment(doctor, patient, result);
 		return null;
 	}
 

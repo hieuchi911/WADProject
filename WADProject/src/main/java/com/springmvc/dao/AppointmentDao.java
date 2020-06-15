@@ -44,9 +44,8 @@ public class AppointmentDao {
 		List<String> from_to = jdbcTemplate.query(sql, new FromToMapper());
 		return from_to;
 	}
-
-	public Appointment setAppointment(String doctor, Patient patient, int appointment_hour, int appointment_shift) {
-		String f_t = appointment_hour + "_" + appointment_shift;
+	public Appointment setAppointment(String doctor, Patient patient, String appointment_shift) {
+		String f_t = appointment_shift;
 		System.out.println("f_t is: " + f_t);
 		
 		String sql_update = "UPDATE appointment \n"
