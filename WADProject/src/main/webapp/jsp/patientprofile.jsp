@@ -15,10 +15,12 @@
 <link rel="stylesheet" href="css/themify-icons.css">
 <link rel="stylesheet" href="css/flaticon.css">
 <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 <!-- main css -->
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/content.css" type="text/css">
+<link rel="stylesheet" href="css/frame.css" type="text/css">
 <link rel="stylesheet" href="css/responsive.css">
-
 <title>Patient</title>
 
 </head>
@@ -50,7 +52,7 @@
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<a class="navbar-brand logo_h" href="index"><img
-						src="img/logo.png" alt=""></a>
+						src="images/misc/logo.png" alt=""></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -59,28 +61,13 @@
 							class="icon-bar"></span>
 					</button>
 					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset"
-						id="navbarSupportedContent">
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link"
-								href="homepage">Home</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="patientprofile">My profile</a></li>
-							<!-- <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="single-blog">Blog Details</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="element">element</a></li>
-                                </ul>
-                            </li>  -->
-
-							<li class="nav-item"><a class="nav-link" href="shop">Shop
-									now</a></li>
-							<li class="nav-item"><a class="nav-link" href="contact">Contact
-									us</a></li>
-							<li class="nav-item"><a class="nav-link" href="home">Log
-									out</a></li>
+							<li class="nav-item"><a class="nav-link" href="homepage">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="profile">My profile</a></li>
+							<li class="nav-item"><a class="nav-link" href="shop">Shop now</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact">Contact us</a></li>
+							<li class="nav-item"><a class="nav-link" href="logout">Log out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -133,7 +120,14 @@
 							<a href="#">Personal information</a><hr width="200px">
 						</h3>
 						<form:form id="patientForm" name="patientForm" modelAttribute="editUser" action="editPatient">
-							<form:input class="characters" path="username" name="username" value="${user.username}" disabled="true"></form:input>
+							<div class="row" style="height: 50px">
+								<div class="col-1"></div>
+								<div class="col-3" style="text-align: right">Username</div>
+								<div class="col-5">
+									<form:input class="form-control characters" path="username" name="username" value="${user.username}" disabled="true"></form:input>
+								</div>
+								<div class="col"></div>
+							</div>
 							<hr>
 							<div class="row" style="height: 50px">
 								<div class="col-1"></div>
@@ -175,7 +169,7 @@
 								<div class="col-4"></div>
 								<div class="col-3">
 									<button class="form-control" id="edit-basic" type="button">Edit</button>
-									<br>
+									<hr>
 									<button class="form-control" id="edit-password" type="button">Change Password</button>
 								</div>
 								<div class="col-2">
@@ -188,9 +182,6 @@
 					<div class="w-100"></div>
 					
 					<div class="col card-team__body text-center" id="passwordSection" style="display: none;">
-						<h3>
-							<a href="#">Edit password</a><hr width="200px">
-						</h3>
 						<form action="editPassword" method="post">
 							<div class="row" style="height: 50px">
 								<div class="col-1"></div>
@@ -218,7 +209,6 @@
 								</div>
 								<div class="col"></div>
 							</div>
-							
 							<div class="row" style="height: 50px">
 								<div class="col-4"></div>
 								<div class="col-5">
@@ -226,11 +216,12 @@
 								</div>
 								<div class="col"></div>
 							</div>
-							
 						</form>
 					</div>
+					
 					<div class="w-100"></div>
 					<div class="col card-team__body text-center">
+						<hr>
 						<h3>
 							<a href="#">Symptom report</a><hr width="200px">
 						</h3>
