@@ -56,8 +56,8 @@ public class ShoppingDao {
 		
 		List<ShopObject> objects = jdbcTemplate.query(sql, new ShopObjectMapper());
 		
-		ShopObject object = objects.get(0);
 		if (objects.size() == 0) return null;
+		ShopObject object = objects.get(0);
 		
 		if (object.getCategory().equals("medicine")) {
 			object = getMedicine(object_id);

@@ -92,7 +92,6 @@
                 <div class="col-lg-9 col-md-7">
 					<div class="row">
 						<c:forEach items="${appointments.objects}" var="appointment" varStatus="tagStatus">
-							<c:if test="${appointment.from_to != 'none'}">
 								<div class="appointment-card container">
 									<div class="row">
 										<div class="col-lg-2">
@@ -140,7 +139,6 @@
 										</div>
 									</div>
 								</div>
-							</c:if>
 						</c:forEach>
 					</div>
                 </div>

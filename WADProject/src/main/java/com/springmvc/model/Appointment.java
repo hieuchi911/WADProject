@@ -44,7 +44,7 @@ public class Appointment {
 	
 	public String getFrom_to() {
 		if (this.from_to.equals("none") ) {
-			return "";
+			return "none";
 		} else {
 			String[] res = this.from_to.split("_");
 			String result = res[0] + " o\'clock - shift " + res[1];
