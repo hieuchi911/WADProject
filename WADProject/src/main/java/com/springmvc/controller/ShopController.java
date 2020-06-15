@@ -39,9 +39,14 @@ public class ShopController {
 	 * This method shows the shopping screen in url "/shop".
 	 */
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
-	public ModelAndView showShop(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("shop");
+	public ModelAndView showShop(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {		
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
 		
+		ModelAndView mav = new ModelAndView("shop");
+
 		HttpSession sess = request.getSession();
 		Cart cart = (Cart) sess.getAttribute("cart");
 		
@@ -61,7 +66,12 @@ public class ShopController {
 	 * This method shows the shopping screen in url "/shop".
 	 */
 	@RequestMapping(value = "/{category}-shop", method = RequestMethod.GET)
-	public ModelAndView showShopByCategory(@PathVariable String category) {
+	public ModelAndView showShopByCategory(@PathVariable String category, 
+			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("shop");
 		
 		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
@@ -75,7 +85,12 @@ public class ShopController {
 	 * This method shows the item screen in url "/shopitem-{item}".
 	 */
 	@RequestMapping(value = "/shopitem-{object_id}", method = RequestMethod.GET)
-	public ModelAndView showItem(@PathVariable String object_id) {
+	public ModelAndView showItem(@PathVariable String object_id, 
+			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ShopObject object = shopService.getShopObject(object_id);
 		
 		ModelAndView mav = null;
@@ -96,7 +111,11 @@ public class ShopController {
 	 */
 	@RequestMapping(value = "addItem2Cart", method = RequestMethod.POST)
 	public String addItem2Cart(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute CartObject cartobject) {
+			@ModelAttribute CartObject cartobject, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		Cart cart = (Cart) sess.getAttribute("cart");
 		
@@ -133,7 +152,12 @@ public class ShopController {
 	 * This method shows the shopping screen in url "/shop".
 	 */
 	@RequestMapping(value = "/remove-item", method = RequestMethod.GET)
-	public ModelAndView removeItemFromCart(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView removeItemFromCart(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("redirect:/shopCheckout");
 		
 		HttpSession sess = request.getSession();
@@ -161,6 +185,10 @@ public class ShopController {
 	@RequestMapping(value = "/shopCheckout", method = RequestMethod.GET)
 	public ModelAndView checkOut(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		Cart cart = (Cart) sess.getAttribute("cart");
 		
@@ -184,6 +212,10 @@ public class ShopController {
 	@RequestMapping(value="/confirmTransaction", method=RequestMethod.POST) 
 	public String confirmTransaction(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		sess.setAttribute("cart", null);
 		
@@ -194,7 +226,12 @@ public class ShopController {
 	 * This method shows the search items.
 	 */
 	@RequestMapping(value="/searchitem", method = RequestMethod.GET)
-	public ModelAndView searchItem(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView searchItem(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("shop");
 		
 		String key = request.getParameter("query");

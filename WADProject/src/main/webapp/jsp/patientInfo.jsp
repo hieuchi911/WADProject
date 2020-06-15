@@ -73,19 +73,19 @@
 					</tr>
 					<tr>
 						<td><form:label path="name">Full Name</form:label></td>
-						<td style="width:70%"><form:input class="form-control" path="name" name="name" id="name" /></td>
+						<td style="width:70%"><form:input class="form-control letters" path="name" name="name" id="name" required="true"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="gender">Gender</form:label></td>
-						<td><form:input class="form-control" path="gender" name="gender" id="gender" /></td>
+						<td><form:input class="form-control letters" path="gender" name="gender" id="gender" required="true"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="phone">Phone number</form:label></td>
-						<td><form:input class="form-control" path="phone" name="phone" id="phone" /></td>
+						<td><form:input class="form-control numbers" path="phone" name="phone" id="phone" required="true"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="address">Address</form:label></td>
-						<td><form:input class="form-control" path="address" name="address" id="address" /></td>
+						<td><form:input class="form-control ln" path="address" name="address" id="address" required="true"/></td>
 					</tr>
 					<tr style="display:none;">
 						<td></td>

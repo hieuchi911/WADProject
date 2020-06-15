@@ -83,7 +83,7 @@
             	<div class="col-lg-3 col-md-5">
 	            	<div class="searchbar">
                         <form method="get" action="searchitem">
-                        	<input type="text" placeholder="Search.." name="query" size="22">
+                        	<input class="characters" type="text" placeholder="Search.." name="query" size="22">
                         	<button type="submit">Search</button>
                         </form>
 	            	</div>
@@ -109,8 +109,8 @@
 	                                </div>
 	                                <div class="product__item__text">
 	                               	    <form action="add-medicine-${object.id}" method="post">
-			                				<input type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
-			                				<input type="text" class="form-control" placeholder="Dosage.." name="dosage" size="40">
+			                				<input class="numbers" type="text" class="form-control" placeholder="Amount.." name="amount" size="40">
+			                				<input class="ln" type="text" class="form-control" placeholder="Dosage.." name="dosage" size="40">
 			                				<input type="submit" class="form-control" name="submit" value="Add"/>
 			                			</form>
 	                                    <h6><a href="#">${object.name}</a></h6>

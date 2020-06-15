@@ -133,13 +133,13 @@
 							<a href="#">Personal information</a><hr width="200px">
 						</h3>
 						<form:form id="patientForm" name="patientForm" modelAttribute="editUser" action="editPatient">
-							<form:input path="username" name="username" value="${user.username}" disabled="true"></form:input>
-							
+							<form:input class="characters" path="username" name="username" value="${user.username}" disabled="true"></form:input>
+							<hr>
 							<div class="row" style="height: 50px">
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Name</div>
 								<div class="col-5">
-									<form:input class="form-control" path="name" name="name" value="${user.name}" disabled="true"></form:input>
+									<form:input class="form-control letters" path="name" name="name" value="${user.name}" disabled="true" required="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -148,7 +148,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Gender</div>
 								<div class="col-5">
-									<form:input class="form-control" path="gender" name="gender" value="${user.gender}" disabled="true"></form:input>
+									<form:input class="form-control letters" path="gender" name="gender" value="${user.gender}" disabled="true" required="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -157,7 +157,7 @@
 								<div class="col-1"></div>								
 								<div class="col-3" style="text-align: right">Phone</div>
 								<div class="col-5">
-									<form:input class="form-control" path="phone" name="phone" value="${user.phone}" disabled="true"></form:input>
+									<form:input class="form-control numbers" path="phone" name="phone" value="${user.phone}" disabled="true" required="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -166,7 +166,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Address</div>
 								<div class="col-5">
-									<form:input class="form-control" path="address" name="address" value="${user.address}" disabled="true"></form:input>
+									<form:input class="form-control ln" path="address" name="address" value="${user.address}" disabled="true" required="true"></form:input>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -196,7 +196,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">Old Password</div>
 								<div class="col-5">
-									<input class="form-control" type="password" name="oldpw" />
+									<input class="form-control" type="password" name="oldpw" required/>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -205,7 +205,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right">New Password</div>
 								<div class="col-5">
-									<input class="form-control" type="password" name="newpw" />
+									<input class="form-control" type="password" name="newpw" required/>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -214,7 +214,7 @@
 								<div class="col-1"></div>
 								<div class="col-3" style="text-align: right;">Confirm New Password</div>
 								<div class="col-5">
-									<input class="form-control" type="password" name="newpwCf" />
+									<input class="form-control" type="password" name="newpwCf" required/>
 								</div>
 								<div class="col"></div>
 							</div>
@@ -306,8 +306,6 @@
 		</div>
 	</footer>
 	<!-- End footer Area -->
-
-
 
 	
 	<!-- Optional JavaScript -->

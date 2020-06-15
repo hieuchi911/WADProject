@@ -163,19 +163,19 @@
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
                                 <p>Card Number<span>*</span></p>
-                                <input type="text">
+                                <input class="numbers" type="text" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Cart Name<span>*</span></p>
-                                <input type="text">
+                                <input class="letters" type="text" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Expiry Date<span>*</span></p>
-                                <input type="date">
+                                <input type="date" required>
                             </div>
                             <div class="checkout__input">
                                 <p>Code<span>*</span></p>
-                                <input type="text">
+                                <input class="characters" type="text" required>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">

@@ -73,15 +73,15 @@
 					</tr>
 					<tr>
 						<td><form:label path="username">Username</form:label></td>
-						<td><form:input class="form-control" path="username" name="username" id="username" /></td>
+						<td><form:input class="form-control characters" path="username" name="username" id="username" required="true"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="password">Password</form:label></td>
-						<td><form:password class="form-control" path="password" name="password" id="password" /></td>
+						<td><form:password class="form-control characters" path="password" name="password" id="password" required="true"/></td>
 					</tr>
 					<tr>
 						<td><label>Confirm Password</label></td>
-						<td><input class="form-control" type="password" name="confirm-password" id="confirm-password"/></td>
+						<td><input class="form-control characters" type="password" name="confirm-password" id="confirm-password" required/></td>
 					</tr>
 					<tr style="display:none;">
 						<td><form:input path="usertype" name="usertype" id="usertype" value="patient" />Patient</td>

@@ -101,7 +101,7 @@
                     <div class="sidebar">
                             <div class="searchbar">
                             	<form method="get" action="searchitem">
-	                                <input type="text" placeholder="Search.." name="query" size="22">
+	                                <input class="ln" type="text" placeholder="Search.." name="query" size="22">
 	                                <button type="submit">Submit</button>
                                 </form>
                             </div>
