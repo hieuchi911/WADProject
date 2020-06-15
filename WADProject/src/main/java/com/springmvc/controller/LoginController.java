@@ -133,8 +133,7 @@ public class LoginController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView profile(Model model, @SessionAttribute User user) {
 		ModelAndView mav = null;
-		
-		
+				
 		if (user.getUsertype().contentEquals("patient")) {
 			mav = new ModelAndView("patientprofile");
 			
@@ -160,7 +159,8 @@ public class LoginController {
 	 * This method shows the login screen in url "/logout".
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutProcess(Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String logoutProcess(Model model, HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
 		CookieService.removeCookie(response, "login");
 		model.addAttribute("user", new User());
 		return "redirect:/";

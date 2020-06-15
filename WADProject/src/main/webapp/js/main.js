@@ -7,8 +7,7 @@ $(document).ready(function(){
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
-
-
+    
     /*-------------------
         Quantity change
     --------------------- */
@@ -27,6 +26,9 @@ $(document).ready(function(){
             } else {
                 newVal = 0;
             }
+        }
+        if (isNaN(newVal)) {
+        	newVal = 0;
         }
         $button.parent().find('input').val(newVal);
     });
@@ -63,5 +65,21 @@ $(document).ready(function(){
     		$("#report textarea").prop("disabled", false);
     	else 
     		$("#report textarea").prop("disabled", true);
+    });
+    
+    /*-------------------
+		Form input
+	--------------------- */	
+    $('.numbers').on('keyup keydown input focusout', function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    $('.characters').on('keyup keydown input focusout', function () { 
+        this.value = this.value.replace(/[^a-zA-Z0-9\.]/g,'');
+    });
+    $('.letters').on('keyup keydown input focusout', function () { 
+        this.value = this.value.replace(/[^a-zA-Z \.]/g,'');
+    });
+    $('.ln').on('keyup keydown input focusout', function () { 
+        this.value = this.value.replace(/[^a-zA-Z0-9 \.]/g,'');
     });
 })(jQuery);

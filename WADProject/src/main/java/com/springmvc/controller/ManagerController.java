@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.model.Login;
+import com.springmvc.model.User;
 import com.springmvc.service.CookieService;
 import com.springmvc.service.ManagerService;
 import com.springmvc.service.UserService;
@@ -28,7 +30,8 @@ public class ManagerController {
 	 * This method adds a doctor to the database
 	 */
 	@RequestMapping(value = "/manager-doctor", method = RequestMethod.POST)
-	public ModelAndView addDoctor(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView addDoctor(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
 		ModelAndView mav = new ModelAndView("manager");
 		
 		String[] att = new String[8];
@@ -50,7 +53,9 @@ public class ManagerController {
 	 * This method adds a medicine to the database
 	 */
 	@RequestMapping(value = "/manager-medicine", method = RequestMethod.POST)
-	public ModelAndView addMedicine(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView addMedicine(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
+		
 		ModelAndView mav = new ModelAndView("manager");
 		
 		String[] att = new String[8];
@@ -72,7 +77,8 @@ public class ManagerController {
 	 * This method adds a medical tool to the database
 	 */
 	@RequestMapping(value = "/manager-tool", method = RequestMethod.POST)
-	public ModelAndView addTool(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView addTool(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
 		ModelAndView mav = new ModelAndView("manager");
 		
 		String[] att = new String[6];

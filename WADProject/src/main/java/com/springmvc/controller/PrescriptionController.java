@@ -34,6 +34,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/prescribe-{username}", method = RequestMethod.GET)
 	public ModelAndView createPrecription(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String username, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("prescribe");
 			
 		ObjectListContainer<ShopObject> objects = new ObjectListContainer<ShopObject>();
@@ -61,6 +65,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/take-{username}", method = RequestMethod.GET)
 	public ModelAndView takePrescription(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String username, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav;
 		
 		Prescription pres = prescriptionService.getPrescription(user.getUsername(), username);
@@ -81,6 +89,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/buy-prescription-{doctor_username}", method = RequestMethod.GET)
 	public String buyPrescription(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String doctor_username, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		Prescription pres = prescriptionService.getPrescription(user.getUsername(), doctor_username);
 		List <PrescribedMedicine> meds = pres.getPrescription().getObjects();
 		
@@ -112,6 +124,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/add-medicine-{id}", method = RequestMethod.POST)
 	public ModelAndView addMedicine2Prescription(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		Prescription pres = (Prescription) sess.getAttribute("prescription");
 		String amount = request.getParameter("amount");
@@ -150,6 +166,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/removemed-{id}", method = RequestMethod.GET)
 	public ModelAndView removeMedicine(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String id, @SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		Prescription pres = (Prescription) sess.getAttribute("prescription");
 		
@@ -179,6 +199,10 @@ public class PrescriptionController {
 	@RequestMapping(value = "/confirm-prescription", method = RequestMethod.GET)
 	public ModelAndView confirmPrescription(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		HttpSession sess = request.getSession();
 		Prescription pres = (Prescription) sess.getAttribute("prescription");
 		

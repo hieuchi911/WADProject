@@ -75,11 +75,11 @@
 					</tr>
 					<tr>
 						<td><form:label path="username">Username </form:label></td>
-						<td style="width:70%"><form:input class="form-control" path="username" name="username" id="username" /></td>
+						<td style="width:70%"><form:input class="form-control characters" path="username" name="username" id="username" required="true"/></td>
 					</tr>
 					<tr>
 						<td><form:label path="password">Password </form:label></td>
-						<td><form:password class="form-control" path="password" name="password" id="password"/></td>
+						<td><form:password class="form-control characters" path="password" name="password" id="password" required="true"/></td>
 					</tr>
 					<tr>
 						<td></td>

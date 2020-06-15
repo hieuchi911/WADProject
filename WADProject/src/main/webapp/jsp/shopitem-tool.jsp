@@ -115,7 +115,7 @@
 	                        <div class="product__details__quantity">
 	                            <div class="quantity">
 	                                <div class="pro-qty">
-	                                    <form:input path="amount" value="1"/>
+	                                    <form:input class="numbers" path="amount" value="1" required="true"/>
 	                                </div>
 	                            </div>
 	                        </div>

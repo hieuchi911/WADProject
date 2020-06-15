@@ -44,6 +44,9 @@ public class PatientController {
 	@RequestMapping(value = "/editPatient", method = RequestMethod.POST)
 	public ModelAndView editPatient(Model model,
 			@SessionAttribute User user, @ModelAttribute Patient editUser) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
 		
 		if(editUser instanceof Patient) {
 			editUser.setUsername(user.getUsername());
@@ -68,6 +71,9 @@ public class PatientController {
 	@RequestMapping(value = "/editDescription", method = RequestMethod.POST)
 	public ModelAndView editProfile(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
 		
 		ModelAndView mav = null;
 		if (user != null) {
@@ -103,6 +109,9 @@ public class PatientController {
 	@RequestMapping(value = "/editPassword", method = RequestMethod.POST)
 	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response, 
 			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
 		
 		ModelAndView mav = null;
 		if (user != null) {
@@ -137,6 +146,10 @@ public class PatientController {
 	@RequestMapping(value = "/{username}-appointment", method = RequestMethod.GET)
 	public ModelAndView makeAppointment(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user, @PathVariable String username) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = null;
 		if (user != null) {
 			if(user instanceof Patient) {
@@ -171,7 +184,12 @@ public class PatientController {
 	 * This method returns the doctor catalog
 	 */
 	@RequestMapping(value = "/showDoctors", method = RequestMethod.GET)
-	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView showDoctors(HttpServletRequest request, HttpServletResponse response, 
+			@SessionAttribute User user) {
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("doctors");
 		
 		ObjectListContainer<Doctor> doctors = new ObjectListContainer<Doctor>();
@@ -188,6 +206,10 @@ public class PatientController {
 	@RequestMapping(value = "/patient-accepted-requests", method = RequestMethod.GET)
 	public ModelAndView showAppointments(HttpServletRequest request, HttpServletResponse response,
 			@SessionAttribute User user) {		
+		// User not logged in yet!
+		if (user.getUsername() == null)
+			return null;
+		
 		ModelAndView mav = new ModelAndView("accepteddoctorappointment");
 
 		ObjectListContainer<Appointment> apps = new ObjectListContainer<Appointment>();
