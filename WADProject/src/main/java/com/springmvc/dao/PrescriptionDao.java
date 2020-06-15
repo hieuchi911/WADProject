@@ -40,22 +40,32 @@ public class PrescriptionDao {
 	}
 
 	public void addPrescribedMedicine(PrescribedMedicine prescribedMedicine, int prescription_id) {
-		String sql = "INSERT INTO prescribedmedicine VALUES(?,?,?);";
+		String sql = "INSERT INTO prescribedmedicine VALUES(?,?,?,?);";
 		
 		
 		jdbcTemplate.update(sql, new Object[] { prescription_id, prescribedMedicine.getId(), 
-												prescribedMedicine.getAmount()});
+												prescribedMedicine.getAmount(), prescribedMedicine.getDosage()});
 	}
 
-	public Prescription getPrescription(String patient_username, String doctor_username) {
+	public Prescription getPrescription(String username_1, String username_2) {
 		String sql = "SELECT * FROM prescription "
-				+ 	 "WHERE doctor_username='" + doctor_username + "' "
-				+ 	 "AND patient_username='" + patient_username + "' "
+				+ 	 "WHERE doctor_username='" + username_2 + "' "
+				+ 	 "AND patient_username='" + username_1 + "' "
 				+ 	 "ORDER BY prescription_id DESC;";
 		
 		List<Prescription> objects = jdbcTemplate.query(sql, new PrescriptionMapper());
-		if (objects.size() == 0)
-			return null;
+		if (objects.size() == 0) {
+			sql = "SELECT * FROM prescription "
+					+ 	 "WHERE doctor_username='" + username_1 + "' "
+					+ 	 "AND patient_username='" + username_2 + "' "
+					+ 	 "ORDER BY prescription_id DESC;";
+			
+			objects = jdbcTemplate.query(sql, new PrescriptionMapper());
+			
+			if (objects.size() == 0)
+				return null;
+			return objects.get(0);
+		}
 		return objects.get(0);
 	}
 
