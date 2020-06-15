@@ -95,12 +95,12 @@
 						<c:forEach items="${doctors.objects}" var="doctor" varStatus="tagStatus">
 							<div class="auser-card container">
 								<div class="row">
-									<div class="col-lg-2">
-										<img
-											src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTGjTgg70t-gQ0i66piGNEeoHVYff0uopb-3cXeDUH6GoMgpq7x&usqp=CAU"
-											width="50%">
+									<div class="col-lg-4" style="background-color: #c3c3c3; background-size: cover;
+									background-image: url('images/doctors/${doctor.username}.jpg');
+									">
+										
 									</div>
-									<div class="col-lg-10"><br>
+									<div class="col-lg-8"><br>
 										<h3>Dr. ${doctor.name}</h3>
 										<hr>
 

@@ -26,7 +26,10 @@ public class AppointmentDao {
 	public Appointment makeAppointment(Appointment appointment) { // Need symptom report here, not yet handled
 		String sql = "INSERT INTO appointment (doctor_username, patient_username, illness_description, from_to)"
 				+ 																			"VALUES (?, ?, ?, ?);";
-		jdbcTemplate.update(sql, new Object[] { appointment.getDoctor(), appointment.getPatient(), appointment.getIllness_description(), "none"});
+		jdbcTemplate.update(sql, new Object[] { appointment.getDoctor(), appointment.getPatient(),
+				appointment.getIllness_description().getAllergy() + "||" +
+				appointment.getIllness_description().getBackground() + "||" +
+				appointment.getIllness_description().getCurrent(), "none"});
 		
 		return appointment;
 	}

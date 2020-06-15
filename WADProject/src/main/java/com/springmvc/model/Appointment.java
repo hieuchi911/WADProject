@@ -34,7 +34,7 @@ public class Appointment {
 	}
 	
 	public void setIllness_description(String descr) {
-		if (descr.length() == 0) 
+		if (descr.length() == 0 || descr.equals("||||"))
 			descr = ".||.||.";
 		String[] att = descr.split("\\|\\|");
 		this.illness_description.setAllergy(att[0]);
