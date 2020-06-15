@@ -214,6 +214,15 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+-- Add users
+INSERT INTO `spring_mvc`.`user`
+	VALUES
+        ("DrPhoebe", "123", "doctor"),
+		("DrJoey", "123", "doctor"),
+        ("DrChandler", "123", "doctor"),
+        ("DrMonica", "123", "doctor"),
+        ("DrRoss", "123", "doctor"),
+        ("DrRachel", "123", "doctor");
 
 -- Add doctors
 
@@ -238,11 +247,11 @@ INSERT INTO `spring_mvc`.`shopobject` (`object_id`, `photo_url`, `name`, `manufa
 		(6, "images/blood-pressure-meter.jpg", "Blood pressure meter arm band AXP-CUFFFAGY103", "Vietnam", "Keep out of children's reach", 300, "tool");
 
 -- Add medicines
-INSERT INTO `` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (1,'Elthon 50mg pills are produced in the form of film-coated tablets and are used orally. People should use the medicine before meals and must follow the manufacturer\'s instructions.','The composition of Elthon 50mg pills includes active ingredient Itopride hydrochloride 50mg and some excipients, pharmaceuticals just enough to make a film-coated tablet as provided by the manufacturer.','Shock and hypersensitivity reactions such as dyspnea, paleness, hypotension, laryngeal edema, jaundice, sweating, liver dysfunction ...');
-INSERT INTO `` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (2,'Take this medication by mouth usually 4 times a day (every 6 hours), or as directed by your doctor.','Penicillin, cephalosporin','Nausea, vomiting, diarrhea, or mouth/tongue sores may occur. If any of these effects persist or worsen, notify your doctor or pharmacist promptly.');
-INSERT INTO `` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (3,'NOROXIN is indicated for the treatment of adults with the following infections caused by susceptible strains of the designated microorganisms.','Norfloxacin, a fluoroquinolone, is 1-ethyl-6-fluoro-1,4-dihydro-4-oxo-7-(1-piperazinyl)-3-quinolinecarboxylic acid.','Fluoroquinolones, including NOROXIN, may exacerbate muscle weakness in patients with myasthenia gravis. Avoid NOROXIN in patients with known history of myasthenia gravis.');
-INSERT INTO `` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (4,'Take this medication by mouth with or without food, usually 50 milligrams once daily or as directed by your doctor.','Naltrexone belongs to a class of drugs known as opiate antagonists.','Nausea, headache, dizziness, anxiety, tiredness, and trouble sleeping may occur.');
+INSERT INTO `spring_mvc'.'medicine` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (1,'Elthon 50mg pills are produced in the form of film-coated tablets and are used orally. People should use the medicine before meals and must follow the manufacturer\'s instructions.','The composition of Elthon 50mg pills includes active ingredient Itopride hydrochloride 50mg and some excipients, pharmaceuticals just enough to make a film-coated tablet as provided by the manufacturer.','Shock and hypersensitivity reactions such as dyspnea, paleness, hypotension, laryngeal edema, jaundice, sweating, liver dysfunction ...');
+INSERT INTO `spring_mvc'.'medicine` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (2,'Take this medication by mouth usually 4 times a day (every 6 hours), or as directed by your doctor.','Penicillin, cephalosporin','Nausea, vomiting, diarrhea, or mouth/tongue sores may occur. If any of these effects persist or worsen, notify your doctor or pharmacist promptly.');
+INSERT INTO `spring_mvc'.'medicine` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (3,'NOROXIN is indicated for the treatment of adults with the following infections caused by susceptible strains of the designated microorganisms.','Norfloxacin, a fluoroquinolone, is 1-ethyl-6-fluoro-1,4-dihydro-4-oxo-7-(1-piperazinyl)-3-quinolinecarboxylic acid.','Fluoroquinolones, including NOROXIN, may exacerbate muscle weakness in patients with myasthenia gravis. Avoid NOROXIN in patients with known history of myasthenia gravis.');
+INSERT INTO `spring_mvc'.'medicine` (`medicine_id`,`instruction`,`ingredients`,`side_effects`) VALUES (4,'Take this medication by mouth with or without food, usually 50 milligrams once daily or as directed by your doctor.','Naltrexone belongs to a class of drugs known as opiate antagonists.','Nausea, headache, dizziness, anxiety, tiredness, and trouble sleeping may occur.');
 
 -- Add medical tools
-INSERT INTO `` (`tool_id`,`usage`) VALUES (5,'The stethoscope is an acoustic medical device for auscultation, or listening to internal sounds of an animal or human body.');
-INSERT INTO `` (`tool_id`,`usage`) VALUES (6,'An at-home monitor will give your doctor better insight into how your blood pressure changes throughout the day, rather than only getting immediate readings when you visit their office.');
+INSERT INTO `spring_mvc'.'medicaltool` (`tool_id`,`usage`) VALUES (5,'The stethoscope is an acoustic medical device for auscultation, or listening to internal sounds of an animal or human body.');
+INSERT INTO `spring_mvc'.'medicaltool` (`tool_id`,`usage`) VALUES (6,'An at-home monitor will give your doctor better insight into how your blood pressure changes throughout the day, rather than only getting immediate readings when you visit their office.');
