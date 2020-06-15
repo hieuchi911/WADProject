@@ -124,7 +124,7 @@ public class DoctorController {
 			tempUser.setUsername(patient);
 			Patient p = userService.profilePatient(tempUser);
 			
-			String appointment;
+			Appointment appointment = new Appointment();
 			appointment = appointmentService.computeTime(user.getUsername(), p);
 			
 			// get all appointments, then display accepted ones in the returned view

@@ -26,7 +26,7 @@ public class AppointmentService {
 	}
 
 	
-	public String computeTime(String doctor, Patient patient) {
+	public Appointment computeTime(String doctor, Patient patient) {
 		List<String> from_to = appointmentDao.getFromTo(doctor);
 		
 		// Not consider existing appointments, this is just plain computation for a proper from_to
@@ -35,29 +35,23 @@ public class AppointmentService {
 		int hour = LocalDateTime.now().getHour();
 		int minute = LocalDateTime.now().getMinute();
 		// if making appointment at non-working time, set appointment time as the first shift in the next day
-		if(hour < 7 ) {
+		if(hour < 7 || hour > 17 || (hour == 17 && minute > 40)) {
 			appointment_hour = 7;
 			appointment_shift = 1;
 		} else {
-			if(hour > 17 || (hour == 17 && minute > 40)) {
-				appointmentDao.setAppointment(doctor, patient, "Please come back tomorrow");
-				return null;
-			}
-			else {
-				if(minute > 40) {
-					appointment_hour = hour + 1;
-					appointment_shift = 1;
+			if(minute > 40) {
+				appointment_hour = hour + 1;
+				appointment_shift = 1;
+			} else {
+				if(minute < 20) {
+					appointment_hour = hour;
+					appointment_shift = 2;
 				} else {
-					if(minute < 20) {
-						appointment_hour = hour;
-						appointment_shift = 2;
-					} else {
-						appointment_hour = hour;
-						appointment_shift = 3;
+					appointment_hour = hour;
+					appointment_shift = 3;
 					}
 				}
 			}
-		}
 		
 		
 		// Handle existing appointments
