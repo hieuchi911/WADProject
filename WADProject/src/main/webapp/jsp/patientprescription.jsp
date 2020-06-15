@@ -149,9 +149,11 @@
 											</c:forEach>
 	                                    </tbody>
 	                                </table>
-                               		<form action="buy-prescription-${prescription.doctor}" method="get">
-										<button class="form-control" name="buy">Buy</button>
-									</form>
+	                                <c:if test="${prescription.doctor != user.username}">
+	                               		<form action="buy-prescription-${prescription.doctor}" method="get">
+											<button class="form-control" name="buy">Buy</button>
+										</form>
+									</c:if>
 	                            </div>
 	                        </div>
 	                    </div>

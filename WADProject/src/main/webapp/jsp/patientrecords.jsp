@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-lg-9 col-md-7">
                     <div class="row">
-                        <c:forEach items="${doctors.objects}" var="doctor" varStatus="tagStatus">
+                        <c:forEach items="${patientsRecords.objects}" var="prescription" varStatus="tagStatus">
                              <div class="auser-card container">
                                  <div class="row">
                                      <div class="col-lg-2">
@@ -119,7 +119,7 @@
                                              </tr>
                                          </table>
                                          <br>
-                                         <form method="get" action="take-${prescription.doctor}">
+                                         <form method="get" action="take-${prescription.patient}">
                                              <p><button>Prescription Details</button></p>
                                          </form>
                                      </div>
